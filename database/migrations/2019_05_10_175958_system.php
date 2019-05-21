@@ -18,12 +18,13 @@ class System extends Migration
         */
         Schema::create('systems', function (Blueprint $table) {
             $table->bigIncrements('system_id');
-            $table->string('sticker_number');
-            $table->string('computer_name');
-            $table->string('ip_1');
-            $table->string('ip_2');
-            $table->string('teamviewer');
-            $table->string('anydesk');
+            $table->string('sticker_number')->nullable();
+            $table->string('computer_name')->nullable();
+            $table->string('ip_main')->nullable();
+            $table->string('ip_sub')->nullable();
+            $table->string('teamviewer')->nullable();
+            $table->string('anydesk')->nullable();
+            $table->string('windows')->nullable();
         });
     }
 

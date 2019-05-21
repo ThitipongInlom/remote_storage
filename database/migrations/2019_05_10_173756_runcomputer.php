@@ -18,8 +18,8 @@ class Runcomputer extends Migration
         */
         Schema::create('runcomputers', function (Blueprint $table) {
             $table->bigIncrements('runcomputer_id');
-            $table->string('sticker_number');
-            $table->string('runcomputers_dep');
+            $table->string('sticker_number')->nullable();
+            $table->string('runcomputers_dep')->nullable();
         });
     }
 

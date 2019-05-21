@@ -18,7 +18,16 @@ class Hardware extends Migration
         */
         Schema::create('hardwares', function (Blueprint $table) {
             $table->bigIncrements('hardware_id');
-            $table->string('sticker_number');
+            $table->string('sticker_number')->nullable();
+            $table->string('cpu')->nullable();
+            $table->string('ram')->nullable();
+            $table->string('case')->nullable();
+            $table->string('mouse')->nullable();
+            $table->string('keyboard')->nullable();
+            $table->string('mainboard')->nullable();
+            $table->string('powersupply')->nullable();
+            $table->string('hdd')->nullable();
+            $table->string('ssd')->nullable();
         });
     }
 

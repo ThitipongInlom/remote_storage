@@ -18,10 +18,10 @@ class Guest extends Migration
         */
         Schema::create('guests', function (Blueprint $table) {
             $table->bigIncrements('guests_id');
-            $table->string('sticker_number');
-            $table->string('guest_dep');
-            $table->string('guest_name');
-            $table->string('guest_phone');
+            $table->string('sticker_number')->nullable();
+            $table->string('guest_dep')->nullable();
+            $table->string('guest_name')->nullable();
+            $table->string('guest_phone')->nullable();
         });
     }
 
