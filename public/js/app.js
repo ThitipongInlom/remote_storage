@@ -69351,7 +69351,7 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
- * SimpleBar.js - v4.0.0-alpha.9
+ * SimpleBar.js - v4.0.0
  * Scrollbars, simpler.
  * https://grsmto.github.io/simplebar/
  *
@@ -73200,6 +73200,18 @@ process.umask = function() { return 0; };
 
         document.removeEventListener('mousemove', _this.drag, true);
         document.removeEventListener('mouseup', _this.onEndDrag, true);
+        _this.removePreventClickId = window.setTimeout(function () {
+          // Remove these asynchronously so we still suppress click events
+          // generated simultaneously with mouseup.
+          document.removeEventListener('click', _this.preventClick, true);
+          document.removeEventListener('dblclick', _this.preventClick, true);
+          _this.removePreventClickId = null;
+        });
+      };
+
+      this.preventClick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
       };
 
       this.el = element;
@@ -73243,7 +73255,8 @@ process.umask = function() { return 0; };
           track: {},
           scrollbar: {}
         }
-      }; // Don't re-instantiate over an existing one
+      };
+      this.removePreventClickId = null; // Don't re-instantiate over an existing one
 
       if (this.el.SimpleBar) {
         return;
@@ -73689,6 +73702,14 @@ process.umask = function() { return 0; };
       this.el.classList.add(this.classNames.dragging);
       document.addEventListener('mousemove', this.drag, true);
       document.addEventListener('mouseup', this.onEndDrag, true);
+
+      if (this.removePreventClickId === null) {
+        document.addEventListener('click', this.preventClick, true);
+        document.addEventListener('dblclick', this.preventClick, true);
+      } else {
+        window.clearTimeout(this.removePreventClickId);
+        this.removePreventClickId = null;
+      }
     }
     /**
      * Drag scrollbar handle
@@ -86637,7 +86658,7 @@ window.Ladda = __webpack_require__(/*! ladda/js/ladda */ "./node_modules/ladda/j
 
 window.Toastr = __webpack_require__(/*! toastr/toastr */ "./node_modules/toastr/toastr.js"); // Simplebar
 
-__webpack_require__(/*! simplebar/dist/simplebar.js */ "./node_modules/simplebar/dist/simplebar.js");
+window.SimpleBar = __webpack_require__(/*! simplebar/dist/simplebar.js */ "./node_modules/simplebar/dist/simplebar.js");
 
 /***/ }),
 
@@ -86662,6 +86683,7 @@ try {
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 
   $('[data-toggle="tooltip"]').tooltip();
+  $("[data-toggle='tooltip']").tooltip();
 
   __webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js")();
 

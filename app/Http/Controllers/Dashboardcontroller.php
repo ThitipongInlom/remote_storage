@@ -29,14 +29,22 @@ class Dashboardcontroller extends Controller
         return Datatables::of($users)
         ->editColumn('teamviewer', function($users) {
             $url = "https://start.teamviewer.com/device/".$users->teamviewer."/authorization/password/mode/control";
-            $result = "<a href='$url' class='btn btn-sm btn-primary stretched-link' target='_blank'><i class='fas fa-external-link-alt'></i></a>"."  ".$users->teamviewer;
+            $img_url = url('img/teamviewer.png');
+            $result = "<a href='$url' class='btn btn-sm btn-primary' target='_blank' data-toggle='tooltip' data-placement='bottom' title='เปิด Teamviewer'><img src='$img_url' style='width: 18px;'' class='card-img-top'></a>"."  ".$users->teamviewer;
+            return $result;
+        })
+        ->editColumn('anydesk', function($users) {
+            $url = "anydesk:$users->anydesk";
+            $img_url = url('img/anydesk.png');
+            $result = "<a href='$url' class='btn btn-sm btn-primary' target='_blank' data-toggle='tooltip' data-placement='bottom' title='เปิด Anydesk'><img src='$img_url' style='width: 18px;'' class='card-img-top'></a>"."  ".$users->anydesk;
             return $result;
         })
         ->addColumn('action', function ($users) {
-            $result  = '<button class="btn btn-sm btn-success" id="'.$users->sticker_number.'"><i class="fas fa-search"></i>View</button> ';
+            $url = url("view/$users->sticker_number");
+            $result  = "<a class='btn btn-sm btn-primary' href='$url' role='button'><i class='fas fa-search'></i>View</a>";
             return $result;
         })
-        ->rawColumns(['teamviewer','action'])
+        ->rawColumns(['teamviewer','anydesk','action'])
         ->make(true);
     }
 }

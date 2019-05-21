@@ -15,8 +15,8 @@ class System extends Model
     protected $fillable = [
         'sticker_number', 
         'computer_name',
-        'ip_1',
-        'ip_2',
+        'ip_main',
+        'ip_sub',
         'teamviewer',
         'anydesk',
     ];

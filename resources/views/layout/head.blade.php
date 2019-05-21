@@ -8,14 +8,29 @@
     <li class="nav-item d-none d-sm-inline-block" style="cursor: pointer;" >
         <span href="#" class="nav-link"><b>ทางลัดเปิดโปรแกรม :</b></span>
     </li>
-    <li class="nav-item d-none d-sm-inline-block" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Ping">
-        <span href="#" class="nav-link"><img src="{{ url('img/cmd.png') }}" style="width: 24px;" class="card-img-top"></span>
+    <li class="nav-item d-none d-sm-inline-block" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="IP">
+        <span href="#" class="nav-link">
+            <img src="{{ url('img/cmd.png') }}" style="width: 24px;" class="card-img-top">
+            @if (isset($Item))
+                <b>{{ $Item[0]->ip_main }}</b>
+            @endif
+        </span>
     </li>
     <li class="nav-item d-none d-sm-inline-block" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Anydesk">
-        <span href="#" class="nav-link"><img src="{{ url('img/anydesk.png') }}" style="width: 24px;" class="card-img-top"></span>
+        <span href="#" class="nav-link">
+            <img src="{{ url('img/anydesk.png') }}" style="width: 24px;" class="card-img-top">
+            @if (isset($Item))
+                <b>{{ $Item[0]->anydesk }}</b>
+            @endif        
+        </span>
     </li>
     <li class="nav-item d-none d-sm-inline-block" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Teamviewer">
-        <span href="#" class="nav-link"><img src="{{ url('img/teamviewer.png') }}" style="width: 24px;" class="card-img-top"></span>
+        <span href="#" class="nav-link">
+            <img src="{{ url('img/teamviewer.png') }}" style="width: 24px;" class="card-img-top">
+            @if (isset($Item))
+                <b>{{ $Item[0]->teamviewer }}</b>
+            @endif           
+        </span>
     </li>
     </ul>
 
@@ -31,11 +46,26 @@
     <div class="sidebar">
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+            <a href="{{ url('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
+            <i class="fas fa-tachometer-alt"></i>
+            <p>แดชบอร์ด</p>
+            </a>
+        </li>
+        @if (isset($Item))
+            @php 
+                $urlviewitem = $Item[0]->sticker_number; 
+            @endphp
+        @else
+            @php 
+                $urlviewitem = ""; 
+            @endphp       
+        @endif 
         <li class="nav-item has-treeview
-            {{ Request::is('dashboard') ? 'menu-open' : '' }}
+            {{ Request::is("view/$urlviewitem") ? 'menu-open' : '' }}
         ">
             <a href="#" class="nav-link 
-            {{ Request::is('dashboard') ? 'active' : '' }}
+            {{ Request::is("view/$urlviewitem") ? 'active' : '' }}
         ">
             <i class="fas fa-tachometer-alt"></i>
             <p>
@@ -45,9 +75,22 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ url('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
-                <i class="fas fa-tachometer-alt"></i>
-                <p>แดชบอร์ด</p>
+                <a href="{{ url('additem') }}" class="nav-link {{ Request::is("additem") ? 'active' : '' }}">
+                <i class="fas fa-plus"></i>
+                <p>เพิ่มข้อมูล</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                @if (isset($Item))
+                    @php 
+                        $urlviewitem = $Item[0]->sticker_number; 
+                    @endphp
+                    <a href="#" class="nav-link {{ Request::is("view/$urlviewitem") ? 'active' : '' }} disabled">
+                @else
+                    <a href="#" class="nav-link disabled">
+                @endif  
+                <i class="fas fa-search"></i>
+                <p>แสดงข้อมูล</p>
                 </a>
             </li>
             </ul>

@@ -15,4 +15,4 @@ window.Ladda = require('ladda/js/ladda');
 // Toastr
 window.Toastr = require('toastr/toastr');
 // Simplebar
-require('simplebar/dist/simplebar.js');
+window.SimpleBar = require('simplebar/dist/simplebar.js');

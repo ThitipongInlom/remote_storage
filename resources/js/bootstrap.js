@@ -13,6 +13,7 @@ try {
     require('bootstrap');
 
     $('[data-toggle="tooltip"]').tooltip();
+    $("[data-toggle='tooltip']").tooltip();
 
     require('datatables.net-bs4')();
     require('datatables.net-buttons-bs4')();

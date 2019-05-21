@@ -29967,3 +29967,9 @@ button.toast-close-button {
     width: 25em;
   }
 }
+[data-simplebar] {
+  width: inherit !important;
+  height: inherit !important;
+  max-width: inherit !important;
+  max-height: inherit !important;
+}
