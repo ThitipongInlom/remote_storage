@@ -9,6 +9,7 @@ class Guest extends Model
     /*
         Guest V 0.1
     */    
+    public $table = "guests";
     /**
      * รายชื่อ ตาราง ใน ดาต้าเบส
      */
@@ -18,6 +19,8 @@ class Guest extends Model
         'guest_name', 
         'guest_phone', 
     ];
+
+    public $timestamps = false;
 
      /**
      * ชื่อ ตาราง 

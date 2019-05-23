@@ -22,4 +22,37 @@ class Additemcontroller extends Controller
     {
         return view('page/additem');
     }
+
+    public function Additem_save(Request $request)
+    {
+        // เช็คว่า Sticker Number ซ้ำในระบบหรือไม่ แปลงค่าเป็น Upper
+        $sticker_number_count = Runcomputer::where('sticker_number', strtoupper($request->post('sticker_number')))->count();
+        if ($sticker_number_count == '0') {
+            // 1.เพิ่มข้อมูลส่วน System
+            $System = new System;
+            $System->sticker_number = strtoupper($request->sticker_number);
+            $System->save();
+            // 2.เพิ่มข้อมูลส่วน Software
+            $Software = new Software;
+            $Software->sticker_number = strtoupper($request->sticker_number);
+            $Software->save();
+            // 3.เพิ่มข้อมูลส่วน Runcomputer
+            $Runcomputer = new Runcomputer;
+            $Runcomputer->sticker_number = strtoupper($request->sticker_number);
+            $Runcomputer->save();
+            // 4.เพิ่มข้อมูลส่วน Hardware
+            $Hardware = new Hardware;
+            $Hardware->sticker_number = strtoupper($request->sticker_number);
+            $Hardware->save();
+            // 5.เพิ่มข้อมูลส่วน Guest
+            $Guest = new Guest;
+            $Guest->sticker_number = strtoupper($request->sticker_number);
+            $Guest->save();
+            print_r($_POST);
+        }else{
+            // Error Save ไม่สำเร็จ
+            return Response::json(array('status' => 'error','error_text' => 'Sticker Number ซ้ำมีในระบบแล้ว'),200);
+        }
+        print_r($sticker_number_count);
+    }
 }

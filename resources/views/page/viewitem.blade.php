@@ -35,7 +35,7 @@
     <div class="row">
         <!-- Hardware -->
         <div class="col-md-4">
-            <div class="card">
+            <div class="card card-primary">
             <div class="card-header">
                 <b>Hardware</b>
             </div>
@@ -184,9 +184,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Power Supply</a>
                         @if ($row->powersupply == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Power Supply</span>
+                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม PowerSupply</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Power Supply</span>
+                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข PowerSupply</span>
                         @endif
                         <span class="product-description">
                         @if ($row->powersupply == '')
@@ -251,7 +251,7 @@
         </div>
         <!-- Software -->
         <div class="col-md-4">
-            <div class="card">
+            <div class="card card-primary">
             <div class="card-header">
                 <b>Software</b>
             </div>
@@ -259,18 +259,52 @@
             <div data-simplebar data-simplebar-auto-hide="false">
             <div class="card-body">
                 <ul class="products-list product-list-in-card pl-2 pr-2">
-                    <li class="item">
+                @foreach ($Item as $row)
+                    <!-- Teamviewer -->
+                    @if ($row->teamviewer == '' OR $row->teamviewer != '')
+                     <li class="item">
                         <div class="product-img">
                         <img src="{{ url('img/teamviewer.png') }}" alt="Product Image" class="img-size-50">
                         </div>
                         <div class="product-info">
-                        <a href="javascript:void(0)" class="product-title">Samsung TV
-                            <span class="badge badge-warning float-right">$1800</span></a>
+                        <a href="javascript:void(0)" class="product-title">Teamviewer</a>
+                        @if ($row->teamviewer == '')
+                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Teamviewer</span>
+                        @else
+                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Teamviewer</span>
+                        @endif
                         <span class="product-description">
-                            Samsung 32" 1080p 60Hz LED Smart HDTV.
-                        </span>
+                        @if ($row->teamviewer == '')
+                            <p>ยังไม่มีข้อมูล</p>
+                        @else
+                            {{ $row->teamviewer }}
+                        @endif
                         </div>
-                    </li>
+                    </li>                       
+                    @endif
+                    <!-- Anydesk -->
+                    @if ($row->anydesk == '' OR $row->anydesk != '')
+                     <li class="item">
+                        <div class="product-img">
+                        <img src="{{ url('img/anydesk.png') }}" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">Anydesk</a>
+                        @if ($row->anydesk == '')
+                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Anydesk</span>
+                        @else
+                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Anydesk</span>
+                        @endif
+                        <span class="product-description">
+                        @if ($row->anydesk == '')
+                            <p>ยังไม่มีข้อมูล</p>
+                        @else
+                            {{ $row->anydesk }}
+                        @endif
+                        </div>
+                    </li>                       
+                    @endif
+                @endforeach
                 </ul>
             </div>
             </div>
@@ -279,7 +313,7 @@
         </div>
         <!-- System -->
         <div class="col-md-4">
-            <div class="card">
+            <div class="card card-primary">
             <div class="card-header">
                 <b>System</b>
             </div>
@@ -306,6 +340,28 @@
                             <p>ยังไม่มีข้อมูล</p>
                         @else
                             {{ $row->windows }}
+                        @endif
+                        </div>
+                    </li>                       
+                    @endif
+                    <!-- Computer Name -->
+                    @if ($row->computer_name == '' OR $row->computer_name != '')
+                     <li class="item">
+                        <div class="product-img">
+                        <img src="{{ url('img/icon/computer_name.png') }}" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">Computer Name</a>
+                        @if ($row->computer_name == '')
+                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Name</span>
+                        @else
+                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Name</span>
+                        @endif
+                        <span class="product-description">
+                        @if ($row->computer_name == '')
+                            <p>ยังไม่มีข้อมูล</p>
+                        @else
+                            {{ $row->computer_name }}
                         @endif
                         </div>
                     </li>                       

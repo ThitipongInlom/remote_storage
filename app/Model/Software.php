@@ -9,6 +9,7 @@ class Software extends Model
     /*
         Software V 0.1
     */    
+    public $table = "softwares";
     /**
      * รายชื่อ ตาราง ใน ดาต้าเบส
      */
@@ -16,6 +17,8 @@ class Software extends Model
         'sticker_number', 
         'windows',
     ];
+
+    public $timestamps = false;
     
      /**
      * ชื่อ ตาราง 

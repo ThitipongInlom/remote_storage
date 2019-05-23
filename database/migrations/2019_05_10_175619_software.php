@@ -19,6 +19,8 @@ class Software extends Migration
         Schema::create('softwares', function (Blueprint $table) {
             $table->bigIncrements('software_id');
             $table->string('sticker_number')->nullable();
+            $table->string('teamviewer')->nullable();
+            $table->string('anydesk')->nullable();
         });
     }
 

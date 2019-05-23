@@ -22,9 +22,8 @@ class System extends Migration
             $table->string('computer_name')->nullable();
             $table->string('ip_main')->nullable();
             $table->string('ip_sub')->nullable();
-            $table->string('teamviewer')->nullable();
-            $table->string('anydesk')->nullable();
             $table->string('windows')->nullable();
+            $table->string('internet')->nullable();
         });
     }
 

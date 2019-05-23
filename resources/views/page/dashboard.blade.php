@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">แดชบอร์ด</h1>
+                <h1 class="m-0 text-dark">แดชบอร์ด <a href="{{ url('additem') }}" class="btn btn-sm btn-success" role="button"><b>+</b> เพิ่มข้อมูล</a></h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -33,10 +33,12 @@
     <div class="content">
     <div class="container-fluid">
     <!-- จำนวนข้อมูลทั้งหมด -->    
+        <div class="card card-primary card-outline">
+            <div class="card-body">
             <div class="table-responsive">
             <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main">
                 <thead>
-                    <tr class="bg-secondary">
+                    <tr class="bg-primary">
                         <th>Sticker</th>
                         <th>Name</th>
                         <th>Computer Name</th>
@@ -47,7 +49,7 @@
                     </tr>
                 </thead>
                 <tfoot>
-                    <tr class="bg-secondary">
+                    <tr class="bg-primary">
                         <th>Sticker</th>
                         <th>Name</th>
                         <th>Computer Name</th>
@@ -59,6 +61,8 @@
                 </tfoot>
             </table>
             </div>
+            </div>
+        </div>
     </div>
     </div>
     </div>

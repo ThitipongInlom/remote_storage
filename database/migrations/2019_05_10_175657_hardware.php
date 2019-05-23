@@ -22,6 +22,7 @@ class Hardware extends Migration
             $table->string('cpu')->nullable();
             $table->string('ram')->nullable();
             $table->string('case')->nullable();
+            $table->string('monitor')->nullable();
             $table->string('mouse')->nullable();
             $table->string('keyboard')->nullable();
             $table->string('mainboard')->nullable();

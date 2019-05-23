@@ -9,6 +9,7 @@ class System extends Model
     /*
         System V 0.1
     */    
+    public $table = "systems";
     /**
      * รายชื่อ ตาราง ใน ดาต้าเบส
      */
@@ -20,6 +21,8 @@ class System extends Model
         'teamviewer',
         'anydesk',
     ];
+
+    public $timestamps = false;
 
      /**
      * ชื่อ ตาราง 

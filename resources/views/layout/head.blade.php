@@ -36,8 +36,14 @@
 
     <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-        <!--<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
-                class="fa fa-th-large"></i></a> -->
+<div class="btn-group">
+  <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-sliders-h"></i>
+  </button>
+  <div class="dropdown-menu dropdown-menu-right">
+    <a class="dropdown-item" href="{{ route('logout') }}" role="button">ออกจากระบบ</a>
+  </div>
+</div>
     </li>
     </ul>
 </nav>
@@ -63,9 +69,11 @@
         @endif 
         <li class="nav-item has-treeview
             {{ Request::is("view/$urlviewitem") ? 'menu-open' : '' }}
+            {{ Request::is("additem") ? 'menu-open' : '' }}
         ">
             <a href="#" class="nav-link 
             {{ Request::is("view/$urlviewitem") ? 'active' : '' }}
+            {{ Request::is("additem") ? 'active' : '' }}
         ">
             <i class="fas fa-tachometer-alt"></i>
             <p>
@@ -94,12 +102,6 @@
                 </a>
             </li>
             </ul>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link">
-            <i class="fas fa-sign-out-alt"></i>
-            <p>ออกจากระบบ</p>
-            </a>
         </li>
         </ul>
     </nav>
