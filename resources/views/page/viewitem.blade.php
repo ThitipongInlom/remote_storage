@@ -23,6 +23,7 @@
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item">ข้อมูล</li>
                 <li class="breadcrumb-item">{{ $Item[0]->sticker_number }}</li>
+                <input type="hidden" id="id_computer" value="{{ $Item[0]->sticker_number }}">
                 </ol>
             </div>
             </div>
@@ -39,7 +40,7 @@
             <div class="card-header">
                 <b>Hardware</b>
             </div>
-            <div class="overflow-auto" style="height: 450px;">
+            <div class="overflow-auto" style="height: 350px;">
             <div data-simplebar data-simplebar-auto-hide="false">
             <div class="card-body">
                 <ul class="products-list product-list-in-card pl-2 pr-2">
@@ -52,9 +53,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">CPU</a>
                         @if ($row->cpu == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม CPU</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="CPU" onclick="Add_item_data_form_view(this);">เพิ่ม CPU</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข CPU</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="CPU" old_value="{{ $row->cpu }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน CPU</span>
                         @endif
                         <span class="product-description">
                         @if ($row->cpu == '')
@@ -74,9 +75,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">RAM</a>
                         @if ($row->ram == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม RAM</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="RAM"  onclick="Add_item_data_form_view(this);">เพิ่ม RAM</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข RAM</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="RAM" old_value="{{ $row->ram }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน RAM</span>
                         @endif
                         <span class="product-description">
                         @if ($row->ram == '')
@@ -96,15 +97,37 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Case</a>
                         @if ($row->case == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Case</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Case" onclick="Add_item_data_form_view(this);">เพิ่ม Case</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Case</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Case" old_value="{{ $row->case }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Case</span>
                         @endif
                         <span class="product-description">
                         @if ($row->case == '')
                             <p>ยังไม่มีข้อมูล</p>
                         @else
                             {{ $row->case }}
+                        @endif
+                        </span>
+                        </div>
+                    </li>                       
+                    @endif
+                    @if ($row->monitor == '' OR $row->monitor != '')
+                     <li class="item">
+                        <div class="product-img">
+                        <img src="{{ url('img/icon/monitor.png') }}" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">Monitor</a>
+                        @if ($row->monitor == '')
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Monitor" onclick="Add_item_data_form_view(this);">เพิ่ม Monitor</span>
+                        @else
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Monitor" old_value="{{ $row->monitor }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Monitor</span>
+                        @endif
+                        <span class="product-description">
+                        @if ($row->monitor == '')
+                            <p>ยังไม่มีข้อมูล</p>
+                        @else
+                            {{ $row->monitor }}
                         @endif
                         </span>
                         </div>
@@ -118,9 +141,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Mouse</a>
                         @if ($row->mouse == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Mouse</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Mouse" onclick="Add_item_data_form_view(this);">เพิ่ม Mouse</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Mouse</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Mouse" old_value="{{ $row->mouse }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Mouse</span>
                         @endif
                         <span class="product-description">
                         @if ($row->mouse == '')
@@ -140,9 +163,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Keyboard</a>
                         @if ($row->keyboard == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Keyboard</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Keyboard" onclick="Add_item_data_form_view(this);">เพิ่ม Keyboard</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Keyboard</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Keyboard" old_value="{{ $row->keyboard }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Keyboard</span>
                         @endif
                         <span class="product-description">
                         @if ($row->keyboard == '')
@@ -162,9 +185,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Mainboard</a>
                         @if ($row->mainboard == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Mainboard</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Mainboard" onclick="Add_item_data_form_view(this);">เพิ่ม Mainboard</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Mainboard</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Mainboard" old_value="{{ $row->mainboard }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Mainboard</span>
                         @endif
                         <span class="product-description">
                         @if ($row->mainboard == '')
@@ -184,9 +207,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Power Supply</a>
                         @if ($row->powersupply == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม PowerSupply</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Power Supply" onclick="Add_item_data_form_view(this);">เพิ่ม PowerSupply</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข PowerSupply</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Power Supply" old_value="{{ $row->powersupply }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน PowerSupply</span>
                         @endif
                         <span class="product-description">
                         @if ($row->powersupply == '')
@@ -206,9 +229,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">HDD</a>
                         @if ($row->hdd == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม HDD</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="HDD" onclick="Add_item_data_form_view(this);">เพิ่ม HDD</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข HDD</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="HDD" old_value="{{ $row->hdd }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน HDD</span>
                         @endif
                         <span class="product-description">
                         @if ($row->hdd == '')
@@ -228,9 +251,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">SSD</a>
                         @if ($row->ssd == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม SSD</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="SSD" onclick="Add_item_data_form_view(this);">เพิ่ม SSD</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข SSD</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="SSD" old_value="{{ $row->ssd }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน SSD</span>
                         @endif
                         <span class="product-description">
                         @if ($row->ssd == '')
@@ -255,7 +278,7 @@
             <div class="card-header">
                 <b>Software</b>
             </div>
-            <div class="overflow-auto" style="height: 450px;">
+            <div class="overflow-auto" style="height: 350px;">
             <div data-simplebar data-simplebar-auto-hide="false">
             <div class="card-body">
                 <ul class="products-list product-list-in-card pl-2 pr-2">
@@ -269,9 +292,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Teamviewer</a>
                         @if ($row->teamviewer == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Teamviewer</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Teamviewer" onclick="Add_item_data_form_view(this);">เพิ่ม Teamviewer</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Teamviewer</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Teamviewer" old_value="{{ $row->teamviewer }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Teamviewer</span>
                         @endif
                         <span class="product-description">
                         @if ($row->teamviewer == '')
@@ -291,9 +314,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Anydesk</a>
                         @if ($row->anydesk == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Anydesk</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Anydesk" onclick="Add_item_data_form_view(this);">เพิ่ม Anydesk</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Anydesk</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Anydesk" old_value="{{ $row->anydesk }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Anydesk</span>
                         @endif
                         <span class="product-description">
                         @if ($row->anydesk == '')
@@ -317,7 +340,7 @@
             <div class="card-header">
                 <b>System</b>
             </div>
-            <div class="overflow-auto" style="height: 450px;">
+            <div class="overflow-auto" style="height: 350px;">
             <div data-simplebar data-simplebar-auto-hide="false">
             <div class="card-body">
                 <ul class="products-list product-list-in-card pl-2 pr-2">
@@ -331,9 +354,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Windows</a>
                         @if ($row->windows == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Windows</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="select" newname="Windows" onclick="Add_item_data_form_view(this);">เพิ่ม Windows</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Windows</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="select" newname="Windows" old_value="{{ $row->windows }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Windows</span>
                         @endif
                         <span class="product-description">
                         @if ($row->windows == '')
@@ -353,9 +376,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Computer Name</a>
                         @if ($row->computer_name == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม Name</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Computer Name" onclick="Add_item_data_form_view(this);">เพิ่ม Name</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข Name</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Computer Name" old_value="{{ $row->computer_name }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Name</span>
                         @endif
                         <span class="product-description">
                         @if ($row->computer_name == '')
@@ -375,9 +398,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">IP Address Main</a>
                         @if ($row->ip_main == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม IP</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="IP Address Main" onclick="Add_item_data_form_view(this);">เพิ่ม IP</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข IP</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="IP Address Main" old_value="{{ $row->ip_main }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน IP</span>
                         @endif
                         <span class="product-description">
                         @if ($row->ip_main == '')
@@ -397,9 +420,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">IP Address Sub</a>
                         @if ($row->ip_sub == '')
-                            <span class="btn btn-sm badge badge-success float-right">เพิ่ม IP</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="IP Address Sub" onclick="Add_item_data_form_view(this);">เพิ่ม IP</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right">แก้ไข IP</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="IP Address Sub" old_value="{{ $row->ip_sub }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน IP</span>
                         @endif
                         <span class="product-description">
                         @if ($row->ip_sub == '')
@@ -418,12 +441,206 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <b>ข้อมูลประวัติ</b>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                    <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main">
+                        <thead>
+                            <tr class="bg-primary">
+                                <th>Sticker</th>
+                                <th>วันที่</th>
+                                <th>ประเภท</th>
+                                <th>ข้อมูลเก่า</th>
+                                <th>ข้อมูลใหม่</th>
+                                <th>สถานะ</th>
+                                <th>ผู้ทำการ</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr class="bg-primary">
+                                <th>Sticker</th>
+                                <th>วันที่</th>
+                                <th>ประเภท</th>
+                                <th>ข้อมูลเก่า</th>
+                                <th>ข้อมูลใหม่</th>
+                                <th>สถานะ</th>
+                                <th>ผู้ทำการ</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     </div>
     </div>
     <!-- END -->
     @include('../layout.footer')
+
+    <!-- Modal Add -->
+    <div class="modal fade" id="Modal_add_item" tabindex="-1" role="dialog" aria-labelledby="Modal_add_itemLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content card-primary card-outline">
+        <div class="modal-header">
+            <h5 class="modal-title" id="Modal_add_itemLabel">เพิ่มข้อมูล <span class="Modal_add_item_name"></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Show = Input -->
+            <div class="form-group" id="Modal_add_input">
+                <label for="Modal_add_item_input">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                <input type="text" class="form-control form-control-sm" id="Modal_add_item_input" placeholder="กรุณาใส่ข้อมูลที่ต้องการ">
+            </div>
+            <!-- Show = Select -->
+            <div class="form-group" id="Modal_add_select">
+                <label for="Modal_add_item_select">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                <select class="custom-select custom-select-sm" id="Modal_add_item_select">
+                <option value="Windows XP">Windows XP</option>
+                <option value="Windows 7">Windows 7</option>
+                <option value="Windows 8">Windows 8</option>
+                <option value="Windows 10">Windows 10</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
+            <button type="button" class="btn btn-sm btn-primary btn-loading" id="Add_item_data_form_view_save" onclick="Add_item_data_form_view_save(this);">ยืนยันการบันทึก</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    <!-- Modal Edit -->
+    <div class="modal fade" id="Modal_edit_item" tabindex="-1" role="dialog" aria-labelledby="Modal_edit_itemLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content card-primary card-outline">
+        <div class="modal-header">
+            <h5 class="modal-title" id="Modal_edit_itemLabel">เปลี่ยนข้อมูล <span class="Modal_edit_item_name"></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Show = Input -->
+            <div class="form-group" id="Modal_edit_input">
+                <label for="Modal_edit_item_input">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
+                <input type="text" class="form-control form-control-sm" id="Modal_edit_item_input" placeholder="กรุณาใส่ข้อมูลที่ต้องการ">
+            </div>
+            <!-- Show = Select -->
+            <div class="form-group" id="Modal_edit_select">
+                <label for="Modal_edit_item_select">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
+                <select class="custom-select custom-select-sm" id="Modal_edit_item_select">
+                <option value="Windows XP">Windows XP</option>
+                <option value="Windows 7">Windows 7</option>
+                <option value="Windows 8">Windows 8</option>
+                <option value="Windows 10">Windows 10</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
+            <button type="button" class="btn btn-sm btn-primary btn-loading" id="Edit_item_data_form_view_save" onclick="Edit_item_data_form_view_save(this);">ยืนยันการแก้ไข</button>
+        </div>
+        </div>
+    </div>
+    </div>
     </body>
         <!-- All Js -->
         <script type="text/javascript" src="{{ url('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ url('js/viewitem.js') }}"></script>
+        <!-- Script In Page -->
+        <script>
+        $.fn.dataTable.ext.errMode = 'throw';
+        var TableDisplay = $('#Table_Main').DataTable({
+            "dom": "<'row'<'col-sm-1'l><'col-sm-7'><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-1'i><'col-sm-7'><'col-sm-4'p>>",
+            "processing": true,
+            "serverSide": true,
+            "bPaginate": true,
+            "responsive": true,
+            "order": [
+                [0, 'asc']
+            ],
+            "aLengthMenu": [
+                [10, 50, 100, -1],
+                ["10", "50", "100", "ทั้งหมด"]
+            ],
+            "ajax": {
+                "url": "../api/v1/ajax_load_item_view_history/{{ $Item[0]->sticker_number }}",
+                "type": 'POST',
+                "headers": {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            },
+            "columns": [{
+                    "data": 'sticker_number',
+                    "name": 'sticker_number',
+                },
+                {
+                    "data": 'created_at',
+                    "name": 'created_at'
+                },
+                {
+                    "data": 'item_type',
+                    "name": 'item_type'
+                },
+                {
+                    "data": 'item_old',
+                    "name": 'item_old'
+                },
+                {
+                    "data": 'item_change',
+                    "name": 'item_change'
+                },
+                {
+                    "data": 'item_status',
+                    "name": 'item_status'
+                },
+                {
+                    "data": 'users_change',
+                    "name": 'users_change'
+                }
+            ],
+            "columnDefs": [{
+                    "className": 'text-left',
+                    "targets": []
+                },
+                {
+                    "className": 'text-center',
+                    "targets": [0, 1, 2, 5]
+                },
+                {
+                    "className": 'text-right',
+                    "targets": [3, 4]
+                },
+            ],
+            "language": {
+                "lengthMenu": "แสดง _MENU_ แถว",
+                "search": "ค้นหา:",
+                "info": "แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ แถว",
+                "infoEmpty": "แสดง 0 ถึง 0 ทั้งหมด 0 แถว",
+                "infoFiltered": "(จาก ทั้งหมด _MAX_ ทั้งหมด แถว)",
+                "processing": "กำลังโหลดข้อมูล...",
+                "zeroRecords": "ไม่มีข้อมูล",
+                "paginate": {
+                    "first": "หน้าแรก",
+                    "last": "หน้าสุดท้าย",
+                    "next": "ต่อไป",
+                    "previous": "ย้อนกลับ"
+                },
+            },
+            search: {
+                "regex": true
+            },
+        });
+        </script>
 </html>

@@ -15,6 +15,16 @@ class Hardware extends Model
      */
     protected $fillable = [
         'sticker_number', 
+        'cpu',
+        'ram',
+        'case',
+        'monitor',
+        'mouse',
+        'keyboard',
+        'mainboard',
+        'powersupply',
+        'hdd',
+        'ssd'
     ];
 
     public $timestamps = false;

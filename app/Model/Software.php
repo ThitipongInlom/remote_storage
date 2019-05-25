@@ -16,6 +16,8 @@ class Software extends Model
     protected $fillable = [
         'sticker_number', 
         'windows',
+        'teamviewer',
+        'anydesk'
     ];
 
     public $timestamps = false;

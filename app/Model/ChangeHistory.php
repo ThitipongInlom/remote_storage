@@ -4,26 +4,26 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class System extends Model
+class ChangeHistory extends Model
 {
     /*
-        System V 0.1
+        ChangeHistory V 0.1
     */    
-    public $table = "systems";
+    public $table = "changehistorys";
     /**
      * รายชื่อ ตาราง ใน ดาต้าเบส
      */
     protected $fillable = [
         'sticker_number', 
-        'computer_name',
-        'ip_main',
-        'ip_sub',
+        'item_type',
+        'item_old',
+        'item_change',
+        'item_status',
+        'remark',
+        'users_change',
     ];
-
-    public $timestamps = false;
-
      /**
      * ชื่อ ตาราง 
      */   
-    protected $primaryKey = 'system_id';
+    protected $primaryKey = 'changehistory_id';
 }
