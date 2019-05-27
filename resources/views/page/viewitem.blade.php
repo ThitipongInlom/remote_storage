@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">ข้อมูลของคอม</h1>
+                <h1 class="m-0 text-dark">ข้อมูลของคอม <a href="{{ url('dashboard') }}" class="btn btn-sm btn-primary" role="button"><i class="fas fa-tachometer-alt"></i> แดชบอร์ด</a></h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -33,6 +33,131 @@
     <div class="content">
     <div class="container-fluid">
     <!-- จำนวนข้อมูลทั้งหมด -->    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <b>Guest</b>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <ul class="products-list product-list-in-card pl-2 pr-2">
+                            @foreach ($Item as $row)
+                                <!-- Guest Name -->
+                                @if ($row->guest_name == '' OR $row->guest_name != '')
+                                <li class="item">
+                                    <div class="product-img">
+                                    <img src="{{ url('img/icon/user_name.png') }}" alt="Product Image" class="img-size-50">
+                                    </div>
+                                    <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">Name</a>
+                                    @if ($row->guest_name == '')
+                                        <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Guest Name" onclick="Add_item_data_form_view(this);">เพิ่ม Name</span>
+                                    @else
+                                        <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Guest Name" old_value="{{ $row->guest_name }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Name</span>
+                                    @endif
+                                    <span class="product-description">
+                                    @if ($row->guest_name == '')
+                                        <p>ยังไม่มีข้อมูล</p>
+                                    @else
+                                        {{ $row->guest_name }}
+                                    @endif
+                                    </div>
+                                </li>                       
+                                @endif
+                            @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="products-list product-list-in-card pl-2 pr-2">
+                            @foreach ($Item as $row)
+                                <!-- Guest Dep -->
+                                @if ($row->guest_dep == '' OR $row->guest_dep != '')
+                                <li class="item">
+                                    <div class="product-img">
+                                    <img src="{{ url('img/icon/dep.png') }}" alt="Product Image" class="img-size-50">
+                                    </div>
+                                    <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">Dep</a>
+                                    @if ($row->guest_dep == '')
+                                        <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Guest Dep" onclick="Add_item_data_form_view(this);">เพิ่ม Dep</span>
+                                    @else
+                                        <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Guest Dep" old_value="{{ $row->guest_dep }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Dep</span>
+                                    @endif
+                                    <span class="product-description">
+                                    @if ($row->guest_dep == '')
+                                        <p>ยังไม่มีข้อมูล</p>
+                                    @else
+                                        {{ $row->guest_dep }}
+                                    @endif
+                                    </div>
+                                </li>                       
+                                @endif
+                            @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="products-list product-list-in-card pl-2 pr-2">
+                            @foreach ($Item as $row)
+                                <!-- Guest Hotel -->
+                                @if ($row->guest_hotel == '' OR $row->guest_hotel != '')
+                                <li class="item">
+                                    <div class="product-img">
+                                    <img src="{{ url('img/icon/hotel.png') }}" alt="Product Image" class="img-size-50">
+                                    </div>
+                                    <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">Hotel</a>
+                                    @if ($row->guest_hotel == '')
+                                        <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Guest Hotel" onclick="Add_item_data_form_view(this);">เพิ่ม Hotel</span>
+                                    @else
+                                        <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Guest Hotel" old_value="{{ $row->guest_hotel }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Hotel</span>
+                                    @endif
+                                    <span class="product-description">
+                                    @if ($row->guest_hotel == '')
+                                        <p>ยังไม่มีข้อมูล</p>
+                                    @else
+                                        {{ $row->guest_hotel }}
+                                    @endif
+                                    </div>
+                                </li>                       
+                                @endif
+                            @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="products-list product-list-in-card pl-2 pr-2">
+                            @foreach ($Item as $row)
+                                <!-- Guest Phone -->
+                                @if ($row->guest_phone == '' OR $row->guest_phone != '')
+                                <li class="item">
+                                    <div class="product-img">
+                                    <img src="{{ url('img/icon/phone.png') }}" alt="Product Image" class="img-size-50">
+                                    </div>
+                                    <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">Phone</a>
+                                    @if ($row->guest_phone == '')
+                                        <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Guest Phone" onclick="Add_item_data_form_view(this);">เพิ่ม Phone</span>
+                                    @else
+                                        <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Guest Phone" old_value="{{ $row->guest_phone }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Phone</span>
+                                    @endif
+                                    <span class="product-description">
+                                    @if ($row->guest_phone == '')
+                                        <p>ยังไม่มีข้อมูล</p>
+                                    @else
+                                        {{ $row->guest_phone }}
+                                    @endif
+                                    </div>
+                                </li>                       
+                                @endif
+                            @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <!-- Hardware -->
         <div class="col-md-4">
@@ -433,6 +558,28 @@
                         </div>
                     </li>                       
                     @endif
+                    <!-- Internet -->
+                    @if ($row->internet == '' OR $row->internet != '')
+                     <li class="item">
+                        <div class="product-img">
+                        <img src="{{ url('img/icon/internet.png') }}" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">Internet</a>
+                        @if ($row->internet == '')
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="IP Address Sub" onclick="Add_item_data_form_view(this);">เพิ่ม Internet</span>
+                        @else
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="IP Address Sub" old_value="{{ $row->ip_sub }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Internet</span>
+                        @endif
+                        <span class="product-description">
+                        @if ($row->internet == '')
+                            <p>ยังไม่มีข้อมูล</p>
+                        @else
+                            {{ $row->internet }}
+                        @endif
+                        </div>
+                    </li>                       
+                    @endif
                 @endforeach
                 </ul>
             </div>
@@ -445,7 +592,7 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <b>ข้อมูลประวัติ</b>
+                    <b>ข้อมูลประวัติย้อนหลัง</b>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -457,6 +604,7 @@
                                 <th>ประเภท</th>
                                 <th>ข้อมูลเก่า</th>
                                 <th>ข้อมูลใหม่</th>
+                                <th>หมายเหตุ</th>
                                 <th>สถานะ</th>
                                 <th>ผู้ทำการ</th>
                             </tr>
@@ -468,6 +616,7 @@
                                 <th>ประเภท</th>
                                 <th>ข้อมูลเก่า</th>
                                 <th>ข้อมูลใหม่</th>
+                                <th>หมายเหตุ</th>
                                 <th>สถานะ</th>
                                 <th>ผู้ทำการ</th>
                             </tr>
@@ -544,6 +693,9 @@
                 <option value="Windows 10">Windows 10</option>
                 </select>
             </div>
+            <!-- Remark -->
+                <label for="Modal_edit_item_remark">หมายเหตุ</label>
+                <input type="text" class="form-control form-control-sm" id="Modal_edit_item_remark" placeholder="หมายเหตุ">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -568,11 +720,11 @@
             "bPaginate": true,
             "responsive": true,
             "order": [
-                [0, 'asc']
+                [1, 'desc']
             ],
             "aLengthMenu": [
-                [10, 50, 100, -1],
-                ["10", "50", "100", "ทั้งหมด"]
+                [5, 10, 20, -1],
+                ["5", "10", "20", "ทั้งหมด"]
             ],
             "ajax": {
                 "url": "../api/v1/ajax_load_item_view_history/{{ $Item[0]->sticker_number }}",
@@ -602,6 +754,10 @@
                     "name": 'item_change'
                 },
                 {
+                    "data": 'remark',
+                    "name": 'remark'
+                },
+                {
                     "data": 'item_status',
                     "name": 'item_status'
                 },
@@ -612,15 +768,15 @@
             ],
             "columnDefs": [{
                     "className": 'text-left',
-                    "targets": []
+                    "targets": [3, 4, 5]
                 },
                 {
                     "className": 'text-center',
-                    "targets": [0, 1, 2, 5]
+                    "targets": [0, 1, 2, 6, 7]
                 },
                 {
                     "className": 'text-right',
-                    "targets": [3, 4]
+                    "targets": []
                 },
             ],
             "language": {

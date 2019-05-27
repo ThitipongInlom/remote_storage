@@ -38,7 +38,7 @@ class Viewitemcontroller extends Controller
 
         return Datatables::of($users)
         ->editColumn('created_at', function($users) {
-            $result = date("d/m/Y",strtotime($users->created_at));
+            $result = date("d/m/Y H:i:s",strtotime($users->created_at));
             return $result;
         })
         ->make(true);
@@ -47,6 +47,55 @@ class Viewitemcontroller extends Controller
     public function Update_item_view_save(Request $request)
     {
         switch ($request->post('Type_add')) {
+
+            /**
+             * Guest
+             */
+
+            // Guest Name
+            case 'Guest Name':
+                $Guest = Guest::where('sticker_number', $request->post('ID_computer'))->get();
+                $id = $Guest[0]->guests_id;
+                $old_item = $Guest[0]->guest_name;
+                $Guest = Guest::find($id);
+                $Guest->guest_name = $request->post('Value_add');
+                $Guest->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
+                return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
+            break;
+            // Guest Dep
+            case 'Guest Dep':
+                $Guest = Guest::where('sticker_number', $request->post('ID_computer'))->get();
+                $id = $Guest[0]->guests_id;
+                $old_item = $Guest[0]->guest_dep;
+                $Guest = Guest::find($id);
+                $Guest->guest_dep = $request->post('Value_add');
+                $Guest->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));                
+                return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
+            break;
+            // Guest Hotel
+            case 'Guest Hotel':
+                $Guest = Guest::where('sticker_number', $request->post('ID_computer'))->get();
+                $id = $Guest[0]->guests_id;
+                $old_item = $Guest[0]->guest_hotel;
+                $Guest = Guest::find($id);
+                $Guest->guest_hotel = $request->post('Value_add');
+                $Guest->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));  
+                return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
+            break;
+            // Guest Phone
+            case 'Guest Phone':
+                $Guest = Guest::where('sticker_number', $request->post('ID_computer'))->get();
+                $id = $Guest[0]->guests_id;
+                $old_item = $Guest[0]->guest_phone;
+                $Guest = Guest::find($id);
+                $Guest->guest_phone = $request->post('Value_add');
+                $Guest->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));                
+                return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
+            break;
 
             /**
              * Hardware
@@ -60,88 +109,106 @@ class Viewitemcontroller extends Controller
                 $Hardware = Hardware::find($id);
                 $Hardware->cpu = $request->post('Value_add');
                 $Hardware->save();
-                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item);
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break;
             // RAM
             case 'RAM':
                 $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->ram;
                 $Hardware = Hardware::find($id);
                 $Hardware->ram = $request->post('Value_add');
                 $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
             // Case
             case 'Case':
                 $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->case;
                 $Hardware = Hardware::find($id);
                 $Hardware->case = $request->post('Value_add');
                 $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break;      
             // Monitor
             case 'Monitor':
                 $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->monitor;
                 $Hardware = Hardware::find($id);
                 $Hardware->monitor = $request->post('Value_add');
                 $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break;    
             // Mouse
             case 'Mouse':
                 $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->mouse;
                 $Hardware = Hardware::find($id);
                 $Hardware->mouse = $request->post('Value_add');
                 $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break;  
             // Keyboard
             case 'Keyboard':
                 $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->keyboard;
                 $Hardware = Hardware::find($id);
                 $Hardware->keyboard = $request->post('Value_add');
                 $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break;    
             // Mainboard
             case 'Mainboard':
                 $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->mainboard;
                 $Hardware = Hardware::find($id);
                 $Hardware->mainboard = $request->post('Value_add');
                 $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
             // Power Supply
             case 'Power Supply':
                 $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->powersupply;
                 $Hardware = Hardware::find($id);
                 $Hardware->powersupply = $request->post('Value_add');
                 $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break;   
             // HDD
             case 'HDD':
                 $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->hdd;
                 $Hardware = Hardware::find($id);
                 $Hardware->hdd = $request->post('Value_add');
                 $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break;  
             // HDD
             case 'SSD':
                 $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->ssd;
                 $Hardware = Hardware::find($id);
                 $Hardware->ssd = $request->post('Value_add');
                 $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break;      
             
@@ -153,65 +220,77 @@ class Viewitemcontroller extends Controller
             case 'Teamviewer':
                 $Software = Software::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Software[0]->software_id;
+                $old_item = $Software[0]->teamviewer;
                 $Software = Software::find($id);
                 $Software->teamviewer = $request->post('Value_add');
                 $Software->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
             // Anydesk
             case 'Anydesk':
                 $Software = Software::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $Software[0]->software_id;
+                $old_item = $Software[0]->anydesk;
                 $Software = Software::find($id);
                 $Software->anydesk = $request->post('Value_add');
                 $Software->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
 
             /**
              * System
              */
+
             // Windows
             case 'Windows':
                 $System = System::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $System[0]->system_id;
+                $old_item = $System[0]->windows;
                 $System = System::find($id);
                 $System->windows = $request->post('Value_add');
                 $System->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
             // Computer Name
             case 'Computer Name':
                 $System = System::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $System[0]->system_id;
+                $old_item = $System[0]->computer_name;
                 $System = System::find($id);
                 $System->computer_name = $request->post('Value_add');
                 $System->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
             // IP Address Main
             case 'IP Address Main':
                 $System = System::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $System[0]->system_id;
+                $old_item = $System[0]->ip_main;
                 $System = System::find($id);
                 $System->ip_main = $request->post('Value_add');
                 $System->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
             // IP Address Sub
             case 'IP Address Sub':
                 $System = System::where('sticker_number', $request->post('ID_computer'))->get();
                 $id = $System[0]->system_id;
+                $old_item = $System[0]->ip_sub;
                 $System = System::find($id);
                 $System->ip_sub = $request->post('Value_add');
                 $System->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
-
         }
     }
 
-    public function Change_Historys_Log($ID_Computer, $Item_type, $Value_add, $Item_ststus, $old_item)
+    public function Change_Historys_Log($ID_Computer, $Item_type, $Value_add, $Item_ststus, $old_item, $Remark)
     {
             // Insert ChangeHistory
             $ChangeHistory = new ChangeHistory;
@@ -225,6 +304,8 @@ class Viewitemcontroller extends Controller
             $ChangeHistory->item_change = $Value_add;
             // Insert Item Status
             $ChangeHistory->item_status = $Item_ststus;
+            // Insert Item Remark
+            $ChangeHistory->remark = $Remark;
             // Insert User Change 
             $ChangeHistory->users_change = Auth::user()->username;
             // Insert Save

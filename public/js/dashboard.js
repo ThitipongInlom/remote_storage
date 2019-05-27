@@ -88,3 +88,9 @@ $(document).ready(function () {
     });
 
 });
+
+$(document).ajaxComplete(function () {
+    $('[data-toggle="tooltip"]').tooltip({
+        "html": true,
+    });
+});

@@ -19,6 +19,12 @@ $(document).ready(function () {
     }
 });
 
+$(document).ajaxComplete(function () {
+    $('[data-toggle="tooltip"]').tooltip({
+        "html": true,
+    });
+});
+
 var Add_item_data_form_view = function Add_item_data_form_view(e) {
     // รีเซ็ต ข้อมูลจาก Input 
     $("#Modal_add_item_input").val('');
@@ -141,6 +147,7 @@ var Edit_item_data_form_view_save = function Edit_item_data_form_view_save(e) {
         Data.append('Value_add', Value_add);
         Data.append('Type_add', $(e).attr('newname'));
         Data.append('ID_computer', $("#id_computer").val());
+        Data.append('Remark', $("#Modal_edit_item_remark").val());
         Data.append('Item_ststus', 'เปลี่ยนข้อมูล');
         $.ajax({
             url: '../update_item_view_save',

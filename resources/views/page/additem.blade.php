@@ -76,7 +76,12 @@
                                 <td>
                                     <div class="form-group">
                                         <label for="windows">Windows <img src="{{ url('img/icon/windows.png') }}" style="width: 18px;"></label>
-                                        <input type="text" class="form-control form-control-sm" id="windows" placeholder="Windows">
+                                        <select class="custom-select custom-select-sm" id="windows">
+                                            <option value="Windows XP">Windows XP</option>
+                                            <option value="Windows 7">Windows 7</option>
+                                            <option value="Windows 8">Windows 8</option>
+                                            <option value="Windows 10">Windows 10</option>
+                                        </select>
                                     </div>
                                 </td>
                                 <td>
@@ -137,7 +142,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                
+                                    <div class="form-group">
+                                        <label for="ip_main">Guest Hotel :</label>
+                                        <input type="text" class="form-control form-control-sm" id="hotel" placeholder="Guest Hotel">
+                                    </div>                                
                                 </td>
                             </tr>
                         </tbody>

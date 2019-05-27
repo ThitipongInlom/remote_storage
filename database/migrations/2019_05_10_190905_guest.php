@@ -20,6 +20,7 @@ class Guest extends Migration
             $table->bigIncrements('guests_id');
             $table->string('sticker_number')->nullable();
             $table->string('guest_dep')->nullable();
+            $table->string('guest_hotel')->nullable();
             $table->string('guest_name')->nullable();
             $table->string('guest_phone')->nullable();
         });

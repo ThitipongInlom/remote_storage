@@ -16,6 +16,7 @@ class Guest extends Model
     protected $fillable = [
         'sticker_number', 
         'guest_dep', 
+        'guest_hotel', 
         'guest_name', 
         'guest_phone', 
     ];
