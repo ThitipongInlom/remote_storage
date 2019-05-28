@@ -26,7 +26,13 @@ var Save_Add_Item = function Save_Add_Item() {
     Data.append('ip_main', $("#ip_main").val());
     Data.append('ip_sub', $("#ip_sub").val());
     Data.append('windows', $("#windows").val());
-    Data.append('internet', $("input:radio[name='internet']:checked").val());
+    Data.append('internet', $('input:radio[name="internet"]:checked').val());
+    Data.append('guest_name', $("#guest_name").val());
+    Data.append('guest_dep', $("#guest_dep").val());
+    Data.append('guest_phone', $("#guest_phone").val());
+    Data.append('guest_hotel', $("#guest_hotel").val());
+    Data.append('teamviwer', $("#teamviwer").val());
+    Data.append('anydesk', $("#anydesk").val());
         // Laading  Options
         var loading = Ladda.create(document.querySelector('.btn-loading'));
         loading.start();
@@ -45,15 +51,14 @@ var Save_Add_Item = function Save_Add_Item() {
             processData: false,
             data: Data,
             success: function (callback) {
-                //var res = jQuery.parseJSON(callback);
+                var res = jQuery.parseJSON(callback);
                 console.log(callback);
-                /*if (res.status == 'success') {
+                if (res.status == 'success') {
                     
                 }else {
                     // Text Error 
                     Toastr["error"](res.error_text);
                 }
-                */
             }
         }).always(
             function () {

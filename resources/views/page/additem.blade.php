@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">เพิ่มข้อมูล</h1>
+                <h1 class="m-0 text-dark">เพิ่มข้อมูล <a href="{{ url('dashboard') }}" class="btn btn-sm btn-primary" role="button"><i class="fas fa-tachometer-alt"></i> แดชบอร์ด</a></h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -77,10 +77,9 @@
                                     <div class="form-group">
                                         <label for="windows">Windows <img src="{{ url('img/icon/windows.png') }}" style="width: 18px;"></label>
                                         <select class="custom-select custom-select-sm" id="windows">
-                                            <option value="Windows XP">Windows XP</option>
-                                            <option value="Windows 7">Windows 7</option>
-                                            <option value="Windows 8">Windows 8</option>
-                                            <option value="Windows 10">Windows 10</option>
+                                        @foreach ($Window as $row)
+                                            <option value="{{ $row->window_titel }}">{{ $row->window_titel }}</option>
+                                        @endforeach
                                         </select>
                                     </div>
                                 </td>
@@ -90,7 +89,7 @@
                                         <br>
                                         <div align="center">
                                         <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="internet_1" name="internet" class="custom-control-input" value="Enable">
+                                        <input type="radio" id="internet_1" name="internet" class="custom-control-input" value="Enable" checked>
                                         <label class="custom-control-label" for="internet_1">เปิด</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
@@ -104,6 +103,81 @@
                         </tbody>
                     </table>
                     <hr>
+                    <h4>Hardware</h4>
+                    <table class="table table-sm">
+                        <tbody>
+                            <tr>
+                                <td width="50%">
+                                    <div class="form-group">
+                                        <label for="guest_name">CPU <img src="{{ url('img/icon/cpu.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="cpu" placeholder="CPU">
+                                    </div>
+                                </td>
+                                <td width="50%">
+                                    <div class="form-group">
+                                        <label for="guest_dep">RAM <img src="{{ url('img/icon/ram.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="ram" placeholder="RAM">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="guest_name">Case <img src="{{ url('img/icon/case.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="case" placeholder="Case">
+                                    </div>                             
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="guest_name">Monitor <img src="{{ url('img/icon/monitor.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="monitor" placeholder="Monitor">
+                                    </div>            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="guest_name">Mouse <img src="{{ url('img/icon/mouse.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="mouse" placeholder="Mouse">
+                                    </div>                             
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="guest_name">Keyboard <img src="{{ url('img/icon/keyboard.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="keyboard" placeholder="Keyboard">
+                                    </div>            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="guest_name">Mainboard <img src="{{ url('img/icon/mainboard.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="mainboard" placeholder="Mainboard">
+                                    </div>                             
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="guest_name">Power Supply <img src="{{ url('img/icon/powersupply.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="powersupply" placeholder="Power Supply">
+                                    </div>            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="guest_name">HDD <img src="{{ url('img/icon/hdd.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="hdd" placeholder="HDD">
+                                    </div>                             
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="guest_name">SSD <img src="{{ url('img/icon/ssd.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="ssd" placeholder="SSD">
+                                    </div>            
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 </div>
                 </div>
@@ -121,36 +195,63 @@
                     <table class="table table-sm">
                         <tbody>
                             <tr>
-                                <td>
+                                <td width="50%">
                                     <div class="form-group">
-                                        <label for="sticker_number">Guest Name :</label>
-                                        <input type="text" class="form-control form-control-sm" id="sticker_number" placeholder="Guest Name">
+                                        <label for="guest_name">Guest Name <img src="{{ url('img/icon/user_name.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="guest_name" placeholder="Guest Name">
                                     </div>
                                 </td>
-                                <td>
+                                <td width="50%">
                                     <div class="form-group">
-                                        <label for="computer_name">Guest Dep :</label>
-                                        <input type="text" class="form-control form-control-sm" id="computer_name" placeholder="Guest Dep">
+                                        <label for="guest_dep">Guest Dep <img src="{{ url('img/icon/dep.png') }}" style="width: 18px;"></label>
+                                        <select class="custom-select custom-select-sm" id="guest_dep">
+                                        @foreach ($Department as $row)
+                                            <option value="{{ $row->department_titel }}">{{ $row->department_titel }} - {{ $row->department_main }}</option>
+                                        @endforeach
+                                        </select>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <div class="form-group">
-                                        <label for="ip_main">Guest Phone :</label>
-                                        <input type="text" class="form-control form-control-sm" id="ip_main" placeholder="Guest Phone">
+                                        <label for="guest_phone">Guest Phone <img src="{{ url('img/icon/phone.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="guest_phone" placeholder="Guest Phone">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <label for="ip_main">Guest Hotel :</label>
-                                        <input type="text" class="form-control form-control-sm" id="hotel" placeholder="Guest Hotel">
+                                        <label for="guest_hotel">Guest Hotel <img src="{{ url('img/icon/hotel.png') }}" style="width: 18px;"></label>
+                                        <select class="custom-select custom-select-sm" id="guest_hotel">                                    
+                                        @foreach ($Hotel as $row)
+                                            <option value="{{ $row->hotel_titel }}">{{ $row->hotel_titel }}</option>
+                                        @endforeach
+                                        </select>
                                     </div>                                
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <hr>
+                    <h4>Software</h4>
+                    <table class="table table-sm">
+                        <tbody>
+                            <tr>
+                                <td width="50%">
+                                    <div class="form-group">
+                                        <label for="guest_name">Teamviewer <img src="{{ url('img/teamviewer.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="teamviwer" placeholder="Teamviwer">
+                                    </div>
+                                </td>
+                                <td width="50%">
+                                    <div class="form-group">
+                                        <label for="guest_dep">Anydesk <img src="{{ url('img/anydesk.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="anydesk" placeholder="Anydesk">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 </div>
                 </div>

@@ -81,9 +81,9 @@
                                     <div class="product-info">
                                     <a href="javascript:void(0)" class="product-title">Dep</a>
                                     @if ($row->guest_dep == '')
-                                        <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Guest Dep" onclick="Add_item_data_form_view(this);">เพิ่ม Dep</span>
+                                        <span class="btn btn-sm badge badge-success float-right" datashow="select_dep" newname="Guest Dep" onclick="Add_item_data_form_view(this);">เพิ่ม Dep</span>
                                     @else
-                                        <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Guest Dep" old_value="{{ $row->guest_dep }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Dep</span>
+                                        <span class="btn btn-sm badge badge-warning float-right" datashow="select_dep" newname="Guest Dep" old_value="{{ $row->guest_dep }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Dep</span>
                                     @endif
                                     <span class="product-description">
                                     @if ($row->guest_dep == '')
@@ -109,9 +109,9 @@
                                     <div class="product-info">
                                     <a href="javascript:void(0)" class="product-title">Hotel</a>
                                     @if ($row->guest_hotel == '')
-                                        <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Guest Hotel" onclick="Add_item_data_form_view(this);">เพิ่ม Hotel</span>
+                                        <span class="btn btn-sm badge badge-success float-right" datashow="select_hotel" newname="Guest Hotel" onclick="Add_item_data_form_view(this);">เพิ่ม Hotel</span>
                                     @else
-                                        <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Guest Hotel" old_value="{{ $row->guest_hotel }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Hotel</span>
+                                        <span class="btn btn-sm badge badge-warning float-right" datashow="select_hotel" newname="Guest Hotel" old_value="{{ $row->guest_hotel }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Hotel</span>
                                     @endif
                                     <span class="product-description">
                                     @if ($row->guest_hotel == '')
@@ -479,9 +479,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Windows</a>
                         @if ($row->windows == '')
-                            <span class="btn btn-sm badge badge-success float-right" datashow="select" newname="Windows" onclick="Add_item_data_form_view(this);">เพิ่ม Windows</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="select_windows" newname="Windows" onclick="Add_item_data_form_view(this);">เพิ่ม Windows</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right" datashow="select" newname="Windows" old_value="{{ $row->windows }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Windows</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="select_windows" newname="Windows" old_value="{{ $row->windows }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Windows</span>
                         @endif
                         <span class="product-description">
                         @if ($row->windows == '')
@@ -567,9 +567,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Internet</a>
                         @if ($row->internet == '')
-                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="IP Address Sub" onclick="Add_item_data_form_view(this);">เพิ่ม Internet</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="radio_internet" newname="Internet" onclick="Add_item_data_form_view(this);">เพิ่ม Internet</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="IP Address Sub" old_value="{{ $row->ip_sub }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Internet</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="radio_internet" newname="Internet" old_value="{{ $row->internet }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Internet</span>
                         @endif
                         <span class="product-description">
                         @if ($row->internet == '')
@@ -649,15 +649,47 @@
                 <label for="Modal_add_item_input">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
                 <input type="text" class="form-control form-control-sm" id="Modal_add_item_input" placeholder="กรุณาใส่ข้อมูลที่ต้องการ">
             </div>
-            <!-- Show = Select -->
-            <div class="form-group" id="Modal_add_select">
-                <label for="Modal_add_item_select">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
-                <select class="custom-select custom-select-sm" id="Modal_add_item_select">
-                <option value="Windows XP">Windows XP</option>
-                <option value="Windows 7">Windows 7</option>
-                <option value="Windows 8">Windows 8</option>
-                <option value="Windows 10">Windows 10</option>
+            <!-- Show = Select Dep -->
+            <div class="form-group" id="Modal_add_select_dep">
+                <label for="Modal_add_item_select_dep">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                <select class="custom-select custom-select-sm" id="Modal_add_item_select_dep">
+                @foreach ($Department as $row)
+                    <option value="{{ $row->department_titel }}">{{ $row->department_titel }} - {{ $row->department_main }}</option>
+                @endforeach
                 </select>
+            </div>
+            <!-- Show = Select Hotel -->
+            <div class="form-group" id="Modal_add_select_hotel">
+                <label for="Modal_add_item_select_hotel">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                <select class="custom-select custom-select-sm" id="Modal_add_item_select_hotel">
+                @foreach ($Hotel as $row)
+                    <option value="{{ $row->hotel_titel }}">{{ $row->hotel_titel }}</option>
+                @endforeach
+                </select>
+            </div>
+            <!-- Show = Select Windows -->
+            <div class="form-group" id="Modal_add_select_windows">
+                <label for="Modal_add_item_select_windows">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                <select class="custom-select custom-select-sm" id="Modal_add_item_select_windows">
+                @foreach ($Window as $row)
+                    <option value="{{ $row->window_titel }}">{{ $row->window_titel }}</option>
+                @endforeach
+                </select>
+            </div>
+            <!-- Show = radio internet -->
+            <div class="form-group" id="Modal_add_radio_internet">
+                <label for="Modal_add_item_select_windows">ข้อมูลเก่าของ <span class="Modal_add_item_name"></span></label>
+                <br>
+                <div align="center">
+                <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="internet_add_1" name="internet_add" class="custom-control-input" value="Enable">
+                <label class="custom-control-label" for="internet_add_1">เปิด</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="internet_add_2" name="internet_add" class="custom-control-input" value="Disable">
+                <label class="custom-control-label" for="internet_add_2">ปิด</label>
+                </div>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
@@ -683,15 +715,47 @@
                 <label for="Modal_edit_item_input">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
                 <input type="text" class="form-control form-control-sm" id="Modal_edit_item_input" placeholder="กรุณาใส่ข้อมูลที่ต้องการ">
             </div>
-            <!-- Show = Select -->
-            <div class="form-group" id="Modal_edit_select">
-                <label for="Modal_edit_item_select">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
-                <select class="custom-select custom-select-sm" id="Modal_edit_item_select">
-                <option value="Windows XP">Windows XP</option>
-                <option value="Windows 7">Windows 7</option>
-                <option value="Windows 8">Windows 8</option>
-                <option value="Windows 10">Windows 10</option>
+            <!-- Show = Select Dep -->
+            <div class="form-group" id="Modal_edit_select_dep">
+                <label for="Modal_edit_item_select_dep">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
+                <select class="custom-select custom-select-sm" id="Modal_edit_item_select_dep">
+                @foreach ($Department as $row)
+                    <option value="{{ $row->department_titel }}">{{ $row->department_titel }} - {{ $row->department_main }}</option>
+                @endforeach
                 </select>
+            </div>
+            <!-- Show = Select Hotel -->
+            <div class="form-group" id="Modal_edit_select_hotel">
+                <label for="Modal_edit_item_select_hotel">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                <select class="custom-select custom-select-sm" id="Modal_edit_item_select_hotel">
+                @foreach ($Hotel as $row)
+                    <option value="{{ $row->hotel_titel }}">{{ $row->hotel_titel }}</option>
+                @endforeach
+                </select>
+            </div>
+            <!-- Show = Select Windows -->
+            <div class="form-group" id="Modal_edit_select_windows">
+                <label for="Modal_edit_item_select_windows">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
+                <select class="custom-select custom-select-sm" id="Modal_edit_item_select_windows">
+                @foreach ($Window as $row)
+                    <option value="{{ $row->window_titel }}">{{ $row->window_titel }}</option>
+                @endforeach
+                </select>
+            </div>
+            <!-- Show = radio internet -->
+            <div class="form-group" id="Modal_edit_radio_internet">
+                <label for="Modal_edit_item_select_windows">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
+                <br>
+                <div align="center">
+                <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="internet_edit_1" name="internet_edit" class="custom-control-input" value="Enable">
+                <label class="custom-control-label" for="internet_edit_1">เปิด</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="internet_edit_2" name="internet_edit" class="custom-control-input" value="Disable">
+                <label class="custom-control-label" for="internet_edit_2">ปิด</label>
+                </div>
+                </div>
             </div>
             <!-- Remark -->
                 <label for="Modal_edit_item_remark">หมายเหตุ</label>

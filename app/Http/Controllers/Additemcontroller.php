@@ -10,6 +10,9 @@ use App\Model\Software as Software;
 use App\Model\Runcomputer as Runcomputer;
 use App\Model\Hardware as Hardware;
 use App\Model\Guest as Guest;
+use App\Model\Department as Department;
+use App\Model\Hotel as Hotel;
+use App\Model\Window as Window;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +23,10 @@ class Additemcontroller extends Controller
 {
     public function Add_item()
     {
-        return view('page/additem');
+        return view('page/additem', [
+                    'Department' => Department::get(),
+                    'Hotel' => Hotel::get(),
+                    'Window' => Window::get()]);
     }
 
     public function Additem_save(Request $request)
@@ -31,10 +37,17 @@ class Additemcontroller extends Controller
             // 1.เพิ่มข้อมูลส่วน System
             $System = new System;
             $System->sticker_number = strtoupper($request->post('sticker_number'));
+            $System->computer_name = $request->post('computer_name');
+            $System->ip_main = $request->post('ip_main');
+            $System->ip_sub = $request->post('ip_sub');
+            $System->windows = $request->post('windows');
+            $System->internet = $request->post('internet');
             $System->save();
             // 2.เพิ่มข้อมูลส่วน Software
             $Software = new Software;
             $Software->sticker_number = strtoupper($request->post('sticker_number'));
+            $Software->teamviewer = $request->post('teamviewer');
+            $Software->anydesk = $request->post('anydesk');
             $Software->save();
             // 3.เพิ่มข้อมูลส่วน Runcomputer
             $Runcomputer = new Runcomputer;
@@ -47,13 +60,16 @@ class Additemcontroller extends Controller
             // 5.เพิ่มข้อมูลส่วน Guest
             $Guest = new Guest;
             $Guest->sticker_number = strtoupper($request->post('sticker_number'));
+            $Guest->guest_name = $request->post('guest_name');
+            $Guest->guest_dep = $request->post('guest_dep');
+            $Guest->guest_hotel = $request->post('guest_hotel');
+            $Guest->guest_phone = $request->post('guest_phone');
             $Guest->save();
             print_r($_POST);
         }else{
             // Error Save ไม่สำเร็จ
-            return Response::json(array('status' => 'error','error_text' => 'Sticker Number ซ้ำมีในระบบแล้ว'),200);
+            return Response::json(array('status' => 'error','error_text' => 'Sticker '.strtoupper($request->post('sticker_number')).' ซ้ำมีในระบบแล้ว'),200);
         }
-        print_r($sticker_number_count);
     }
     
 }

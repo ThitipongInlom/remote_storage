@@ -11,6 +11,9 @@ use App\Model\Runcomputer as Runcomputer;
 use App\Model\Hardware as Hardware;
 use App\Model\Guest as Guest;
 use App\Model\ChangeHistory as ChangeHistory;
+use App\Model\Department as Department;
+use App\Model\Hotel as Hotel;
+use App\Model\Window as Window;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +32,10 @@ class Viewitemcontroller extends Controller
                 ->where('runcomputers.sticker_number', $sticker_number)
                 ->get();
         return view('page/viewitem', [
-                    'Item' => $data,]);
+                    'Item' => $data,
+                    'Department' => Department::get(),
+                    'Hotel' => Hotel::get(),
+                    'Window' => Window::get()]);
     }
 
     public function Load_item_view_history(Request $request, $sticker_number)
@@ -37,6 +43,7 @@ class Viewitemcontroller extends Controller
         $users = ChangeHistory::where('sticker_number', $sticker_number)->get();
 
         return Datatables::of($users)
+        ->editColumn('remark', '{!! str_limit($remark, 25) !!}')
         ->editColumn('created_at', function($users) {
             $result = date("d/m/Y H:i:s",strtotime($users->created_at));
             return $result;
@@ -283,6 +290,17 @@ class Viewitemcontroller extends Controller
                 $old_item = $System[0]->ip_sub;
                 $System = System::find($id);
                 $System->ip_sub = $request->post('Value_add');
+                $System->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
+                return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
+            break; 
+            // Internet
+            case 'Internet':
+                $System = System::where('sticker_number', $request->post('ID_computer'))->get();
+                $id = $System[0]->system_id;
+                $old_item = $System[0]->internet;
+                $System = System::find($id);
+                $System->internet = $request->post('Value_add');
                 $System->save();
                 $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);

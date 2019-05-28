@@ -11,7 +11,7 @@
     <body class="hold-transition login-page" style="background-image:url('{{ url('img/bg_login.jpg') }}');">
         <div class="login-box">
         <div class="login-logo">
-           <p style="color:#ff2066;"><b>Remote</b> Storage</p>
+           <p><b>Remote</b> Storage</p>
         </div>
         <div class="card" style="background-color: #000000a6;">
             <div class="card-body login-card-body">
