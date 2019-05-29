@@ -35,7 +35,7 @@ class Dashboardcontroller extends Controller
         })
         ->addColumn('action', function ($users) {
             $url = url("view/$users->sticker_number");
-            $result  = "<a class='btn btn-sm btn-primary' href='$url' role='button'><i class='fas fa-search'></i>View</a>";
+            $result  = "<a class='btn btn-sm btn-primary' href='$url' role='button' data-toggle='tooltip' data-placement='bottom' title='ดูข้อมูลคอมพิวเตอร์ $users->sticker_number'><i class='fas fa-search'></i>View</a>";
             return $result;
         })
         ->rawColumns(['teamviewer','anydesk','action'])

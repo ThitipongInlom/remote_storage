@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Remote Storage</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- All Css -->
+        <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
+    </head>
+    <body class="hold-transition login-page">
+    @include('../layout.head')
+    <!-- ส่วนหัวข้อมูล -->
+    <div class="content-wrapper">
+    <!-- END -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">เพิ่มข้อมูล แผนก / โรงแรม / ระบบ <a href="{{ url('dashboard') }}" class="btn btn-sm btn-primary" role="button"><i class="fas fa-tachometer-alt"></i> แดชบอร์ด</a></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item">ข้อมูล</li>
+                <li class="breadcrumb-item">เพิ่มข้อมูล</li>
+                </ol>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ส่วนกลางที่แสดง -->
+    <div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-primary">
+                <div class="card-header">
+                    <b>Windows</b>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-sm btn-success">เพิ่ม Windows</button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <div class="overflow-auto" style="height: 450px;">
+                        <div data-simplebar data-simplebar-auto-hide="false">
+                        <table class="table table-hover table-sm m-0">
+                            <thead>
+                            <tr align="center">
+                                <th width="60%">Windows Name</th>
+                                <th width="40%">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($Window as $row)
+                            <tr>
+                                <td align="left"><b>{{ $row->window_titel }}</b></td>
+                                <td align="right">
+                                    <button class="btn btn-sm btn-warning">แก้ไข</button>
+                                    <button class="btn btn-sm btn-danger">ลบ</button>
+                                </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-primary">
+                <div class="card-header">
+                    <b>Department</b>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-sm btn-success">เพิ่ม Department</button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <div class="overflow-auto" style="height: 450px;">
+                        <div data-simplebar data-simplebar-auto-hide="false">
+                        <table class="table table-hover table-sm m-0">
+                            <thead>
+                            <tr align="center">
+                            <th width="60%">Department Name</th>
+                            <th width="40%">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($Department as $row)
+                            <tr>
+                                <td align="left"><b>{{ $row->department_titel }}</b></td>
+                                <td align="right">
+                                    <button class="btn btn-sm btn-warning">แก้ไข</button>
+                                    <button class="btn btn-sm btn-danger">ลบ</button>
+                                </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-primary">
+                <div class="card-header">
+                    <b>Hotel</b>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-sm btn-success">เพิ่ม Hotel</button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <div class="overflow-auto" style="height: 450px;">
+                        <div data-simplebar data-simplebar-auto-hide="false">
+                        <table class="table table-hover table-sm m-0">
+                            <thead>
+                            <tr align="center">
+                            <th width="60%">Hotel Name</th>
+                            <th width="40%">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($Hotel as $row)
+                            <tr>
+                                <td align="left"><b>{{ $row->hotel_titel }}</b></td>
+                                <td align="right">
+                                    <button class="btn btn-sm btn-warning">แก้ไข</button>
+                                    <button class="btn btn-sm btn-danger">ลบ</button>
+                                </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <!-- END -->
+    @include('../layout.footer')
+    </body>
+        <!-- All Js -->
+        <script type="text/javascript" src="{{ url('js/app.js') }}"></script>
+</html>

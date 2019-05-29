@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">เพิ่มข้อมูล <a href="{{ url('dashboard') }}" class="btn btn-sm btn-primary" role="button"><i class="fas fa-tachometer-alt"></i> แดชบอร์ด</a></h1>
+                <h1 class="m-0 text-dark">เพิ่มข้อมูล <a href="{{ url('dashboard') }}" class="btn btn-sm btn-primary" role="button" data-toggle="tooltip" data-placement="bottom" title="ข้อมูลคอมพิวเตอร์ทั้งหมด"><i class="fas fa-tachometer-alt"></i> แดชบอร์ด</a></h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -53,7 +53,7 @@
                                 </td>
                                 <td width="50%">
                                     <div class="form-group">
-                                        <label for="computer_name">Computer Name :</label>
+                                        <label for="computer_name">Computer Name</label>
                                         <input type="text" class="form-control form-control-sm" id="computer_name" placeholder="Computer Name">
                                     </div>
                                 </td>
@@ -174,6 +174,17 @@
                                         <label for="guest_name">SSD <img src="{{ url('img/icon/ssd.png') }}" style="width: 18px;"></label>
                                         <input type="text" class="form-control form-control-sm" id="ssd" placeholder="SSD">
                                     </div>            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="guest_name">UPS <img src="{{ url('img/icon/ups.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="ups" placeholder="UPS">
+                                    </div>                             
+                                </td>
+                                <td>
+
                                 </td>
                             </tr>
                         </tbody>

@@ -15,6 +15,8 @@ Route::post('/additem_save', 'Additemcontroller@Additem_save')->name('additem_sa
 // View Item
 Route::get('/view/{sticker_number}', 'Viewitemcontroller@Load_item')->middleware('auth')->name('view');
 Route::post('/update_item_view_save', 'Viewitemcontroller@Update_item_view_save')->name('update_item_view_save');
+// Add Select Item
+Route::get('/addselectitem', 'Addselectitemcontroller@Add_select_item')->middleware('auth')->name('addselectitem');
 
 
 // API Make

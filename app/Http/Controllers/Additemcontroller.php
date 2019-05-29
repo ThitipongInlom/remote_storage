@@ -65,7 +65,7 @@ class Additemcontroller extends Controller
             $Guest->guest_hotel = $request->post('guest_hotel');
             $Guest->guest_phone = $request->post('guest_phone');
             $Guest->save();
-            print_r($_POST);
+            return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
         }else{
             // Error Save ไม่สำเร็จ
             return Response::json(array('status' => 'error','error_text' => 'Sticker '.strtoupper($request->post('sticker_number')).' ซ้ำมีในระบบแล้ว'),200);

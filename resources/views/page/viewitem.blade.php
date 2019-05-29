@@ -390,6 +390,30 @@
                         </div>
                     </li>                       
                     @endif
+                    @if ($row->ups == '' OR $row->ups != '')
+                     <li class="item">
+                        <div class="product-img">
+                        <img src="{{ url('img/icon/ups.png') }}" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">UPS</a>
+                        @if ($row->ups == '')
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="UPS" onclick="Add_item_data_form_view(this);">เพิ่ม UPS</span>
+                        @else
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="UPS" old_value="{{ $row->ups }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน UPS</span>
+                            <br>
+                            <span class="btn btn-sm badge badge-danger float-right" datashow="input" newname="UPS Battery" old_value="{{ $row->ups_battery }}" onclick="Edit_item_data_form_view(this);">เปลี่ยนแบต</span>
+                        @endif
+                        <span class="product-description">
+                        @if ($row->ups == '')
+                            <p>ยังไม่มีข้อมูล</p>
+                        @else
+                            {{ $row->ups }}
+                        @endif
+                        </span>
+                        </div>
+                    </li>                       
+                    @endif
                 @endforeach
                 </ul>
             </div>
@@ -832,11 +856,11 @@
             ],
             "columnDefs": [{
                     "className": 'text-left',
-                    "targets": [3, 4, 5]
+                    "targets": [2, 3, 4, 5]
                 },
                 {
                     "className": 'text-center',
-                    "targets": [0, 1, 2, 6, 7]
+                    "targets": [0, 1, 6, 7]
                 },
                 {
                     "className": 'text-right',

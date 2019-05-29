@@ -43,11 +43,15 @@ class Viewitemcontroller extends Controller
         $users = ChangeHistory::where('sticker_number', $sticker_number)->get();
 
         return Datatables::of($users)
-        ->editColumn('remark', '{!! str_limit($remark, 25) !!}')
+        ->editColumn('remark', function($users) {
+            $result = "<span style='cursor: pointer;' data-toggle='tooltip' data-placement='bottom' title='$users->remark'>".str_limit($users->remark, 25)."</span>";
+            return $result;
+        })
         ->editColumn('created_at', function($users) {
             $result = date("d/m/Y H:i:s",strtotime($users->created_at));
             return $result;
         })
+        ->rawColumns(['remark'])
         ->make(true);
     }
 
@@ -217,7 +221,29 @@ class Viewitemcontroller extends Controller
                 $Hardware->save();
                 $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
-            break;      
+            break;    
+            // UPS
+            case 'UPS':
+                $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
+                $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->ups;
+                $Hardware = Hardware::find($id);
+                $Hardware->ups = $request->post('Value_add');
+                $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
+                return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
+            break;  
+            // UPS Battery
+            case 'UPS Battery':
+                $Hardware = Hardware::where('sticker_number', $request->post('ID_computer'))->get();
+                $id = $Hardware[0]->hardware_id;
+                $old_item = $Hardware[0]->ups_battery;
+                $Hardware = Hardware::find($id);
+                $Hardware->ups_battery = $request->post('Value_add');
+                $Hardware->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
+                return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
+            break;
             
             /**
              * Software
@@ -229,9 +255,9 @@ class Viewitemcontroller extends Controller
                 $id = $Software[0]->software_id;
                 $old_item = $Software[0]->teamviewer;
                 $Software = Software::find($id);
-                $Software->teamviewer = $request->post('Value_add');
+                $Software->teamviewer = str_replace(" ", "", $request->post('Value_add'));
                 $Software->save();
-                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), str_replace(" ", "", $request->post('Value_add')), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
             // Anydesk
@@ -240,9 +266,9 @@ class Viewitemcontroller extends Controller
                 $id = $Software[0]->software_id;
                 $old_item = $Software[0]->anydesk;
                 $Software = Software::find($id);
-                $Software->anydesk = $request->post('Value_add');
+                $Software->anydesk = str_replace(" ", "", $request->post('Value_add'));
                 $Software->save();
-                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), $request->post('Value_add'), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), str_replace(" ", "", $request->post('Value_add')), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
 

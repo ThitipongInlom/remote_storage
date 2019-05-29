@@ -29,6 +29,8 @@ class Hardware extends Migration
             $table->string('powersupply')->nullable();
             $table->string('hdd')->nullable();
             $table->string('ssd')->nullable();
+            $table->string('ups')->nullable();
+            $table->string('ups_battery')->nullable();
         });
     }
 

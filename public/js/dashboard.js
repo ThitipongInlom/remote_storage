@@ -60,7 +60,7 @@ $(document).ready(function () {
             },
             {
                 "className": 'text-center',
-                "targets": []
+                "targets": [0, 5, 6]
             },
             {
                 "className": 'text-right',

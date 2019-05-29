@@ -19,14 +19,13 @@ class Hotel extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->bigIncrements('hotel_id');
             $table->string('hotel_titel');
-            $table->string('hotel_main');
         });
         // Insert Windows V 0.1
         DB::table('hotels')->insert([
-            ['hotel_titel' => 'The Zign', 'hotel_main' => 'The Zign'],
-            ['hotel_titel' => 'Tsix5', 'hotel_main' => 'Tsix5'],
-            ['hotel_titel' => 'Z2', 'hotel_main' => 'Z - through'],
-            ['hotel_titel' => 'Way', 'hotel_main' => 'Way'],
+            ['hotel_titel' => 'The Zign'],
+            ['hotel_titel' => 'Tsix5'],
+            ['hotel_titel' => 'Z2'],
+            ['hotel_titel' => 'Way'],
         ]);
     }
 

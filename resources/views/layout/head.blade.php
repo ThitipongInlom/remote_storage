@@ -75,7 +75,7 @@
             {{ Request::is("view/$urlviewitem") ? 'active' : '' }}
             {{ Request::is("additem") ? 'active' : '' }}
         ">
-            <i class="fas fa-tachometer-alt"></i>
+            <i class="fas fa-database"></i>
             <p>
                 ข้อมูล
                 <i class="right fa fa-angle-left"></i>
@@ -98,7 +98,28 @@
                     <a href="#" class="nav-link disabled">
                 @endif  
                 <i class="fas fa-search"></i>
-                <p>แสดงข้อมูล</p>
+                <p> แสดงข้อมูล</p>
+                </a>
+            </li>
+            </ul>
+        </li>
+        <li class="nav-item has-treeview
+            {{ Request::is("addselectitem") ? 'menu-open' : '' }}
+        ">
+            <a href="#" class="nav-link
+            {{ Request::is("addselectitem") ? 'active' : '' }}
+        ">
+            <i class="fas fa-cogs"></i>
+            <p>
+                 ตั้งค่า
+                <i class="right fa fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ url('addselectitem') }}" class="nav-link {{ Request::is("addselectitem") ? 'active' : '' }}">
+                <i class="fas fa-tools"></i>
+                <p>เพิ่ม  แผนก / โรงแรม / ระบบ</p>
                 </a>
             </li>
             </ul>

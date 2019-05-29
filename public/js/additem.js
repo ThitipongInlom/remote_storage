@@ -33,6 +33,7 @@ var Save_Add_Item = function Save_Add_Item() {
     Data.append('guest_hotel', $("#guest_hotel").val());
     Data.append('teamviwer', $("#teamviwer").val());
     Data.append('anydesk', $("#anydesk").val());
+    Data.append('ups', $("#ups").val());
         // Laading  Options
         var loading = Ladda.create(document.querySelector('.btn-loading'));
         loading.start();
@@ -54,7 +55,10 @@ var Save_Add_Item = function Save_Add_Item() {
                 var res = jQuery.parseJSON(callback);
                 console.log(callback);
                 if (res.status == 'success') {
-                    
+                    Toastr["success"](res.error_text);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
                 }else {
                     // Text Error 
                     Toastr["error"](res.error_text);
