@@ -17,6 +17,9 @@ class Hotel extends Model
         'hotel_titel', 
         'hotel_main',
     ];
+
+    public $timestamps = false;
+
      /**
      * ชื่อ ตาราง 
      */   

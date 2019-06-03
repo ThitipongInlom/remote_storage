@@ -28,4 +28,60 @@ class Addselectitemcontroller extends Controller
                     'Hotel' => Hotel::get(),
                     'Window' => Window::get()]);
     }
+
+    public function save_add_item_windows(Request $request)
+    {
+        // เช็คว่าที่จะเพิ่มใหม่ มีใน ระบบแล้วยัง
+        $Window = Window::where('window_titel', $request->post('Modal_add_item_windows'))->count();
+        if ($Window == '0') {
+            $Window = new Window;
+            $Window->window_titel = $request->post('Modal_add_item_windows');
+            $Window->save();
+            // Error Save สำเร็จ
+            return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 1วินาที'),200);
+        }else{
+            // Error Save ไม่สำเร็จ
+            return Response::json(array('status' => 'error','error_text' => 'Window '.$request->post('Modal_add_item_windows').' ซ้ำมีในระบบแล้ว'),200);
+        }
+    }
+
+    public function save_add_item_department(Request $request)
+    {
+        // เช็คว่าที่จะเพิ่มใหม่ มีใน ระบบแล้วยัง
+        $Department = Department::where('department_titel', $request->post('Modal_add_item_department'))->count();
+        if ($Department == '0') {
+            $Department = new Department;
+            $Department->department_titel = $request->post('Modal_add_item_department');
+            $Department->save();
+            // Error Save สำเร็จ
+            return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 1วินาที'),200);
+        }else{
+            // Error Save ไม่สำเร็จ
+            return Response::json(array('status' => 'error','error_text' => 'Department '.$request->post('Modal_add_item_department').' ซ้ำมีในระบบแล้ว'),200);
+        }
+    }
+
+    public function save_delete_item(Request $request)
+    {
+        switch ($request->post('type')) {
+            case 'windows':
+                $Window = Window::find($request->post('old_id'));
+                $Window->delete();
+                // Error Save สำเร็จ
+                return Response::json(array('status' => 'success','error_text' => 'ลบ เสร็จสิ้น รอ 1วินาที'),200);
+                break;
+            case 'department':
+                $Department = Department::find($request->post('old_id'));
+                $Department->delete();
+                // Error Save สำเร็จ
+                return Response::json(array('status' => 'success','error_text' => 'ลบ เสร็จสิ้น รอ 1วินาที'),200);
+                break;
+            case 'hotel':
+                $Hotel = Hotel::find($request->post('old_id'));
+                $Hotel->delete();
+                // Error Save สำเร็จ
+                return Response::json(array('status' => 'success','error_text' => 'ลบ เสร็จสิ้น รอ 1วินาที'),200);
+                break;           
+        }
+    }
 }

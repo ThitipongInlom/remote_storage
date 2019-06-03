@@ -20,7 +20,7 @@ class Department extends Migration
         Schema::create('departments', function (Blueprint $table) {
             $table->bigIncrements('department_id');
             $table->string('department_titel');
-            $table->string('department_main');
+            $table->string('department_main')->nullable();
         });
         // Insert Department V 0.1
         DB::table('departments')->insert([

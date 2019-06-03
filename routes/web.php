@@ -17,7 +17,9 @@ Route::get('/view/{sticker_number}', 'Viewitemcontroller@Load_item')->middleware
 Route::post('/update_item_view_save', 'Viewitemcontroller@Update_item_view_save')->name('update_item_view_save');
 // Add Select Item
 Route::get('/addselectitem', 'Addselectitemcontroller@Add_select_item')->middleware('auth')->name('addselectitem');
-
+Route::post('/save_add_item_windows', 'Addselectitemcontroller@save_add_item_windows')->name('save_add_item_windows');
+Route::post('/save_add_item_department', 'Addselectitemcontroller@save_add_item_department')->name('save_add_item_department');
+Route::post('/save_delete_item', 'Addselectitemcontroller@save_delete_item')->name('save_delete_item');
 
 // API Make
 Route::group(['prefix' => 'api/v1','middleware' => 'auth'], function () {

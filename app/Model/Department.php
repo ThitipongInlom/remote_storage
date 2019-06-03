@@ -17,6 +17,9 @@ class Department extends Model
         'department_titel', 
         'department_main',
     ];
+
+    public $timestamps = false;
+
      /**
      * ชื่อ ตาราง 
      */   

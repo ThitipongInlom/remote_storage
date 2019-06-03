@@ -17,6 +17,9 @@ class Window extends Model
         'window_titel', 
         'window_main',
     ];
+
+    public $timestamps = false;
+    
      /**
      * ชื่อ ตาราง 
      */   
