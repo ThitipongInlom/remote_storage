@@ -42,6 +42,42 @@ var Open_modal_edit_windows = function Open_modal_edit_windows(e) {
     $('#Modal_edit_windows').modal('show');
     $("body").css("padding-right", "0");
     $("#Modal_edit_item_windows").val($(e).attr('old_value'));
+    $("#Modal_edit_windows_confrime").click(function (s) {
+        // Laading  Options
+        var loading = Ladda.create(this);
+        loading.start();
+        loading.setProgress(40);
+        var Data = new FormData();
+        Data.append('old_id', $(e).attr('old_id'));
+        Data.append('old_value', $("#Modal_edit_item_windows").val());
+        $.ajax({
+            url: 'save_edit_item_windows',
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: Data,
+            success: function (callback) {
+                var res = jQuery.parseJSON(callback);
+                loading.setProgress(100);
+                if (res.status == 'success') {
+                    Toastr["success"](res.error_text);
+                    loading.remove();
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    // Text Error 
+                    Toastr["error"](res.error_text);
+                    loading.remove();
+                }
+            }
+        });
+    });
 }
 
 var Open_modal_edit_department = function Open_modal_edit_department(e) {
@@ -49,6 +85,44 @@ var Open_modal_edit_department = function Open_modal_edit_department(e) {
     $('#Modal_edit_department').modal('show');
     $("body").css("padding-right", "0");
     $("#Modal_edit_item_department").val($(e).attr('old_value'));
+    $("#Modal_edit_item_department2").val($(e).attr('old_value2'));
+    $("#Modal_edit_department_confrime").click(function (s) {
+        // Laading  Options
+        var loading = Ladda.create(this);
+        loading.start();
+        loading.setProgress(40);
+        var Data = new FormData();
+        Data.append('old_id', $(e).attr('old_id'));
+        Data.append('old_value', $("#Modal_edit_item_department").val());
+        Data.append('old_value2', $("#Modal_edit_item_department2").val());
+        $.ajax({
+            url: 'save_edit_item_department',
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: Data,
+            success: function (callback) {
+                var res = jQuery.parseJSON(callback);
+                loading.setProgress(100);
+                if (res.status == 'success') {
+                    Toastr["success"](res.error_text);
+                    loading.remove();
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    // Text Error 
+                    Toastr["error"](res.error_text);
+                    loading.remove();
+                }
+            }
+        });
+    });
 }
 
 var Open_modal_edit_hotel = function Open_modal_edit_hotel(e) {
@@ -56,6 +130,42 @@ var Open_modal_edit_hotel = function Open_modal_edit_hotel(e) {
     $('#Modal_edit_hotel').modal('show');
     $("body").css("padding-right", "0");
     $("#Modal_edit_item_hotel").val($(e).attr('old_value'));
+    $("#Modal_edit_hotel_confrime").click(function (s) {
+        // Laading  Options
+        var loading = Ladda.create(this);
+        loading.start();
+        loading.setProgress(40);
+        var Data = new FormData();
+        Data.append('old_id', $(e).attr('old_id'));
+        Data.append('old_value', $("#Modal_edit_item_hotel").val());
+        $.ajax({
+            url: 'save_edit_item_hotel',
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: Data,
+            success: function (callback) {
+                var res = jQuery.parseJSON(callback);
+                loading.setProgress(100);
+                if (res.status == 'success') {
+                    Toastr["success"](res.error_text);
+                    loading.remove();
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    // Text Error 
+                    Toastr["error"](res.error_text);
+                    loading.remove();
+                }
+            }
+        });
+    });
 }
 
 var Open_modal_delete = function Open_modal_delete(e) {
@@ -98,7 +208,7 @@ var Open_modal_delete = function Open_modal_delete(e) {
                 }
             }
         });
-    })
+    });
 }
 
 var Add_item_windows = function Add_item_windows() {
@@ -122,7 +232,6 @@ var Add_item_windows = function Add_item_windows() {
         success: function (callback) {
             var res = jQuery.parseJSON(callback);
             loading.setProgress(100);
-            console.log(callback);
             if (res.status == 'success') {
                 Toastr["success"](res.error_text);
                 loading.remove();
@@ -146,6 +255,7 @@ var Add_item_department = function Add_item_department() {
     loading.setProgress(40);
     var Data = new FormData();
     Data.append('Modal_add_item_department', $("#Modal_add_item_department").val());
+    Data.append('Modal_add_item_department2', $("#Modal_add_item_department2").val());
     $.ajax({
         url: 'save_add_item_department',
         type: 'POST',
@@ -160,11 +270,47 @@ var Add_item_department = function Add_item_department() {
         success: function (callback) {
             var res = jQuery.parseJSON(callback);
             loading.setProgress(100);
-            console.log(callback);
             if (res.status == 'success') {
                 Toastr["success"](res.error_text);
                 loading.remove();
                 $('#Modal_add_department').modal('hide');
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            } else {
+                // Text Error 
+                Toastr["error"](res.error_text);
+                loading.remove();
+            }
+        }
+    });
+}
+
+var Add_item_hotel = function Add_item_hotel() {
+    // Laading  Options
+    var loading = Ladda.create(document.querySelector('.btn-loading'));
+    loading.start();
+    loading.setProgress(40);
+    var Data = new FormData();
+    Data.append('Modal_add_item_hotel', $("#Modal_add_item_hotel").val());
+    $.ajax({
+        url: 'save_add_item_hotel',
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: Data,
+        success: function (callback) {
+            var res = jQuery.parseJSON(callback);
+            loading.setProgress(100);
+            if (res.status == 'success') {
+                Toastr["success"](res.error_text);
+                loading.remove();
+                $('#Modal_edit_hotel').modal('hide');
                 setTimeout(function () {
                     location.reload();
                 }, 1000);

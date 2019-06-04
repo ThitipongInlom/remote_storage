@@ -57,7 +57,7 @@
                             <tr>
                                 <td align="left"><b>{{ $row->window_titel }}</b></td>
                                 <td align="right">
-                                    <button class="btn btn-sm btn-warning" old_value="{{ $row->window_titel }}" onclick="Open_modal_edit_windows(this);">แก้ไข</button>
+                                    <button class="btn btn-sm btn-warning" old_value="{{ $row->window_titel }}" old_id="{{ $row->window_id }}" onclick="Open_modal_edit_windows(this);">แก้ไข</button>
                                     <button class="btn btn-sm btn-danger" type="windows" old_value="{{ $row->window_titel }}" old_id="{{ $row->window_id }}" onclick="Open_modal_delete(this);">ลบ</button>
                                 </td>
                             </tr>
@@ -92,10 +92,10 @@
                             <tbody>
                             @foreach ($Department as $row)
                             <tr>
-                                <td align="left"><b>{{ $row->department_titel }}</b></td>
+                                <td align="left"><b>{{ $row->department_titel }} - {{ $row->department_main }}</b></td>
                                 <td align="right">
-                                    <button class="btn btn-sm btn-warning" old_value="{{ $row->department_titel }}" onclick="Open_modal_edit_department(this);">แก้ไข</button>
-                                    <button class="btn btn-sm btn-danger" type="department" old_value="{{ $row->department_titel }}" old_id="{{ $row->department_id }}" onclick="Open_modal_delete(this);">ลบ</button>
+                                    <button class="btn btn-sm btn-warning" old_value="{{ $row->department_titel }}" old_value2="{{ $row->department_main }}" old_id="{{ $row->department_id }}" onclick="Open_modal_edit_department(this);">แก้ไข</button>
+                                    <button class="btn btn-sm btn-danger" type="department" old_value="{{ $row->department_titel }}" old_value2="{{ $row->department_main }}" old_id="{{ $row->department_id }}" onclick="Open_modal_delete(this);">ลบ</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -131,7 +131,7 @@
                             <tr>
                                 <td align="left"><b>{{ $row->hotel_titel }}</b></td>
                                 <td align="right">
-                                    <button class="btn btn-sm btn-warning" old_value="{{ $row->hotel_titel }}" onclick="Open_modal_edit_hotel(this);">แก้ไข</button>
+                                    <button class="btn btn-sm btn-warning" old_value="{{ $row->hotel_titel }}" old_id="{{ $row->hotel_id }}" onclick="Open_modal_edit_hotel(this);">แก้ไข</button>
                                     <button class="btn btn-sm btn-danger" type="hotel" old_value="{{ $row->hotel_titel }}" old_id="{{ $row->hotel_id }}" onclick="Open_modal_delete(this);">ลบ</button>
                                 </td>
                             </tr>
@@ -180,8 +180,10 @@
             </button>
         </div>
         <div class="modal-body">
-                <label for="Modal_add_item_department">เพิ่มข้อมูล Department</label>
-                <input type="text" class="form-control form-control-sm" id="Modal_add_item_department" placeholder="เพิ่มข้อมูล Department">
+                <label for="Modal_add_item_department">เพิ่มข้อมูล Department ย่อ</label>
+                <input type="text" class="form-control form-control-sm" id="Modal_add_item_department" placeholder="เพิ่มข้อมูล Department ย่อ">
+                <label for="Modal_add_item_department">เพิ่มข้อมูล Department เต็ม</label>
+                <input type="text" class="form-control form-control-sm" id="Modal_add_item_department2" placeholder="เพิ่มข้อมูล Department เต็ม">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -206,28 +208,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
-            <button type="button" class="btn btn-sm btn-success">บันทึก Hotel</button>
-        </div>
-        </div>
-    </div>
-    </div>
-    <!-- Modal Edit Department -->
-    <div class="modal fade" id="Modal_edit_department" tabindex="-1" role="dialog" aria-labelledby="Modal_edit_department" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="Modal_edit_departmentLabel">แก้ไขข้อมูล Department</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-                <label for="Modal_edit_item_department">แก้ไขข้อมูล Department</label>
-                <input type="text" class="form-control form-control-sm" id="Modal_edit_item_department" placeholder="แก้ไขข้อมูล Department">
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
-            <button type="button" class="btn btn-sm btn-success">บันทึก Department</button>
+            <button type="button" class="btn btn-sm btn-success btn-loading" onclick="Add_item_hotel();">บันทึก Hotel</button>
         </div>
         </div>
     </div>
@@ -248,7 +229,30 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
-            <button type="button" class="btn btn-sm btn-success">บันทึก Windows</button>
+            <button type="button" class="btn btn-sm btn-success btn-loading" id="Modal_edit_windows_confrime">บันทึก Windows</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    <!-- Modal Edit Department -->
+    <div class="modal fade" id="Modal_edit_department" tabindex="-1" role="dialog" aria-labelledby="Modal_edit_department" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="Modal_edit_departmentLabel">แก้ไขข้อมูล Department</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+                <label for="Modal_edit_item_department">แก้ไขข้อมูล Department ย่อ</label>
+                <input type="text" class="form-control form-control-sm" id="Modal_edit_item_department" placeholder="แก้ไขข้อมูล Department ย่อ">
+                <label for="Modal_edit_item_department2">แก้ไขข้อมูล Department เต็ม</label>
+                <input type="text" class="form-control form-control-sm" id="Modal_edit_item_department2" placeholder="แก้ไขข้อมูล Department เต็ม">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
+            <button type="button" class="btn btn-sm btn-success btn-loading" id="Modal_edit_department_confrime">บันทึก Department</button>
         </div>
         </div>
     </div>
@@ -269,7 +273,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
-            <button type="button" class="btn btn-sm btn-success">บันทึก Hotel</button>
+            <button type="button" class="btn btn-sm btn-success btn-loading" id="Modal_edit_hotel_confrime">บันทึก Hotel</button>
         </div>
         </div>
     </div>

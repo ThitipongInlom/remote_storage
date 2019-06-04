@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">แดชบอร์ด <a href="{{ url('additem') }}" class="btn btn-sm btn-success" role="button" data-toggle="tooltip" data-placement="bottom" title="เพิ่มข้อมูลคอมพิวเตอร์"><b>+</b> เพิ่มข้อมูล</a></h1>
+                <h1 class="m-0 text-dark">แดชบอร์ด รีโมท <a href="{{ url('additem') }}" class="btn btn-sm btn-success" role="button" data-toggle="tooltip" data-placement="bottom" title="เพิ่มข้อมูลคอมพิวเตอร์"><b>+</b> เพิ่มข้อมูล</a></h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">

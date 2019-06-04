@@ -55,7 +55,7 @@
         <li class="nav-item">
             <a href="{{ url('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
             <i class="fas fa-tachometer-alt"></i>
-            <p>แดชบอร์ด</p>
+            <p>แดชบอร์ด รีโมท</p>
             </a>
         </li>
         @if (isset($Item))
@@ -123,6 +123,12 @@
                 </a>
             </li>
             </ul>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('dashboardstore') }}" class="nav-link {{ Request::is('dashboardstore') ? 'active' : '' }}">
+            <i class="fas fa-tachometer-alt"></i>
+            <p>แดชบอร์ด สต้อก</p>
+            </a>
         </li>
         </ul>
     </nav>
