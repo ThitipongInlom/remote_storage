@@ -21,7 +21,7 @@
             <img src="{{ url('img/anydesk.png') }}" style="width: 24px;" class="card-img-top">
             @if (isset($Item))
                 <b>{{ $Item[0]->anydesk }}</b>
-            @endif        
+            @endif
         </span>
     </li>
     <li class="nav-item d-none d-sm-inline-block" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Teamviewer">

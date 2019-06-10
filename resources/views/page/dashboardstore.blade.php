@@ -32,7 +32,54 @@
     <div class="content">
     <div class="container-fluid">
     <!-- จำนวนข้อมูลทั้งหมด -->    
-        123
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary card-outline">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-inline">
+                                <label for="select_month" class="col-sm-2 col-form-label col-form-label-sm" data-toggle="tooltip" data-placement="bottom" title="เลือก เดือน"><i class="fas fa-calendar-alt fa-2x"></i></label>
+                                <input type="text" data-toggle="datepicker" data-min-view="months" data-view="months" data-date-format="MM yyyy"class="form-control form-control-sm" id="select_month" placeholder="เลือกเดือน">
+                                <button class="btn btn-sm btn-success" style="margin-left:5px;">ค้นหา</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12" align="center">
+                                <label class="col-form-label col-form-label-sm" data-toggle="tooltip" data-placement="bottom" title="ข้อมูลที่แสดงของเดือน"><h5>ข้อมูลเดือน : </h5></label>
+                            </div>
+                            <div class="col-md-4 col-sm-12" align="right">
+                                <button class="btn btn-sm btn-success">เพิ่มข้อมูล</button>
+                            </div>
+                        </div>
+                    <hr>
+                    <div class="table-responsive">
+                    <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main" width="100%">
+                        <thead>
+                            <tr class="bg-primary">
+                                <th>Equipment</th>
+                                <th>Buy to Date</th>
+                                <th>TotalMax</th>
+                                <th>เบิกใช้งาน</th>
+                                <th>ยืมใช้งาน</th>
+                                <th>TotalSum</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr class="bg-primary">
+                                <th>Equipment</th>
+                                <th>Buy to Date</th>
+                                <th>TotalMax</th>
+                                <th>เบิกใช้งาน</th>
+                                <th>ยืมใช้งาน</th>
+                                <th>TotalSum</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     </div>
     </div>
@@ -41,4 +88,5 @@
     </body>
         <!-- All Js -->
         <script type="text/javascript" src="{{ url('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ url('js/dashboardstore.js') }}"></script>
 </html>

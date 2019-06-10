@@ -36,7 +36,7 @@
         <div class="card card-primary card-outline">
             <div class="card-body">
             <div class="table-responsive">
-            <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main">
+            <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main" width="100%">
                 <thead>
                     <tr class="bg-primary">
                         <th>Sticker</th>

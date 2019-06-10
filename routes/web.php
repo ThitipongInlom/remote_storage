@@ -29,5 +29,6 @@ Route::post('/save_delete_item', 'Addselectitemcontroller@save_delete_item')->na
 // API Make
 Route::group(['prefix' => 'api/v1','middleware' => 'auth'], function () {
     Route::post('/ajax_table_main', 'Dashboardcontroller@Ajax_Table_Main');
+    Route::post('/ajax_table_main_store', 'Dashboardstorecontroller@Ajax_Table_Main');
     Route::post('/ajax_load_item_view_history/{sticker_number}', 'Viewitemcontroller@Load_item_view_history');
 });
