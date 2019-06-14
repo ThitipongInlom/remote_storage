@@ -15,15 +15,16 @@ use Illuminate\Support\Facades\DB as DB;
 class Logincontroller extends Controller
 {
     public function do_login(Request $request)
-    {   
+    {
         // เช็คว่า มี Username ถูกต้องหรือไม่
         if (Auth::attempt(['username' => $request->post('username'), 'password' => $request->post('password')])) {
             // อัพเดต ข้อมูลเวลา Login เสร็จสิ้น
             $user = User::find(Auth::user()->users_id);
             $user->updated_at = Carbon::now();
             $user->remember_token = $request->header('X-CSRF-TOKEN');
+            $user->ip_login = $request->ip();
             $user->save();
-
+            
             // Success Login สำเร็จ
             return Response::json(array('status' => 'success','error_text' => 'เข้าสู่ระบบสำเร็จ รอ 3 วินาที','path' => $request->root()),200);
         }else{

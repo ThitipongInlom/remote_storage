@@ -4,7 +4,6 @@ $(document).ready(function () {
         autoClose: true,
     });
 
-
     $.fn.dataTable.ext.errMode = 'throw';
     var TableDisplay = $('#Table_Main').DataTable({
         "dom": "<'row'<'col-sm-1'l><'col-sm-7'><'col-sm-4'f>>" +
@@ -90,3 +89,8 @@ $(document).ready(function () {
         },
     });
 });
+
+var Load_Ajax_Table = function Load_Ajax_Table() {
+    var table = $('#Table_Main').DataTable();
+    table.ajax.reload(null, false);
+}

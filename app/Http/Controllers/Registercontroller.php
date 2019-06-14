@@ -29,7 +29,7 @@ class Registercontroller  extends Controller
 
             return Response::json(array('status' => 'success','error_text' => 'สมัครสมาชิก สำเร็จ รอ 5 วินาที','path' => $request->root()),200);
         }else {
-            return Response::json(array('status' => 'error','error_text' => 'ชื่อในเกมส์ มีอยู่ในระบบแล้ว กรุณาเปลี่ยน ชื่อผู้ใช้งาน'),200);    
+            return Response::json(array('status' => 'error','error_text' => 'ชื่อ มีอยู่ในระบบแล้ว กรุณาเปลี่ยน ชื่อผู้ใช้งาน'),200);    
         }
     }
 }

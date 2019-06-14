@@ -41,7 +41,7 @@
                                 <div class="form-inline">
                                 <label for="select_month" class="col-sm-2 col-form-label col-form-label-sm" data-toggle="tooltip" data-placement="bottom" title="เลือก เดือน"><i class="fas fa-calendar-alt fa-2x"></i></label>
                                 <input type="text" data-toggle="datepicker" data-min-view="months" data-view="months" data-date-format="MM yyyy"class="form-control form-control-sm" id="select_month" placeholder="เลือกเดือน">
-                                <button class="btn btn-sm btn-success" style="margin-left:5px;">ค้นหา</button>
+                                <button class="btn btn-sm btn-success" style="margin-left:5px;" onclick="Load_Ajax_Table();">ค้นหา</button>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12" align="center">

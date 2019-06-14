@@ -46,7 +46,7 @@ class Additemcontroller extends Controller
             // 2.เพิ่มข้อมูลส่วน Software
             $Software = new Software;
             $Software->sticker_number = strtoupper($request->post('sticker_number'));
-            $Software->teamviewer = $request->post('teamviewer');
+            $Software->teamviewer = $request->post('teamviwer');
             $Software->anydesk = $request->post('anydesk');
             $Software->save();
             // 3.เพิ่มข้อมูลส่วน Runcomputer
@@ -56,6 +56,17 @@ class Additemcontroller extends Controller
             // 4.เพิ่มข้อมูลส่วน Hardware
             $Hardware = new Hardware;
             $Hardware->sticker_number = strtoupper($request->post('sticker_number'));
+            $Hardware->cpu = $request->post('cpu');
+            $Hardware->ram = $request->post('ram');
+            $Hardware->case = $request->post('case');
+            $Hardware->monitor = $request->post('monitor');
+            $Hardware->mouse = $request->post('mouse');
+            $Hardware->keyboard = $request->post('keyboard');
+            $Hardware->mainboard = $request->post('mainboard');
+            $Hardware->powersupply = $request->post('powersupply');
+            $Hardware->hdd = $request->post('hdd');
+            $Hardware->ssd = $request->post('ssd');
+            $Hardware->ups = $request->post('ups');
             $Hardware->save();
             // 5.เพิ่มข้อมูลส่วน Guest
             $Guest = new Guest;

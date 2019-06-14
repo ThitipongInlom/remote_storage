@@ -33,6 +33,16 @@ var Save_Add_Item = function Save_Add_Item() {
     Data.append('guest_hotel', $("#guest_hotel").val());
     Data.append('teamviwer', $("#teamviwer").val());
     Data.append('anydesk', $("#anydesk").val());
+    Data.append('cpu', $("#cpu").val());
+    Data.append('ram', $("#ram").val());
+    Data.append('case', $("#case").val());
+    Data.append('monitor', $("#monitor").val());
+    Data.append('mouse', $("#mouse").val());
+    Data.append('keyboard', $("#keyboard").val());
+    Data.append('mainboard', $("#mainboard").val());
+    Data.append('powersupply', $("#powersupply").val());
+    Data.append('hdd', $("#hdd").val());
+    Data.append('ssd', $("#ssd").val());
     Data.append('ups', $("#ups").val());
         // Laading  Options
         var loading = Ladda.create(document.querySelector('.btn-loading'));

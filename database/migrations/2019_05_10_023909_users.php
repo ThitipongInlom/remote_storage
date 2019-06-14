@@ -21,6 +21,7 @@ class Users extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('email');
+            $table->string('ip_login')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

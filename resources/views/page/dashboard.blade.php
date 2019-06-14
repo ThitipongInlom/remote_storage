@@ -41,6 +41,8 @@
                     <tr class="bg-primary">
                         <th>Sticker</th>
                         <th>Name</th>
+                        <th>Dep</th>
+                        <th>Hotel</th>
                         <th>Computer Name</th>
                         <th>Teamviewer</th>
                         <th>Anydesk</th>
@@ -52,6 +54,8 @@
                     <tr class="bg-primary">
                         <th>Sticker</th>
                         <th>Name</th>
+                        <th>Dep</th>
+                        <th>Hotel</th>
                         <th>Computer Name</th>
                         <th>Teamviewer</th>
                         <th>Anydesk</th>

@@ -32,6 +32,14 @@ $(document).ready(function () {
                 "name": 'guest_name'
             },
             {
+                "data": 'guest_dep',
+                "name": 'guest_dep'
+            },
+            {
+                "data": 'guest_hotel',
+                "name": 'guest_hotel'
+            },
+            {
                 "data": 'computer_name',
                 "name": 'computer_name'
             },
@@ -56,11 +64,11 @@ $(document).ready(function () {
         ],
         "columnDefs": [{
                 "className": 'text-left',
-                "targets": []
+                "targets": [5, 6]
             },
             {
                 "className": 'text-center',
-                "targets": [0, 5, 6]
+                "targets": [0, 2, 7]
             },
             {
                 "className": 'text-right',
@@ -86,7 +94,6 @@ $(document).ready(function () {
             "regex": true
         },
     });
-
 });
 
 $(document).ajaxComplete(function () {

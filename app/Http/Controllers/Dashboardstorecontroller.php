@@ -15,10 +15,8 @@ class Dashboardstorecontroller extends Controller
     public function Ajax_Table_Main(Request $request)
     {
         $users = DB::table('storemanus')
-                //->join('storemains', 'storemanus.storemanu_name', '=', 'storemains.item_type')
-                //->groupBy('storemanu_name')
                 ->get();
-        return Datatables::of($users)
+        return Datatables::of($users) 
             ->addColumn('buy_to_date', function ($users) {
                 $result = DB::table('storemains')
                         ->where('item_type', '=', $users->storemanu_name)
