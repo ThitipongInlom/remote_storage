@@ -14,7 +14,31 @@ class Dashboardstorecontroller extends Controller
 {
     public function Ajax_Table_Main(Request $request)
     {
+        if ($request->post('select_month') != '') {
+            $sting_to_array = explode(" ", $request->post('select_month'));
+            $month = $sting_to_array[0];
+            $year  = $sting_to_array[1];
+            switch ($month) {
+                case 'มกราคม':   $month = '1'; break;
+                case 'กุมภาพันธ์':  $month = '2'; break;
+                case 'มีนาคม':    $month = '3'; break;
+                case 'เมษายน':   $month = '4'; break;
+                case 'พฤษภาคม':  $month = '5'; break;
+                case 'มิถุนายน':   $month = '6'; break;
+                case 'กรกฎาคม':  $month = '7'; break;
+                case 'สิงหาคม':  $month = '8';  break;
+                case 'กันยายน':  $month = '9';  break;
+                case 'ตุลาคม':   $month = '10';  break;
+                case 'พฤศจิกายน':  $month = '11'; break;
+                case 'ธันวาคม':  $month = '12';   break;
+            }
+        }else{
+            $month = date("m");
+            $year  = date("Y");      
+        }
         $users = DB::table('storemanus')
+                ->whereMonth('created_at', $month)
+                ->whereYear('created_at', $year)
                 ->get();
         return Datatables::of($users) 
             ->addColumn('buy_to_date', function ($users) {
@@ -54,6 +78,14 @@ class Dashboardstorecontroller extends Controller
                         ->where('location_lend', '=', null)
                         ->where('location_use',  '=', null)
                         ->count();
+                return $result;
+            })
+            ->addColumn('action', function ($users) {
+                $result = '<div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-success">ใช้งาน</button>
+                            <button type="button" class="btn btn-sm btn-warning">แก้ไข</button>
+                            <button type="button" class="btn btn-sm btn-info">ดูข้อมูล</button>
+                           </div>';
                 return $result;
             })
             ->make(true);

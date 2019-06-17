@@ -2,6 +2,10 @@ $(document).ready(function () {
     $('[data-toggle="datepicker"]').datepicker({
         language: 'th',
         autoClose: true,
+        onSelect: function (formattedDate, date, inst) {
+            $("#table_tital").html(formattedDate);
+            TableDisplay.ajax.reload(null, false);
+        }
     });
 
     $.fn.dataTable.ext.errMode = 'throw';
@@ -30,6 +34,9 @@ $(document).ready(function () {
             "data": function (d) {
                 d.select_month = $("#select_month").val();
             },
+            "error": function () {
+                //TableDisplay.ajax.reload(null, false);
+            },
         },
         "columns": [{
                 "data": 'storemanu_name',
@@ -54,6 +61,10 @@ $(document).ready(function () {
             {
                 "data": 'totalsum',
                 "name": 'totalsum'
+            },
+            {
+                "data": 'action',
+                "name": 'action'
             }
         ],
         "columnDefs": [{
@@ -62,11 +73,11 @@ $(document).ready(function () {
             },
             {
                 "className": 'text-center',
-                "targets": []
+                "targets": [1, 6]
             },
             {
                 "className": 'text-right',
-                "targets": []
+                "targets": [2, 3, 4, 5]
             },
         ],
         "language": {
@@ -84,13 +95,14 @@ $(document).ready(function () {
                 "previous": "ย้อนกลับ"
             },
         },
-        search: {
+        "search": {
             "regex": true
         },
     });
 });
 
-var Load_Ajax_Table = function Load_Ajax_Table() {
-    var table = $('#Table_Main').DataTable();
-    table.ajax.reload(null, false);
+var Add_store = function Add_store() {
+    // Modal Show
+    $('#Add_store').modal('show');
+    $("body").css("padding-right", "0");
 }

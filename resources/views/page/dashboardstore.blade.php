@@ -41,14 +41,13 @@
                                 <div class="form-inline">
                                 <label for="select_month" class="col-sm-2 col-form-label col-form-label-sm" data-toggle="tooltip" data-placement="bottom" title="เลือก เดือน"><i class="fas fa-calendar-alt fa-2x"></i></label>
                                 <input type="text" data-toggle="datepicker" data-min-view="months" data-view="months" data-date-format="MM yyyy"class="form-control form-control-sm" id="select_month" placeholder="เลือกเดือน">
-                                <button class="btn btn-sm btn-success" style="margin-left:5px;" onclick="Load_Ajax_Table();">ค้นหา</button>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12" align="center">
-                                <label class="col-form-label col-form-label-sm" data-toggle="tooltip" data-placement="bottom" title="ข้อมูลที่แสดงของเดือน"><h5>ข้อมูลเดือน : </h5></label>
+                                <label class="col-form-label col-form-label-sm"><h5>ข้อมูลเดือน : <span id="table_tital">เดือนปัจจุบัน</span></h5></label>
                             </div>
                             <div class="col-md-4 col-sm-12" align="right">
-                                <button class="btn btn-sm btn-success">เพิ่มข้อมูล</button>
+                                <button class="btn btn-sm btn-success" onclick="Add_store();">เพิ่มข้อมูล</button>
                             </div>
                         </div>
                     <hr>
@@ -62,18 +61,9 @@
                                 <th>เบิกใช้งาน</th>
                                 <th>ยืมใช้งาน</th>
                                 <th>TotalSum</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr class="bg-primary">
-                                <th>Equipment</th>
-                                <th>Buy to Date</th>
-                                <th>TotalMax</th>
-                                <th>เบิกใช้งาน</th>
-                                <th>ยืมใช้งาน</th>
-                                <th>TotalSum</th>
-                            </tr>
-                        </tfoot>
                     </table>
                     </div>
                     </div>
@@ -85,6 +75,26 @@
     </div>
     <!-- END -->
     @include('../layout.footer')
+    <!-- Modal -->
+    <div class="modal fade" id="Add_store" tabindex="-1" role="dialog" aria-labelledby="Add_storeLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="Add_storeLabel">เพิ่มข้อมูล</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            ...
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
     </body>
         <!-- All Js -->
         <script type="text/javascript" src="{{ url('js/app.js') }}"></script>
