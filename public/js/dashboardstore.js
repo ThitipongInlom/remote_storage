@@ -106,3 +106,26 @@ var Add_store = function Add_store() {
     $('#Add_store').modal('show');
     $("body").css("padding-right", "0");
 }
+
+var Use_select_item = function Use_select_item(e) {
+    // Modal Show
+    $('#Use_select_item').modal('show');
+    $("body").css("padding-right", "0");
+    var Data = new FormData();
+    Data.append('item_type', $(e).attr('itemtype'));
+    $.ajax({
+        url: 'api/v1/ajax_get_item_notuse',
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: Data,
+        success: function (callback) {
+            console.log(callback);
+        }
+    })
+}

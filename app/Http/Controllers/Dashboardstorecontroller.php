@@ -37,8 +37,6 @@ class Dashboardstorecontroller extends Controller
             $year  = date("Y");      
         }
         $users = DB::table('storemanus')
-                ->whereMonth('created_at', $month)
-                ->whereYear('created_at', $year)
                 ->get();
         return Datatables::of($users) 
             ->addColumn('buy_to_date', function ($users) {
@@ -82,7 +80,7 @@ class Dashboardstorecontroller extends Controller
             })
             ->addColumn('action', function ($users) {
                 $result = '<div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sm btn-success">ใช้งาน</button>
+                            <button type="button" class="btn btn-sm btn-success" onclick="Use_select_item(this);" itemtype="'.$users->storemanu_name.'">ใช้งาน</button>
                             <button type="button" class="btn btn-sm btn-warning">แก้ไข</button>
                             <button type="button" class="btn btn-sm btn-info">ดูข้อมูล</button>
                            </div>';
@@ -90,4 +88,13 @@ class Dashboardstorecontroller extends Controller
             })
             ->make(true);
     }
+
+    public function Get_item_notuse(Request $request)
+    {
+        $result = DB::table('storemains')
+                ->where('item_type', '=', $request->post('item_type'))
+                ->get();
+        print_r($result);
+    }
+
 }

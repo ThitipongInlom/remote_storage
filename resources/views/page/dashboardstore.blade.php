@@ -75,7 +75,7 @@
     </div>
     <!-- END -->
     @include('../layout.footer')
-    <!-- Modal -->
+    <!-- Modal Add Item -->
     <div class="modal fade" id="Add_store" tabindex="-1" role="dialog" aria-labelledby="Add_storeLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -91,6 +91,25 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    <!-- Use_select_item -->
+    <div class="modal fade" id="Use_select_item" tabindex="-1" role="dialog" aria-labelledby="Use_select_itemLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="Use_select_itemLabel">เลือกรายการที่ต้องการใช้งาน</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            ...
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
         </div>
         </div>
     </div>

@@ -31,4 +31,5 @@ Route::group(['prefix' => 'api/v1','middleware' => 'auth'], function () {
     Route::post('/ajax_table_main', 'Dashboardcontroller@Ajax_Table_Main');
     Route::post('/ajax_table_main_store', 'Dashboardstorecontroller@Ajax_Table_Main');
     Route::post('/ajax_load_item_view_history/{sticker_number}', 'Viewitemcontroller@Load_item_view_history');
+    Route::post('/ajax_get_item_notuse', 'Dashboardstorecontroller@Get_item_notuse');
 });
