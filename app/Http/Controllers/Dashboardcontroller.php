@@ -21,6 +21,12 @@ class Dashboardcontroller extends Controller
                 ->join('guests', 'runcomputers.sticker_number', '=', 'guests.sticker_number')
                 ->get();
         return Datatables::of($users)
+        ->editColumn('ip_main', function($users) {
+            $url = "https://start.teamviewer.com/device/".$users->ip_main."/authorization/password/mode/control";
+            $img_url = url('img/cmd.png');
+            $result = "<a href='$url' class='btn btn-sm btn-primary' target='_blank' data-toggle='tooltip' data-placement='bottom' title='เปิด Teamviewer'><img src='$img_url' style='width: 18px;'' class='card-img-top'></a>"."  ".$users->ip_main;
+            return $result;
+        })
         ->editColumn('teamviewer', function($users) {
             $url = "https://start.teamviewer.com/device/".$users->teamviewer."/authorization/password/mode/control";
             $img_url = url('img/teamviewer.png');
@@ -38,7 +44,7 @@ class Dashboardcontroller extends Controller
             $result  = "<a class='btn btn-sm btn-primary' href='$url' role='button' data-toggle='tooltip' data-placement='bottom' title='ดูข้อมูลคอมพิวเตอร์ $users->sticker_number'><i class='fas fa-search'></i>View</a>";
             return $result;
         })
-        ->rawColumns(['teamviewer','anydesk','action'])
+        ->rawColumns(['ip_main', 'teamviewer', 'anydesk', 'action'])
         ->make(true);
     }
 }

@@ -2,15 +2,14 @@ $(document).ready(function () {
     $.fn.dataTable.ext.errMode = 'throw';
     var TableDisplay = $('#Table_Main').DataTable({
         "dom": "<'row'<'col-sm-1'l><'col-sm-7'><'col-sm-4'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-1'i><'col-sm-7'><'col-sm-4'p>>",
+               "<'row'<'col-sm-12'tr>>" +
+               "<'row'<'col-sm-1'i><'col-sm-7'><'col-sm-4'p>>",
         "processing": true,
         "serverSide": true,
         "bPaginate": true,
         "responsive": true,
         "order": [
-            [0, 'desc'],
-            [2, 'asc']
+            [0, 'asc'],
         ],
         "aLengthMenu": [
             [10, 50, 100, -1],
@@ -29,19 +28,21 @@ $(document).ready(function () {
             },
             {
                 "data": 'guest_name',
-                "name": 'guest_name'
+                "name": 'guest_name',
+                "className": "text-truncate",
             },
             {
                 "data": 'guest_dep',
                 "name": 'guest_dep'
             },
             {
-                "data": 'guest_hotel',
-                "name": 'guest_hotel'
+                "data": 'computer_name',
+                "name": 'computer_name',
+                "className": "text-truncate",
             },
             {
-                "data": 'computer_name',
-                "name": 'computer_name'
+                "data": 'ip_main',
+                "name": 'ip_main'
             },
             {
                 "data": 'teamviewer',

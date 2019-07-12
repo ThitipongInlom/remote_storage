@@ -8,7 +8,7 @@
         <!-- All Css -->
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
     </head>
-    <body class="hold-transition login-page">
+    <body class="hold-transition sidebar-mini sidebar-collapse">
     @include('../layout.head')
     <!-- ส่วนหัวข้อมูล -->
     <div class="content-wrapper">
@@ -39,15 +39,15 @@
             <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main" width="100%">
                 <thead>
                     <tr class="bg-primary">
-                        <th>Sticker</th>
-                        <th>Name</th>
-                        <th>Dep</th>
-                        <th>Hotel</th>
-                        <th>Computer Name</th>
-                        <th>Teamviewer</th>
-                        <th>Anydesk</th>
-                        <th>Phone</th>
-                        <th>Action</th>
+                        <th width="5%">Sticker</th>
+                        <th width="20%">Name</th>
+                        <th width="5%">Dep</th>
+                        <th width="40%">Computer Name</th>
+                        <th width="10%">IP</th>
+                        <th width="10%">Teamviewer</th>
+                        <th width="10%">Anydesk</th>
+                        <th width="10%">Phone</th>
+                        <th width="10%">Action</th>
                     </tr>
                 </thead>
             </table>

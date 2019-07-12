@@ -1,5 +1,4 @@
 <div class="wrapper">
-
 <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
     <ul class="navbar-nav">
     <li class="nav-item">
