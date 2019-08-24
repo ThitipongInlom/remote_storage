@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use Response;
 use Carbon\Carbon;
+use App\Model\Item as Item;
 use App\Model\User as User;
-use App\Model\System as System;
-use App\Model\Software as Software;
-use App\Model\Runcomputer as Runcomputer;
-use App\Model\Hardware as Hardware;
-use App\Model\Guest as Guest;
 use App\Model\Department as Department;
 use App\Model\Hotel as Hotel;
 use App\Model\Window as Window;
@@ -32,50 +28,34 @@ class Additemcontroller extends Controller
     public function Additem_save(Request $request)
     {
         // เช็คว่า Sticker Number ซ้ำในระบบหรือไม่ แปลงค่าเป็น Upper
-        $sticker_number_count = Runcomputer::where('sticker_number', strtoupper($request->post('sticker_number')))->count();
+        $sticker_number_count = Item::where('sticker_number', strtoupper($request->post('sticker_number')))->count();
         if ($sticker_number_count == '0') {
             // 1.เพิ่มข้อมูลส่วน System
-            $System = new System;
-            $System->sticker_number = strtoupper($request->post('sticker_number'));
-            $System->computer_name = $request->post('computer_name');
-            $System->ip_main = $request->post('ip_main');
-            $System->ip_sub = $request->post('ip_sub');
-            $System->windows = $request->post('windows');
-            $System->internet = $request->post('internet');
-            $System->save();
-            // 2.เพิ่มข้อมูลส่วน Software
-            $Software = new Software;
-            $Software->sticker_number = strtoupper($request->post('sticker_number'));
-            $Software->teamviewer = $request->post('teamviwer');
-            $Software->anydesk = $request->post('anydesk');
-            $Software->save();
-            // 3.เพิ่มข้อมูลส่วน Runcomputer
-            $Runcomputer = new Runcomputer;
-            $Runcomputer->sticker_number = strtoupper($request->post('sticker_number'));
-            $Runcomputer->save();
-            // 4.เพิ่มข้อมูลส่วน Hardware
-            $Hardware = new Hardware;
-            $Hardware->sticker_number = strtoupper($request->post('sticker_number'));
-            $Hardware->cpu = $request->post('cpu');
-            $Hardware->ram = $request->post('ram');
-            $Hardware->case = $request->post('case');
-            $Hardware->monitor = $request->post('monitor');
-            $Hardware->mouse = $request->post('mouse');
-            $Hardware->keyboard = $request->post('keyboard');
-            $Hardware->mainboard = $request->post('mainboard');
-            $Hardware->powersupply = $request->post('powersupply');
-            $Hardware->hdd = $request->post('hdd');
-            $Hardware->ssd = $request->post('ssd');
-            $Hardware->ups = $request->post('ups');
-            $Hardware->save();
-            // 5.เพิ่มข้อมูลส่วน Guest
-            $Guest = new Guest;
-            $Guest->sticker_number = strtoupper($request->post('sticker_number'));
-            $Guest->guest_name = $request->post('guest_name');
-            $Guest->guest_dep = $request->post('guest_dep');
-            $Guest->guest_hotel = $request->post('guest_hotel');
-            $Guest->guest_phone = $request->post('guest_phone');
-            $Guest->save();
+            $Item = new Item;
+            $Item->sticker_number = strtoupper($request->post('sticker_number'));
+            $Item->name = $request->post('guest_name');
+            $Item->dep = $request->post('guest_dep');
+            $Item->hotel = $request->post('guest_hotel');
+            $Item->phone = $request->post('guest_phone');
+            $Item->computer_name = $request->post('computer_name');
+            $Item->ip_main = $request->post('ip_main');
+            $Item->ip_sub = $request->post('ip_sub');
+            $Item->windows = $request->post('windows');
+            $Item->internet = $request->post('internet');
+            $Item->teamviewer = $request->post('teamviwer');
+            $Item->anydesk = $request->post('anydesk');
+            $Item->cpu = $request->post('cpu');
+            $Item->ram = $request->post('ram');
+            $Item->case = $request->post('case');
+            $Item->monitor = $request->post('monitor');
+            $Item->mouse = $request->post('mouse');
+            $Item->keyboard = $request->post('keyboard');
+            $Item->mainboard = $request->post('mainboard');
+            $Item->powersupply = $request->post('powersupply');
+            $Item->hdd = $request->post('hdd');
+            $Item->ssd = $request->post('ssd');
+            $Item->ups = $request->post('ups');
+            $Item->save();
             return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
         }else{
             // Error Save ไม่สำเร็จ

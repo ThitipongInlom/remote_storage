@@ -10,6 +10,7 @@ class User extends Authenticatable
     /*
         User V 0.1
     */    
+    public $table = "users";
     /**
      * รายชื่อ ตาราง ใน ดาต้าเบส
      */

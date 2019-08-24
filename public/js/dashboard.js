@@ -27,13 +27,13 @@ $(document).ready(function () {
                 "name": 'sticker_number',
             },
             {
-                "data": 'guest_name',
-                "name": 'guest_name',
+                "data": 'name',
+                "name": 'name',
                 "className": "text-truncate",
             },
             {
-                "data": 'guest_dep',
-                "name": 'guest_dep'
+                "data": 'dep',
+                "name": 'dep'
             },
             {
                 "data": 'computer_name',
@@ -53,8 +53,8 @@ $(document).ready(function () {
                 "name": 'anydesk'
             },
             {
-                "data": 'guest_phone',
-                "name": 'guest_phone'
+                "data": 'phone',
+                "name": 'phone'
             },
             {
                 "data": 'action',

@@ -14,12 +14,7 @@ class Dashboardcontroller extends Controller
 {
     public function Ajax_Table_Main(Request $request)
     {
-        $users = DB::table('runcomputers')
-                ->join('hardwares', 'runcomputers.sticker_number', '=', 'hardwares.sticker_number')
-                ->join('softwares', 'runcomputers.sticker_number', '=', 'softwares.sticker_number')
-                ->join('systems', 'runcomputers.sticker_number', '=', 'systems.sticker_number')
-                ->join('guests', 'runcomputers.sticker_number', '=', 'guests.sticker_number')
-                ->get();
+        $users = DB::table('item')->get();
         return Datatables::of($users)
         ->editColumn('ip_main', function($users) {
             $url = "https://start.teamviewer.com/device/".$users->ip_main."/authorization/password/mode/control";

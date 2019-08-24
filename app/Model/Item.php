@@ -4,17 +4,21 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Hardware extends Model
+class Item extends Model
 {
     /*
-        Hardware V 0.1
+        Item V 0.1
     */    
-    public $table = "hardwares";
+    public $table = "item";
     /**
      * รายชื่อ ตาราง ใน ดาต้าเบส
      */
     protected $fillable = [
         'sticker_number', 
+        'dep',
+        'hotel',
+        'name',
+        'phone',
         'cpu',
         'ram',
         'case',
@@ -24,7 +28,17 @@ class Hardware extends Model
         'mainboard',
         'powersupply',
         'hdd',
-        'ssd'
+        'ssd',
+        'ups',
+        'ups_battery',
+        'windows',
+        'teamviewer',
+        'anydesk',
+        'computer_name',
+        'ip_main',
+        'ip_sub',
+        'internet',
+        'license'
     ];
 
     public $timestamps = false;
@@ -32,5 +46,5 @@ class Hardware extends Model
      /**
      * ชื่อ ตาราง 
      */   
-    protected $primaryKey = 'hardware_id';
+    protected $primaryKey = 'item_id';
 }

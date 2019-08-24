@@ -30,6 +30,7 @@
         </div>
     </div>
     <!-- ส่วนกลางที่แสดง -->
+    @foreach ($Item as $row)
     <div class="content">
     <div class="container-fluid">
     <!-- จำนวนข้อมูลทั้งหมด -->    
@@ -43,114 +44,106 @@
                     <div class="row">
                         <div class="col-md-3">
                             <ul class="products-list product-list-in-card pl-2 pr-2">
-                            @foreach ($Item as $row)
                                 <!-- Guest Name -->
-                                @if ($row->guest_name == '' OR $row->guest_name != '')
+                                @if ($row->name== '' OR $row->name!= '')
                                 <li class="item">
                                     <div class="product-img">
                                     <img src="{{ url('img/icon/user_name.png') }}" alt="Product Image" class="img-size-50">
                                     </div>
                                     <div class="product-info">
                                     <a href="javascript:void(0)" class="product-title">Name</a>
-                                    @if ($row->guest_name == '')
+                                    @if ($row->name== '')
                                         <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Guest Name" onclick="Add_item_data_form_view(this);">เพิ่ม Name</span>
                                     @else
-                                        <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Guest Name" old_value="{{ $row->guest_name }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Name</span>
+                                        <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Guest Name" old_value="{{ $row->name}}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Name</span>
                                     @endif
                                     <span class="product-description">
-                                    @if ($row->guest_name == '')
+                                    @if ($row->name== '')
                                         <p>ยังไม่มีข้อมูล</p>
                                     @else
-                                        {{ $row->guest_name }}
+                                        {{ $row->name}}
                                     @endif
                                     </div>
                                 </li>                       
                                 @endif
-                            @endforeach
                             </ul>
                         </div>
                         <div class="col-md-3">
                             <ul class="products-list product-list-in-card pl-2 pr-2">
-                            @foreach ($Item as $row)
                                 <!-- Guest Dep -->
-                                @if ($row->guest_dep == '' OR $row->guest_dep != '')
+                                @if ($row->dep== '' OR $row->dep!= '')
                                 <li class="item">
                                     <div class="product-img">
                                     <img src="{{ url('img/icon/dep.png') }}" alt="Product Image" class="img-size-50">
                                     </div>
                                     <div class="product-info">
                                     <a href="javascript:void(0)" class="product-title">Dep</a>
-                                    @if ($row->guest_dep == '')
+                                    @if ($row->dep== '')
                                         <span class="btn btn-sm badge badge-success float-right" datashow="select_dep" newname="Guest Dep" onclick="Add_item_data_form_view(this);">เพิ่ม Dep</span>
                                     @else
-                                        <span class="btn btn-sm badge badge-warning float-right" datashow="select_dep" newname="Guest Dep" old_value="{{ $row->guest_dep }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Dep</span>
+                                        <span class="btn btn-sm badge badge-warning float-right" datashow="select_dep" newname="Guest Dep" old_value="{{ $row->dep}}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Dep</span>
                                     @endif
                                     <span class="product-description">
-                                    @if ($row->guest_dep == '')
+                                    @if ($row->dep== '')
                                         <p>ยังไม่มีข้อมูล</p>
                                     @else
-                                        {{ $row->guest_dep }}
+                                        {{ $row->dep}}
                                     @endif
                                     </div>
                                 </li>                       
                                 @endif
-                            @endforeach
                             </ul>
                         </div>
                         <div class="col-md-3">
                             <ul class="products-list product-list-in-card pl-2 pr-2">
-                            @foreach ($Item as $row)
                                 <!-- Guest Hotel -->
-                                @if ($row->guest_hotel == '' OR $row->guest_hotel != '')
+                                @if ($row->hotel== '' OR $row->hotel!= '')
                                 <li class="item">
                                     <div class="product-img">
                                     <img src="{{ url('img/icon/hotel.png') }}" alt="Product Image" class="img-size-50">
                                     </div>
                                     <div class="product-info">
                                     <a href="javascript:void(0)" class="product-title">Hotel</a>
-                                    @if ($row->guest_hotel == '')
+                                    @if ($row->hotel== '')
                                         <span class="btn btn-sm badge badge-success float-right" datashow="select_hotel" newname="Guest Hotel" onclick="Add_item_data_form_view(this);">เพิ่ม Hotel</span>
                                     @else
-                                        <span class="btn btn-sm badge badge-warning float-right" datashow="select_hotel" newname="Guest Hotel" old_value="{{ $row->guest_hotel }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Hotel</span>
+                                        <span class="btn btn-sm badge badge-warning float-right" datashow="select_hotel" newname="Guest Hotel" old_value="{{ $row->hotel}}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Hotel</span>
                                     @endif
                                     <span class="product-description">
-                                    @if ($row->guest_hotel == '')
+                                    @if ($row->hotel== '')
                                         <p>ยังไม่มีข้อมูล</p>
                                     @else
-                                        {{ $row->guest_hotel }}
+                                        {{ $row->hotel}}
                                     @endif
                                     </div>
                                 </li>                       
                                 @endif
-                            @endforeach
                             </ul>
                         </div>
                         <div class="col-md-3">
                             <ul class="products-list product-list-in-card pl-2 pr-2">
-                            @foreach ($Item as $row)
                                 <!-- Guest Phone -->
-                                @if ($row->guest_phone == '' OR $row->guest_phone != '')
+                                @if ($row->phone== '' OR $row->phone!= '')
                                 <li class="item">
                                     <div class="product-img">
                                     <img src="{{ url('img/icon/phone.png') }}" alt="Product Image" class="img-size-50">
                                     </div>
                                     <div class="product-info">
                                     <a href="javascript:void(0)" class="product-title">Phone</a>
-                                    @if ($row->guest_phone == '')
+                                    @if ($row->phone== '')
                                         <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Guest Phone" onclick="Add_item_data_form_view(this);">เพิ่ม Phone</span>
                                     @else
-                                        <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Guest Phone" old_value="{{ $row->guest_phone }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Phone</span>
+                                        <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Guest Phone" old_value="{{ $row->phone}}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Phone</span>
                                     @endif
                                     <span class="product-description">
-                                    @if ($row->guest_phone == '')
+                                    @if ($row->phone== '')
                                         <p>ยังไม่มีข้อมูล</p>
                                     @else
-                                        {{ $row->guest_phone }}
+                                        {{ $row->phone}}
                                     @endif
                                     </div>
                                 </li>                       
                                 @endif
-                            @endforeach
                             </ul>
                         </div>
                     </div>
@@ -169,7 +162,6 @@
             <div data-simplebar data-simplebar-auto-hide="false">
             <div class="card-body">
                 <ul class="products-list product-list-in-card pl-2 pr-2">
-                @foreach ($Item as $row)
                     @if ($row->cpu == '' OR $row->cpu != '')
                      <li class="item">
                         <div class="product-img">
@@ -414,7 +406,6 @@
                         </div>
                     </li>                       
                     @endif
-                @endforeach
                 </ul>
             </div>
             </div>
@@ -431,7 +422,6 @@
             <div data-simplebar data-simplebar-auto-hide="false">
             <div class="card-body">
                 <ul class="products-list product-list-in-card pl-2 pr-2">
-                @foreach ($Item as $row)
                     <!-- Teamviewer -->
                     @if ($row->teamviewer == '' OR $row->teamviewer != '')
                      <li class="item">
@@ -476,7 +466,6 @@
                         </div>
                     </li>                       
                     @endif
-                @endforeach
                 </ul>
             </div>
             </div>
@@ -493,7 +482,6 @@
             <div data-simplebar data-simplebar-auto-hide="false">
             <div class="card-body">
                 <ul class="products-list product-list-in-card pl-2 pr-2">
-                @foreach ($Item as $row)
                     <!-- Windows -->
                     @if ($row->windows == '' OR $row->windows != '')
                      <li class="item">
@@ -512,6 +500,28 @@
                             <p>ยังไม่มีข้อมูล</p>
                         @else
                             {{ $row->windows }}
+                        @endif
+                        </div>
+                    </li>                       
+                    @endif
+                    <!-- Windows license -->
+                    @if ($row->license == '' OR $row->license != '')
+                     <li class="item">
+                        <div class="product-img">
+                        <img src="{{ url('img/icon/license.png') }}" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">Windows license</a>
+                        @if ($row->license == '')
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="License" onclick="Add_item_data_form_view(this);">เพิ่ม license</span>
+                        @else
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="License" old_value="{{ $row->license }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน license</span>
+                        @endif
+                        <span class="product-description">
+                        @if ($row->license == '')
+                            <p>ยังไม่มีข้อมูล</p>
+                        @else
+                            {{ $row->license }}
                         @endif
                         </div>
                     </li>                       
@@ -604,7 +614,6 @@
                         </div>
                     </li>                       
                     @endif
-                @endforeach
                 </ul>
             </div>
             </div>
@@ -653,6 +662,7 @@
     </div>
     </div>
     </div>
+    @endforeach
     </div>
     <!-- END -->
     @include('../layout.footer')
