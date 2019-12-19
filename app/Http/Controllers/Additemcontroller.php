@@ -55,6 +55,8 @@ class Additemcontroller extends Controller
             $Item->hdd = $request->post('hdd');
             $Item->ssd = $request->post('ssd');
             $Item->ups = $request->post('ups');
+            $Item->username_admin = $request->post('username_admin');
+            $Item->password_admin = $request->post('password_admin');
             $Item->save();
             return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
         }else{

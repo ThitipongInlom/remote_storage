@@ -261,6 +261,28 @@ class Viewitemcontroller extends Controller
                 $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), str_replace(" ", "", $request->post('Value_add')), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
                 return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
             break; 
+            // Username_Admin
+            case 'Username_Admin':
+                $Software = Item::where('sticker_number', $request->post('ID_computer'))->get();
+                $id = $Software[0]->item_id;
+                $old_item = $Software[0]->username_admin;
+                $Software = Item::find($id);
+                $Software->username_admin = str_replace(" ", "", $request->post('Value_add'));
+                $Software->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), str_replace(" ", "", $request->post('Value_add')), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
+                return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
+            break; 
+            // Password_Admin
+            case 'Password_Admin':
+                $Software = Item::where('sticker_number', $request->post('ID_computer'))->get();
+                $id = $Software[0]->item_id;
+                $old_item = $Software[0]->password_admin;
+                $Software = Item::find($id);
+                $Software->password_admin = str_replace(" ", "", $request->post('Value_add'));
+                $Software->save();
+                $this->Change_Historys_Log($request->post('ID_computer'), $request->post('Type_add'), str_replace(" ", "", $request->post('Value_add')), $request->post('Item_ststus'), $old_item, $request->post('Remark'));
+                return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
+            break; 
 
             /**
              * System

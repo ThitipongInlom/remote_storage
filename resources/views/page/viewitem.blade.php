@@ -466,6 +466,50 @@
                         </div>
                     </li>                       
                     @endif
+                    <!-- Username Admin -->
+                    @if ($row->username_admin == '' OR $row->username_admin != '')
+                     <li class="item">
+                        <div class="product-img">
+                        <img src="{{ url('img/icon/computer_name.png') }}" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">Username Admin</a>
+                        @if ($row->username_admin == '')
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Username_Admin" onclick="Add_item_data_form_view(this);">เพิ่ม Username Admin</span>
+                        @else
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Username_Admin" old_value="{{ $row->username_admin }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Username Admin</span>
+                        @endif
+                        <span class="product-description">
+                        @if ($row->username_admin == '')
+                            <p>ยังไม่มีข้อมูล</p>
+                        @else
+                            {{ $row->username_admin }}
+                        @endif
+                        </div>
+                    </li>                       
+                    @endif
+                    <!-- Password Admin -->
+                    @if ($row->password_admin == '' OR $row->password_admin != '')
+                     <li class="item">
+                        <div class="product-img">
+                        <img src="{{ url('img/icon/computer_name.png') }}" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">Password Admin</a>
+                        @if ($row->password_admin == '')
+                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="Password_Admin" onclick="Add_item_data_form_view(this);">เพิ่ม Password Admin</span>
+                        @else
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="Password_Admin" old_value="{{ $row->password_admin }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน Password Admin</span>
+                        @endif
+                        <span class="product-description">
+                        @if ($row->password_admin == '')
+                            <p>ยังไม่มีข้อมูล</p>
+                        @else
+                            {{ $row->password_admin }}
+                        @endif
+                        </div>
+                    </li>                       
+                    @endif
                 </ul>
             </div>
             </div>

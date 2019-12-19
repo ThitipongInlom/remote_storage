@@ -44,6 +44,8 @@ var Save_Add_Item = function Save_Add_Item() {
     Data.append('hdd', $("#hdd").val());
     Data.append('ssd', $("#ssd").val());
     Data.append('ups', $("#ups").val());
+    Data.append('username_admin', $("#username_admin").val());
+    Data.append('password_admin', $("#password_admin").val());
         // Laading  Options
         var loading = Ladda.create(document.querySelector('.btn-loading'));
         loading.start();

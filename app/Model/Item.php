@@ -38,7 +38,9 @@ class Item extends Model
         'ip_main',
         'ip_sub',
         'internet',
-        'license'
+        'license',
+        'username_admin',
+        'password_admin'
     ];
 
     public $timestamps = false;

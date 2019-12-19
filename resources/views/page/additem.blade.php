@@ -261,6 +261,20 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td width="50%">
+                                    <div class="form-group">
+                                        <label for="guest_name">Username Admin <img src="{{ url('img/icon/computer_name.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="username_admin" placeholder="Username_Admin">
+                                    </div>
+                                </td>
+                                <td width="50%">
+                                    <div class="form-group">
+                                        <label for="guest_dep">Password Admin <img src="{{ url('img/icon/computer_name.png') }}" style="width: 18px;"></label>
+                                        <input type="text" class="form-control form-control-sm" id="password_admin" placeholder="Password_Admin">
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
