@@ -770,9 +770,15 @@
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
-            <button type="button" class="btn btn-sm btn-primary btn-loading" id="Add_item_data_form_view_save" onclick="Add_item_data_form_view_save(this);">ยืนยันการบันทึก</button>
+        <div class="modal-footer" style="display:inline;">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ยกเลิก</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-sm btn-block btn-success btn-loading" id="Add_item_data_form_view_save" onclick="Add_item_data_form_view_save(this);"> <i class="far fa-save"></i> ยืนยันการบันทึก</button>
+                </div>
+            </div>
         </div>
         </div>
     </div>
@@ -839,9 +845,15 @@
                 <label for="Modal_edit_item_remark">หมายเหตุ</label>
                 <input type="text" class="form-control form-control-sm" id="Modal_edit_item_remark" placeholder="หมายเหตุ">
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">ยกเลิก</button>
-            <button type="button" class="btn btn-sm btn-primary btn-loading" id="Edit_item_data_form_view_save" onclick="Edit_item_data_form_view_save(this);">ยืนยันการแก้ไข</button>
+        <div class="modal-footer" style="display:inline;">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ยกเลิก</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-sm btn-block btn-success btn-loading" id="Edit_item_data_form_view_save" onclick="Edit_item_data_form_view_save(this);"><i class="far fa-save"></i> ยืนยันการแก้ไข</button>
+                </div>
+            </div>
         </div>
         </div>
     </div>

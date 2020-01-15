@@ -283,9 +283,10 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div align="center" class="col-md-12">
-                <button class="btn btn-sm btn-success btn-loading" onclick="Save_Add_Item();">บันทึก</button>
+        <hr>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <button class="btn btn-sm mt-2 mb-3 btn-block btn-success btn-loading" onclick="Save_Add_Item();"><i class="far fa-save"></i> บันทึก</button>
             </div>
         </div>
     </div>
