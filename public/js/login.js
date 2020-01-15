@@ -29,7 +29,7 @@ var fun_login = function fun_login() {
         "onclick": null,
         "showDuration": "300",
         "hideDuration": "1000",
-        "timeOut": "3000",
+        "timeOut": "1000",
         "extendedTimeOut": "1000",
         "showEasing": "swing",
         "hideEasing": "linear",
@@ -64,7 +64,7 @@ var fun_login = function fun_login() {
                     Toastr["success"](res.error_text);
                     setTimeout(function () {
                         window.location.href = res.path + '/dashboard';
-                    }, 3000);
+                    }, 1000);
                 } else {
                     // Text Error 
                     Toastr["error"](res.error_text);

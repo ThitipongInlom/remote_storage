@@ -26,7 +26,7 @@ class Logincontroller extends Controller
             $user->save();
             
             // Success Login สำเร็จ
-            return Response::json(array('status' => 'success','error_text' => 'เข้าสู่ระบบสำเร็จ รอ 3 วินาที','path' => $request->root()),200);
+            return Response::json(array('status' => 'success','error_text' => 'เข้าสู่ระบบสำเร็จ รอ 1 วินาที','path' => $request->root()),200);
         }else{
             // Error Login ไม่สำเร็จ
             return Response::json(array('status' => 'error','error_text' => 'ชื่อผู้ใช้งาน และ รหัสผ่าน ไม่ถูกต้อง'),200);
