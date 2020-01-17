@@ -36,9 +36,14 @@
     <!-- จำนวนข้อมูลทั้งหมด -->    
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <b>Guest</b>
+            <div class="card {{ $color['card_color'] }}">
+                <div class="card-header pb-2">
+                    <b><i class="fas fa-id-card-alt"></i> Guest</b>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-sm btn-dark" update="Y" onclick="Update_status_com(this);"><i class='fas fa-check' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ใช้งาน'></i> ใช้งาน</button>
+                        <button type="button" class="btn btn-sm btn-dark" update="N" onclick="Update_status_com(this);"><i class='fas fa-times' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ไม่ได้ใช้งาน'></i> ไม่ได้ใช้งาน</button>
+                        <button type="button" class="btn btn-sm btn-dark" update="W" onclick="Update_status_com(this);"><i class='fas fa-tools' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ส่งซ่อม'></i> ส่งซ่อม</button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -154,9 +159,9 @@
     <div class="row">
         <!-- Hardware -->
         <div class="col-md-4">
-            <div class="card card-primary">
+            <div class="card {{ $color['card_color'] }}">
             <div class="card-header">
-                <b>Hardware</b>
+                <b><i class="fas fa-server"></i> Hardware</b>
             </div>
             <div class="overflow-auto" style="height: 350px;">
             <div data-simplebar data-simplebar-auto-hide="false">
@@ -414,9 +419,9 @@
         </div>
         <!-- Software -->
         <div class="col-md-4">
-            <div class="card card-primary">
+            <div class="card {{ $color['card_color'] }}">
             <div class="card-header">
-                <b>Software</b>
+                <b><i class="fas fa-server"></i> Software</b>
             </div>
             <div class="overflow-auto" style="height: 350px;">
             <div data-simplebar data-simplebar-auto-hide="false">
@@ -518,9 +523,9 @@
         </div>
         <!-- System -->
         <div class="col-md-4">
-            <div class="card card-primary">
+            <div class="card {{ $color['card_color'] }}">
             <div class="card-header">
-                <b>System</b>
+                <b><i class="fas fa-server"></i> System</b>
             </div>
             <div class="overflow-auto" style="height: 350px;">
             <div data-simplebar data-simplebar-auto-hide="false">
@@ -667,15 +672,15 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-primary">
+            <div class="card {{ $color['card_color'] }}">
                 <div class="card-header">
-                    <b>ข้อมูลประวัติย้อนหลัง</b>
+                    <b><i class="fas fa-list"></i> ข้อมูลประวัติย้อนหลัง</b>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                     <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main">
                         <thead>
-                            <tr class="bg-primary">
+                            <tr class="{{ $color['bg_color'] }}">
                                 <th>Sticker</th>
                                 <th>วันที่</th>
                                 <th>ประเภท</th>
@@ -687,7 +692,7 @@
                             </tr>
                         </thead>
                         <tfoot>
-                            <tr class="bg-primary">
+                            <tr class="{{ $color['bg_color'] }}">
                                 <th>Sticker</th>
                                 <th>วันที่</th>
                                 <th>ประเภท</th>
@@ -862,95 +867,4 @@
         <!-- All Js -->
         <script type="text/javascript" src="{{ url('js/app.js') }}"></script>
         <script type="text/javascript" src="{{ url('js/viewitem.js') }}"></script>
-        <!-- Script In Page -->
-        <script>
-        $.fn.dataTable.ext.errMode = 'throw';
-        var TableDisplay = $('#Table_Main').DataTable({
-            "dom": "<'row'<'col-sm-1'l><'col-sm-7'><'col-sm-4'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-1'i><'col-sm-7'><'col-sm-4'p>>",
-            "processing": true,
-            "serverSide": true,
-            "bPaginate": true,
-            "responsive": true,
-            "order": [
-                [1, 'desc']
-            ],
-            "aLengthMenu": [
-                [5, 10, 20, -1],
-                ["5", "10", "20", "ทั้งหมด"]
-            ],
-            "ajax": {
-                "url": "../api/v1/ajax_load_item_view_history/{{ $Item[0]->sticker_number }}",
-                "type": 'POST',
-                "headers": {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-            },
-            "columns": [{
-                    "data": 'sticker_number',
-                    "name": 'sticker_number',
-                },
-                {
-                    "data": 'created_at',
-                    "name": 'created_at'
-                },
-                {
-                    "data": 'item_type',
-                    "name": 'item_type'
-                },
-                {
-                    "data": 'item_old',
-                    "name": 'item_old'
-                },
-                {
-                    "data": 'item_change',
-                    "name": 'item_change'
-                },
-                {
-                    "data": 'remark',
-                    "name": 'remark'
-                },
-                {
-                    "data": 'item_status',
-                    "name": 'item_status'
-                },
-                {
-                    "data": 'users_change',
-                    "name": 'users_change'
-                }
-            ],
-            "columnDefs": [{
-                    "className": 'text-left',
-                    "targets": [2, 3, 4, 5]
-                },
-                {
-                    "className": 'text-center',
-                    "targets": [0, 1, 6, 7]
-                },
-                {
-                    "className": 'text-right',
-                    "targets": []
-                },
-            ],
-            "language": {
-                "lengthMenu": "แสดง _MENU_ แถว",
-                "search": "ค้นหา:",
-                "info": "แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ แถว",
-                "infoEmpty": "แสดง 0 ถึง 0 ทั้งหมด 0 แถว",
-                "infoFiltered": "(จาก ทั้งหมด _MAX_ ทั้งหมด แถว)",
-                "processing": "กำลังโหลดข้อมูล...",
-                "zeroRecords": "ไม่มีข้อมูล",
-                "paginate": {
-                    "first": "หน้าแรก",
-                    "last": "หน้าสุดท้าย",
-                    "next": "ต่อไป",
-                    "previous": "ย้อนกลับ"
-                },
-            },
-            search: {
-                "regex": true
-            },
-        });
-        </script>
 </html>

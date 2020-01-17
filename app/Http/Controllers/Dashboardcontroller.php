@@ -14,7 +14,17 @@ class Dashboardcontroller extends Controller
 {
     public function Ajax_Table_Main(Request $request)
     {
-        $users = DB::table('item')->get();
+        if ($request->get('type_select_table') == 'return_all'){
+            $users = DB::table('item')->get();
+        }else if ($request->get('type_select_table') == 'return_yes') {
+            $users = DB::table('item')->where('ststus_com', 'Y')->get();
+        }else if ($request->get('type_select_table') == 'return_no') {
+            $users = DB::table('item')->where('ststus_com', 'N')->get();
+        }else if ($request->get('type_select_table') == 'return_wait') {
+            $users = DB::table('item')->where('ststus_com', 'W')->get();
+        }
+
+        // Return
         return Datatables::of($users)
         ->editColumn('ip_main', function($users) {
             $url = "https://start.teamviewer.com/device/".$users->ip_main."/authorization/password/mode/control";
@@ -39,12 +49,27 @@ class Dashboardcontroller extends Controller
             $result  = "<a class='btn btn-sm btn-primary' href='$url' role='button' data-toggle='tooltip' data-placement='bottom' title='ดูข้อมูลคอมพิวเตอร์ $users->sticker_number'><i class='fas fa-search'></i>View</a>";
             return $result;
         })
-        ->addColumn('status_com', function ($users) {
-            $url = url("view/$users->sticker_number");
-            $result  = "";
+        ->addColumn('status', function ($users) {
+            if ($users->ststus_com == 'Y') {
+                $result = "<i class='fas fa-check' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ใช้งาน'></i>";
+            }else if ($users->ststus_com == 'N') {
+                $result = "<i class='fas fa-times' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ไม่ได้ใช้งาน'></i>";
+            }else if ($users->ststus_com == 'W') {
+                $result = "<i class='fas fa-tools' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ส่งซ่อม'></i>";
+            }
             return $result;
         })
-        ->rawColumns(['ip_main', 'teamviewer', 'anydesk', 'action'])
+        ->setRowClass(function ($users) {
+            if ($users->ststus_com == 'Y') {
+                $reclass = "bg-success";
+            }else if ($users->ststus_com == 'N') {
+                $reclass = "bg-danger";
+            }else if ($users->ststus_com == 'W') {
+                $reclass = "bg-warning";
+            }
+            return $reclass;
+        })
+        ->rawColumns(['ip_main', 'teamviewer', 'anydesk', 'action', 'status'])
         ->make(true);
     }
 }

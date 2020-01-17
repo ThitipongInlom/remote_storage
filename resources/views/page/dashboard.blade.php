@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">แดชบอร์ด รีโมท <a href="{{ url('additem') }}" class="btn btn-sm btn-success" role="button" data-toggle="tooltip" data-placement="bottom" title="เพิ่มข้อมูลคอมพิวเตอร์"><b>+</b> เพิ่มข้อมูล</a></h1>
+                <h1 class="m-0 text-dark">แดชบอร์ด รีโมท</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -35,10 +35,25 @@
     <!-- จำนวนข้อมูลทั้งหมด -->    
         <div class="card card-primary card-outline">
             <div class="card-body">
+                <div class="clearfix">
+                    <div class="float-left mb-2">
+                        <h3>แดชบอร์ด</h3>
+                    </div>
+                    <div class="float-right text-right mb-3">
+                        <select class="custom-select custom-select-sm col-8" id="type_select_table" onchange="load_table_on_select();">
+                            <option value="return_all" selected="">ข้อมูลคอมพิวเตอร์ทั้งหมด</option>
+                            <option value="return_yes">ข้อมูลคอมพิวเตอร์ที่ ใช้งาน</option>
+                            <option value="return_no">ข้อมูลคอมพิวเตอร์ที่ ไม่ได้ใช้งาน</option>
+                            <option value="return_wait">ข้อมูลคอมพิวเตอร์ที่ ส่งซ่อม</option>
+                        </select>
+                        <a href="{{ url('additem') }}" class="btn btn-sm btn-success" role="button" data-toggle="tooltip" data-placement="bottom" title="เพิ่มข้อมูลคอมพิวเตอร์"><i class="fas fa-plus"></i> เพิ่มข้อมูล</a>
+                    </div>
+                </div>
             <div class="table-responsive">
             <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main" width="100%">
                 <thead>
                     <tr class="bg-primary">
+                        <th width="5%">Status</th>
                         <th width="5%">Sticker</th>
                         <th width="20%">Name</th>
                         <th width="5%">Dep</th>

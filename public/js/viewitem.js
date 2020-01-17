@@ -1,4 +1,92 @@
 $(document).ready(function () {
+    $.fn.dataTable.ext.errMode = 'throw';
+    var TableDisplay = $('#Table_Main').DataTable({
+        "dom": "<'row'<'col-sm-1'l><'col-sm-7'><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-1'i><'col-sm-7'><'col-sm-4'p>>",
+        "processing": true,
+        "serverSide": true,
+        "bPaginate": true,
+        "responsive": true,
+        "order": [
+            [1, 'desc']
+        ],
+        "aLengthMenu": [
+            [5, 10, 20, -1],
+            ["5", "10", "20", "ทั้งหมด"]
+        ],
+        "ajax": {
+            "url": "../api/v1/ajax_load_item_view_history/{{ $Item[0]->sticker_number }}",
+            "type": 'POST',
+            "headers": {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+        },
+        "columns": [{
+                "data": 'sticker_number',
+                "name": 'sticker_number',
+            },
+            {
+                "data": 'created_at',
+                "name": 'created_at'
+            },
+            {
+                "data": 'item_type',
+                "name": 'item_type'
+            },
+            {
+                "data": 'item_old',
+                "name": 'item_old'
+            },
+            {
+                "data": 'item_change',
+                "name": 'item_change'
+            },
+            {
+                "data": 'remark',
+                "name": 'remark'
+            },
+            {
+                "data": 'item_status',
+                "name": 'item_status'
+            },
+            {
+                "data": 'users_change',
+                "name": 'users_change'
+            }
+        ],
+        "columnDefs": [{
+                "className": 'text-left',
+                "targets": [2, 3, 4, 5]
+            },
+            {
+                "className": 'text-center',
+                "targets": [0, 1, 6, 7]
+            },
+            {
+                "className": 'text-right',
+                "targets": []
+            },
+        ],
+        "language": {
+            "lengthMenu": "แสดง _MENU_ แถว",
+            "search": "ค้นหา:",
+            "info": "แสดง _START_ ถึง _END_ ทั้งหมด _TOTAL_ แถว",
+            "infoEmpty": "แสดง 0 ถึง 0 ทั้งหมด 0 แถว",
+            "infoFiltered": "(จาก ทั้งหมด _MAX_ ทั้งหมด แถว)",
+            "processing": "กำลังโหลดข้อมูล...",
+            "zeroRecords": "ไม่มีข้อมูล",
+            "paginate": {
+                "first": "หน้าแรก",
+                "last": "หน้าสุดท้าย",
+                "next": "ต่อไป",
+                "previous": "ย้อนกลับ"
+            },
+        },
+        search: {
+            "regex": true
+        },
+    });
     // Toastr Options
     Toastr.options = {
         "closeButton": true,
@@ -222,5 +310,32 @@ var Edit_item_data_form_view_save = function Edit_item_data_form_view_save(e) {
             }
         );
     }
+}
+
+var Update_status_com = function Update_status_com(e) {
+    var Data = new FormData();
+    Data.append('status', $(e).attr('update'));
+    Data.append('ID_computer', $("#id_computer").val());
+    $.ajax({
+        url: '../save_update_status_com',
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: Data,
+        success: function (callback) {
+            var res = jQuery.parseJSON(callback);
+            if (res.status == 'success') {
+                Toastr["success"](res.error_text);
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            }
+        }
+    });
 }
 

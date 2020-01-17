@@ -9,7 +9,7 @@ $(document).ready(function () {
         "bPaginate": true,
         "responsive": true,
         "order": [
-            [0, 'asc'],
+            [1, 'asc'],
         ],
         "aLengthMenu": [
             [10, 50, 100, -1],
@@ -21,10 +21,16 @@ $(document).ready(function () {
             "headers": {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+            "data": function (d) {
+                d.type_select_table = $("#type_select_table").val();
+            }
         },
         "columns": [{
+                "data": 'status',
+                "name": 'status'
+            },{
                 "data": 'sticker_number',
-                "name": 'sticker_number',
+                "name": 'sticker_number'
             },
             {
                 "data": 'name',
@@ -38,7 +44,7 @@ $(document).ready(function () {
             {
                 "data": 'computer_name',
                 "name": 'computer_name',
-                "className": "text-truncate",
+                "className": "text-truncate"
             },
             {
                 "data": 'ip_main',
@@ -65,11 +71,11 @@ $(document).ready(function () {
         ],
         "columnDefs": [{
                 "className": 'text-left',
-                "targets": [5, 6]
+                "targets": [6, 7]
             },
             {
                 "className": 'text-center',
-                "targets": [0, 2, 7]
+                "targets": [0, 3, 8]
             },
             {
                 "className": 'text-right',
@@ -102,3 +108,8 @@ $(document).ajaxComplete(function () {
         "html": true,
     });
 });
+
+var load_table_on_select = function load_table_on_select() {
+    var table = $('#Table_Main').DataTable();
+    table.draw();
+}

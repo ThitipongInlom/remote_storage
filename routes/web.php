@@ -24,6 +24,7 @@ Route::post('/save_edit_item_windows', 'Addselectitemcontroller@save_edit_item_w
 Route::post('/save_edit_item_department', 'Addselectitemcontroller@save_edit_item_department')->name('save_edit_item_department');
 Route::post('/save_edit_item_hotel', 'Addselectitemcontroller@save_edit_item_hotel')->name('save_edit_item_hotel');
 Route::post('/save_delete_item', 'Addselectitemcontroller@save_delete_item')->name('save_delete_item');
+Route::post('/save_update_status_com', 'Viewitemcontroller@save_update_status_com')->name('save_update_status_com');
 
 // API Make
 Route::group(['prefix' => 'api/v1','middleware' => 'auth'], function () {

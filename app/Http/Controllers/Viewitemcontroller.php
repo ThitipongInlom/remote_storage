@@ -21,11 +21,26 @@ class Viewitemcontroller extends Controller
     public function Load_item(Request $request, $sticker_number)
     {
         $data = DB::table('item')->where('sticker_number', $sticker_number)->get();
+        $header_color = DB::table('item')->where('sticker_number', $sticker_number)->value('ststus_com');
+        if ($header_color == 'Y') {
+            $card_color = "card-primary";
+            $bg_color   = "bg-primary";
+        }else if ($header_color == 'N') {
+            $card_color = "card-danger";
+            $bg_color   = "bg-danger";
+        }else if ($header_color == 'W') {
+            $card_color = "card-warning";
+            $bg_color   = "bg-warning";
+        }
+    
+        $color = array('card_color' => $card_color, 'bg_color' => $bg_color);
+
         return view('page/viewitem', [
                     'Item' => $data,
                     'Department' => Department::get(),
                     'Hotel' => Hotel::get(),
-                    'Window' => Window::get()]);
+                    'Window' => Window::get(),
+                    'color' => $color]);
     }
 
     public function Load_item_view_history(Request $request, $sticker_number)
@@ -352,6 +367,15 @@ class Viewitemcontroller extends Controller
             // Insert Save
             $ChangeHistory->save();
             return;
+    }
+
+    public function save_update_status_com(Request $request)
+    {
+        $id = Item::where('sticker_number', $request->post('ID_computer'))->value('item_id');
+        $Update = Item::find($id);
+        $Update->ststus_com = $request->post('status');
+        $Update->save();
+        return response()->json(['status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 1วินาที'],200);
     }
 
 }

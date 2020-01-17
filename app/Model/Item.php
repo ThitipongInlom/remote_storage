@@ -40,7 +40,8 @@ class Item extends Model
         'internet',
         'license',
         'username_admin',
-        'password_admin'
+        'password_admin',
+        'ststus_com'
     ];
 
     public $timestamps = false;
