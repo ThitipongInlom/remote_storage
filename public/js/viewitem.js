@@ -10,7 +10,7 @@ $(document).ready(function () {
         "onclick": null,
         "showDuration": "300",
         "hideDuration": "1000",
-        "timeOut": "3000",
+        "timeOut": "1000",
         "extendedTimeOut": "1000",
         "showEasing": "swing",
         "hideEasing": "linear",
@@ -105,7 +105,7 @@ var Add_item_data_form_view_save = function Add_item_data_form_view_save(e) {
                     Toastr["success"](res.error_text);
                     setTimeout(function () {
                         location.reload();
-                    }, 3000);
+                    }, 1000);
                 }
             }
         }).always(
@@ -210,7 +210,7 @@ var Edit_item_data_form_view_save = function Edit_item_data_form_view_save(e) {
                     Toastr["success"](res.error_text);
                     setTimeout(function () {
                         location.reload();
-                    }, 3000);
+                    }, 1000);
                 }
             }
         }).always(

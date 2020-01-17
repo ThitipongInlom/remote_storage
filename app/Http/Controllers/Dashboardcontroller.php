@@ -39,6 +39,11 @@ class Dashboardcontroller extends Controller
             $result  = "<a class='btn btn-sm btn-primary' href='$url' role='button' data-toggle='tooltip' data-placement='bottom' title='ดูข้อมูลคอมพิวเตอร์ $users->sticker_number'><i class='fas fa-search'></i>View</a>";
             return $result;
         })
+        ->addColumn('status_com', function ($users) {
+            $url = url("view/$users->sticker_number");
+            $result  = "";
+            return $result;
+        })
         ->rawColumns(['ip_main', 'teamviewer', 'anydesk', 'action'])
         ->make(true);
     }

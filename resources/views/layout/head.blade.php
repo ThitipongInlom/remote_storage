@@ -119,12 +119,6 @@
                 </li>
             </ul>
         </li>
-        <li class="nav-item">
-            <a href="{{ url('dashboardstore') }}" class="nav-link {{ Request::is('dashboardstore') ? 'active' : '' }}">
-                <i class="fas fa-tachometer-alt"></i>
-                <p>แดชบอร์ด สต้อก</p>
-            </a>
-        </li>
         </ul>
     </nav>
     </div>

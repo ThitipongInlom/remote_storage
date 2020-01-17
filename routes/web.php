@@ -9,7 +9,6 @@ Route::post('/register_save', 'Registercontroller@register_save')->name('registe
 Route::get('/logout', function () { Auth::logout(); return redirect('/'); })->name('logout');
 // Dashboard Page
 Route::get('/dashboard', function () { return view('page/dashboard'); })->middleware('auth')->name('dashboard');
-Route::get('/dashboardstore', function () { return view('page/dashboardstore'); })->middleware('auth')->name('dashboardstore');
 // Add Item
 Route::get('/additem', 'Additemcontroller@Add_item')->middleware('auth')->name('add');
 Route::post('/additem_save', 'Additemcontroller@Additem_save')->name('additem_save');
