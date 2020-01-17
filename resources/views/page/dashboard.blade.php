@@ -40,8 +40,16 @@
                         <h3>แดชบอร์ด</h3>
                     </div>
                     <div class="float-right text-right mb-3">
-                        <select class="custom-select custom-select-sm col-8" id="type_select_table" onchange="load_table_on_select();">
-                            <option value="return_all" selected="">ข้อมูลคอมพิวเตอร์ทั้งหมด</option>
+                        <select class="custom-select custom-select-sm col-4" id="hotel_select_table" onchange="load_table_on_select();">
+                            <option value="all">โรงแรมทั้งหมด</option>
+                            <option value="thezign">TheZign</option>
+                            <option value="tsix5">Tsix5</option>
+                            <option value="way">Way</option>
+                            <option value="z2">Z2</option>
+                            <option value="garden">Garden</option>
+                        </select>
+                        <select class="custom-select custom-select-sm col-4" id="type_select_table" onchange="load_table_on_select();">
+                            <option value="return_all">ข้อมูลคอมพิวเตอร์ทั้งหมด</option>
                             <option value="return_yes">ข้อมูลคอมพิวเตอร์ที่ ใช้งาน</option>
                             <option value="return_no">ข้อมูลคอมพิวเตอร์ที่ ไม่ได้ใช้งาน</option>
                             <option value="return_wait">ข้อมูลคอมพิวเตอร์ที่ ส่งซ่อม</option>

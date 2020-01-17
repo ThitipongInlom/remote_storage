@@ -57,6 +57,7 @@ class Additemcontroller extends Controller
             $Item->ups = $request->post('ups');
             $Item->username_admin = $request->post('username_admin');
             $Item->password_admin = $request->post('password_admin');
+            $Item->ststus_com = 'Y';
             $Item->save();
             return Response::json(array('status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 3วินาที'),200);
         }else{

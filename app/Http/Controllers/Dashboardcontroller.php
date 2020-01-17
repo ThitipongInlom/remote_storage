@@ -14,14 +14,34 @@ class Dashboardcontroller extends Controller
 {
     public function Ajax_Table_Main(Request $request)
     {
-        if ($request->get('type_select_table') == 'return_all'){
-            $users = DB::table('item')->get();
-        }else if ($request->get('type_select_table') == 'return_yes') {
-            $users = DB::table('item')->where('ststus_com', 'Y')->get();
-        }else if ($request->get('type_select_table') == 'return_no') {
-            $users = DB::table('item')->where('ststus_com', 'N')->get();
-        }else if ($request->get('type_select_table') == 'return_wait') {
-            $users = DB::table('item')->where('ststus_com', 'W')->get();
+
+        $type  = $request->post('type_select_table');
+        $hotel = $request->post('hotel_select_table');
+        switch ($type) {
+            case 'return_yes':
+                $users = DB::table('item')->where('ststus_com', 'Y')->get();
+                break;
+           case 'return_no':
+                $users = DB::table('item')->where('ststus_com', 'N')->get();
+                break;
+           case 'return_wait':
+                $users = DB::table('item')->where('ststus_com', 'W')->get();
+                break;            
+            default:
+                if ($hotel == 'thezign') {
+                    $users = DB::table('item')->where('hotel', 'Thezign')->get();
+                }else if ($hotel == 'tsix5') {
+                    $users = DB::table('item')->where('hotel', 'Tsix5')->get();
+                }else if ($hotel == 'way') {
+                    $users = DB::table('item')->where('hotel', 'way')->get();
+                }else if ($hotel == 'z2') {
+                    $users = DB::table('item')->where('hotel', 'Z-Through')->get();
+                }else if ($hotel == 'garden') {
+                    $users = DB::table('item')->where('hotel', 'Garden Seaview')->get();
+                }else {
+                    $users = DB::table('item')->get();
+                }
+                break;
         }
 
         // Return
@@ -56,20 +76,25 @@ class Dashboardcontroller extends Controller
                 $result = "<i class='fas fa-times' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ไม่ได้ใช้งาน'></i>";
             }else if ($users->ststus_com == 'W') {
                 $result = "<i class='fas fa-tools' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ส่งซ่อม'></i>";
+            }else {
+                $result = '';
             }
             return $result;
         })
         ->setRowClass(function ($users) {
             if ($users->ststus_com == 'Y') {
-                $reclass = "bg-success";
+                $result = "bg-success";
             }else if ($users->ststus_com == 'N') {
-                $reclass = "bg-danger";
+                $result = "bg-danger";
             }else if ($users->ststus_com == 'W') {
-                $reclass = "bg-warning";
+                $result = "bg-warning";
+            }else {
+                $result = '';
             }
-            return $reclass;
+            return $result;
         })
         ->rawColumns(['ip_main', 'teamviewer', 'anydesk', 'action', 'status'])
         ->make(true);
+
     }
 }

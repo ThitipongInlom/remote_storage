@@ -23,6 +23,7 @@ $(document).ready(function () {
             },
             "data": function (d) {
                 d.type_select_table = $("#type_select_table").val();
+                d.hotel_select_table = $("#hotel_select_table").val();
             }
         },
         "columns": [{
