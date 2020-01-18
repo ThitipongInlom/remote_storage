@@ -562,9 +562,9 @@
                         <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">Windows license</a>
                         @if ($row->license == '')
-                            <span class="btn btn-sm badge badge-success float-right" datashow="input" newname="License" onclick="Add_item_data_form_view(this);">เพิ่ม license</span>
+                            <span class="btn btn-sm badge badge-success float-right" datashow="windows_license" newname="License" onclick="Add_item_data_form_view(this);">เพิ่ม license</span>
                         @else
-                            <span class="btn btn-sm badge badge-warning float-right" datashow="input" newname="License" old_value="{{ $row->license }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน license</span>
+                            <span class="btn btn-sm badge badge-warning float-right" datashow="windows_license" newname="License" old_value="{{ $row->license }}" onclick="Edit_item_data_form_view(this);">เปลี่ยน license</span>
                         @endif
                         <span class="product-description">
                         @if ($row->license == '')
@@ -774,6 +774,21 @@
                 </div>
                 </div>
             </div>
+            <!-- Show = radio Windows license -->
+            <div class="form-group" id="Modal_add_radio_windows_license">
+                <label for="Modal_add_radio_windows_license">ข้อมูลเก่าของ <span class="Modal_add_item_name"></span></label>
+                <br>
+                <div align="center">
+                <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="windows_license_add_1" name="windows_license_add" class="custom-control-input" value="Active">
+                <label class="custom-control-label" for="windows_license_add_1">Windows แท้</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="windows_license_add_2" name="windows_license_add" class="custom-control-input" value="Not Active">
+                <label class="custom-control-label" for="windows_license_add_2">Windows เถื่อน</label>
+                </div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer" style="display:inline;">
             <div class="row">
@@ -801,12 +816,12 @@
         <div class="modal-body">
             <!-- Show = Input -->
             <div class="form-group" id="Modal_edit_input">
-                <label for="Modal_edit_item_input">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
+                <label for="Modal_edit_item_input">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
                 <input type="text" class="form-control form-control-sm" id="Modal_edit_item_input" placeholder="กรุณาใส่ข้อมูลที่ต้องการ">
             </div>
             <!-- Show = Select Dep -->
             <div class="form-group" id="Modal_edit_select_dep">
-                <label for="Modal_edit_item_select_dep">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
+                <label for="Modal_edit_item_select_dep">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
                 <select class="custom-select custom-select-sm" id="Modal_edit_item_select_dep">
                 @foreach ($Department as $row)
                     <option value="{{ $row->department_titel }}">{{ $row->department_titel }} - {{ $row->department_main }}</option>
@@ -815,7 +830,7 @@
             </div>
             <!-- Show = Select Hotel -->
             <div class="form-group" id="Modal_edit_select_hotel">
-                <label for="Modal_edit_item_select_hotel">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                <label for="Modal_edit_item_select_hotel">แก้ไขข้อมูล <span class="Modal_add_item_name"></span></label>
                 <select class="custom-select custom-select-sm" id="Modal_edit_item_select_hotel">
                 @foreach ($Hotel as $row)
                     <option value="{{ $row->hotel_titel }}">{{ $row->hotel_titel }}</option>
@@ -824,7 +839,7 @@
             </div>
             <!-- Show = Select Windows -->
             <div class="form-group" id="Modal_edit_select_windows">
-                <label for="Modal_edit_item_select_windows">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
+                <label for="Modal_edit_item_select_windows">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
                 <select class="custom-select custom-select-sm" id="Modal_edit_item_select_windows">
                 @foreach ($Window as $row)
                     <option value="{{ $row->window_titel }}">{{ $row->window_titel }}</option>
@@ -833,7 +848,7 @@
             </div>
             <!-- Show = radio internet -->
             <div class="form-group" id="Modal_edit_radio_internet">
-                <label for="Modal_edit_item_select_windows">ข้อมูลเก่าของ <span class="Modal_edit_item_name"></span></label>
+                <label for="Modal_edit_item_select_windows">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
                 <br>
                 <div align="center">
                 <div class="custom-control custom-radio custom-control-inline">
@@ -843,6 +858,21 @@
                 <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="internet_edit_2" name="internet_edit" class="custom-control-input" value="Disable">
                 <label class="custom-control-label" for="internet_edit_2">ปิด</label>
+                </div>
+                </div>
+            </div>
+            <!-- Show = radio Windows license -->
+            <div class="form-group" id="Modal_edit_radio_windows_license">
+                <label for="Modal_edit_radio_windows_license">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
+                <br>
+                <div align="center">
+                <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="windows_license_edit_1" name="windows_license_edit" class="custom-control-input" value="Active">
+                <label class="custom-control-label" for="windows_license_edit_1">Windows แท้</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="windows_license_edit_2" name="windows_license_edit" class="custom-control-input" value="Not Active">
+                <label class="custom-control-label" for="windows_license_edit_2">Windows เถื่อน</label>
                 </div>
                 </div>
             </div>

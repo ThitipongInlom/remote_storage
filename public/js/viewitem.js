@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var id_computer = $("#id_computer").val();
     $.fn.dataTable.ext.errMode = 'throw';
     var TableDisplay = $('#Table_Main').DataTable({
         "dom": "<'row'<'col-sm-1'l><'col-sm-7'><'col-sm-4'f>>" +
@@ -16,7 +17,7 @@ $(document).ready(function () {
             ["5", "10", "20", "ทั้งหมด"]
         ],
         "ajax": {
-            "url": "../api/v1/ajax_load_item_view_history/{{ $Item[0]->sticker_number }}",
+            "url": "../api/v1/ajax_load_item_view_history/" + id_computer,
             "type": 'POST',
             "headers": {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -122,6 +123,7 @@ var Add_item_data_form_view = function Add_item_data_form_view(e) {
     $("#Modal_add_select_hotel").hide();
     $("#Modal_add_select_windows").hide();
     $("#Modal_add_radio_internet").hide();
+    $("#Modal_add_radio_windows_license").hide();
     // แสดง Modal ในการเพิ่มข้อมูล
     $('#Modal_add_item').modal('show');
     $("body").css("padding-right", "0");
@@ -144,6 +146,9 @@ var Add_item_data_form_view = function Add_item_data_form_view(e) {
         case 'radio_internet':
             $("#Modal_add_radio_internet").show();
         break;
+        case 'windows_license':
+            $("#Modal_add_radio_windows_license").show();
+        break;
     }
     // ถ้ามีการ Save ข้อมูล 
     $("#Add_item_data_form_view_save").attr('datashow', $(e).attr('datashow'));
@@ -165,6 +170,8 @@ var Add_item_data_form_view_save = function Add_item_data_form_view_save(e) {
         var Value_add = $("#Modal_add_item_select_windows").val();
     } else if ($(e).attr('datashow') == 'radio_internet') {
         var Value_add = $('input:radio[name="internet_add"]:checked').val();
+    } else if ($(e).attr('datashow') == 'windows_license') {
+        var Value_add = $('input:radio[name="windows_license_add"]:checked').val();
     }
     if (Value_add == '') {
         Toastr["error"]("กรุณากรอก ข้อมูลก่อนบันทึก");
@@ -216,6 +223,7 @@ var Edit_item_data_form_view = function Edit_item_data_form_view(e) {
     $("#Modal_edit_select_hotel").hide();
     $("#Modal_edit_select_windows").hide();
     $("#Modal_edit_radio_internet").hide();
+    $("#Modal_edit_radio_windows_license").hide();
     // แสดง Modal ในการเพิ่มข้อมูล
     $('#Modal_edit_item').modal('show');
     $("body").css("padding-right", "0");
@@ -225,7 +233,7 @@ var Edit_item_data_form_view = function Edit_item_data_form_view(e) {
     switch ($(e).attr('datashow')) {
         case 'input':
             $("#Modal_edit_input").show();
-            $("#Modal_edit_item_input").val($(e).attr('old_value'));
+            //$("#Modal_edit_item_input").val($(e).attr('old_value'));
             break;
         case 'select_dep':
             $("#Modal_edit_select_dep").show();
@@ -247,6 +255,14 @@ var Edit_item_data_form_view = function Edit_item_data_form_view(e) {
                 $('#internet_edit_2').attr('checked', 'checked');
             }
             break;
+        case 'windows_license':
+            $("#Modal_edit_radio_windows_license").show();
+            if ($(e).attr('old_value') == 'Active') {
+                $('#windows_license_edit_1').attr('checked', 'checked');
+            } else {
+                $('#windows_license_edit_2').attr('checked', 'checked');
+            }
+        break;
     }
     console.log(e);
     // ถ้ามีการ Save ข้อมูล 
@@ -269,6 +285,8 @@ var Edit_item_data_form_view_save = function Edit_item_data_form_view_save(e) {
         var Value_add = $("#Modal_edit_item_select_windows").val();
     } else if ($(e).attr('datashow') == 'radio_internet') {
         var Value_add = $('input:radio[name="internet_edit"]:checked').val();
+    } else if ($(e).attr('datashow') == 'windows_license') {
+        var Value_add = $('input:radio[name="windows_license_edit"]:checked').val();
     }
     if (Value_add == '') {
         Toastr["error"]("กรุณากรอก ข้อมูลก่อนบันทึก");
