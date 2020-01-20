@@ -785,7 +785,7 @@
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="windows_license_add_2" name="windows_license_add" class="custom-control-input" value="Not Active">
-                <label class="custom-control-label" for="windows_license_add_2">Windows เถื่อน</label>
+                <label class="custom-control-label" for="windows_license_add_2">Windows ไม่แท้</label>
                 </div>
                 </div>
             </div>
@@ -872,7 +872,7 @@
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="windows_license_edit_2" name="windows_license_edit" class="custom-control-input" value="Not Active">
-                <label class="custom-control-label" for="windows_license_edit_2">Windows เถื่อน</label>
+                <label class="custom-control-label" for="windows_license_edit_2">Windows ไม่แท้</label>
                 </div>
                 </div>
             </div>
