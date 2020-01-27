@@ -33,16 +33,28 @@
     @foreach ($Item as $row)
     <div class="content">
     <div class="container-fluid">
-    <!-- จำนวนข้อมูลทั้งหมด -->    
+    <!-- จำนวนข้อมูลทั้งหมด -->   
+    @if ($row->ststus_com != 'Y')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-triangle"></i> | {{ $row->note_status }}
+            </div>
+        </div>
+    </div> 
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="card {{ $color['card_color'] }}">
                 <div class="card-header pb-2">
                     <b><i class="fas fa-id-card-alt"></i> Guest</b>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-sm btn-dark" update="Y" onclick="Update_status_com(this);"><i class='fas fa-check' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ใช้งาน'></i> ใช้งาน</button>
-                        <button type="button" class="btn btn-sm btn-dark" update="N" onclick="Update_status_com(this);"><i class='fas fa-times' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ไม่ได้ใช้งาน'></i> ไม่ได้ใช้งาน</button>
-                        <button type="button" class="btn btn-sm btn-dark" update="W" onclick="Update_status_com(this);"><i class='fas fa-tools' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ส่งซ่อม'></i> ส่งซ่อม</button>
+                        @if ($row->ststus_com == 'Y')
+                            <button type="button" class="btn btn-sm btn-dark" update="N" onclick="Open_modal_note_status(this);"><i class='fas fa-times' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ไม่ได้ใช้งาน'></i> ไม่ได้ใช้งาน</button>
+                            <button type="button" class="btn btn-sm btn-dark" update="W" onclick="Open_modal_note_status(this);"><i class='fas fa-tools' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ส่งซ่อม'></i> ส่งซ่อม</button>
+                        @else
+                            <button type="button" class="btn btn-sm btn-dark" update="Y" onclick="Update_status_com(this);"><i class='fas fa-check' data-toggle='tooltip' data-placement='bottom' title='คอมพิวเตอร์ ใช้งาน'></i> ใช้งาน</button>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
@@ -718,180 +730,206 @@
 
     <!-- Modal Add -->
     <div class="modal fade" id="Modal_add_item" tabindex="-1" role="dialog" aria-labelledby="Modal_add_itemLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content card-primary card-outline">
-        <div class="modal-header">
-            <h5 class="modal-title" id="Modal_add_itemLabel">เพิ่มข้อมูล <span class="Modal_add_item_name"></span></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content card-primary card-outline">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Modal_add_itemLabel">เพิ่มข้อมูล <span class="Modal_add_item_name"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Show = Input -->
+                    <div class="form-group" id="Modal_add_input">
+                        <label for="Modal_add_item_input">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                        <input type="text" class="form-control form-control-sm" id="Modal_add_item_input" placeholder="กรุณาใส่ข้อมูลที่ต้องการ">
+                    </div>
+                    <!-- Show = Select Dep -->
+                    <div class="form-group" id="Modal_add_select_dep">
+                        <label for="Modal_add_item_select_dep">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                        <select class="custom-select custom-select-sm" id="Modal_add_item_select_dep">
+                        @foreach ($Department as $row)
+                            <option value="{{ $row->department_titel }}">{{ $row->department_titel }} - {{ $row->department_main }}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <!-- Show = Select Hotel -->
+                    <div class="form-group" id="Modal_add_select_hotel">
+                        <label for="Modal_add_item_select_hotel">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                        <select class="custom-select custom-select-sm" id="Modal_add_item_select_hotel">
+                        @foreach ($Hotel as $row)
+                            <option value="{{ $row->hotel_titel }}">{{ $row->hotel_titel }}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <!-- Show = Select Windows -->
+                    <div class="form-group" id="Modal_add_select_windows">
+                        <label for="Modal_add_item_select_windows">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
+                        <select class="custom-select custom-select-sm" id="Modal_add_item_select_windows">
+                        @foreach ($Window as $row)
+                            <option value="{{ $row->window_titel }}">{{ $row->window_titel }}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <!-- Show = radio internet -->
+                    <div class="form-group" id="Modal_add_radio_internet">
+                        <label for="Modal_add_item_select_windows">ข้อมูลเก่าของ <span class="Modal_add_item_name"></span></label>
+                        <br>
+                        <div align="center">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="internet_add_1" name="internet_add" class="custom-control-input" value="Enable">
+                                <label class="custom-control-label" for="internet_add_1">เปิด</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="internet_add_2" name="internet_add" class="custom-control-input" value="Disable">
+                                <label class="custom-control-label" for="internet_add_2">ปิด</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Show = radio Windows license -->
+                    <div class="form-group" id="Modal_add_radio_windows_license">
+                        <label for="Modal_add_radio_windows_license">ข้อมูลเก่าของ <span class="Modal_add_item_name"></span></label>
+                        <br>
+                        <div align="center">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="windows_license_add_1" name="windows_license_add" class="custom-control-input" value="Active">
+                                <label class="custom-control-label" for="windows_license_add_1">Windows แท้</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="windows_license_add_2" name="windows_license_add" class="custom-control-input" value="Not Active">
+                                <label class="custom-control-label" for="windows_license_add_2">Windows ไม่แท้</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="display:inline;">
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ยกเลิก</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-sm btn-block btn-success btn-loading" id="Add_item_data_form_view_save" onclick="Add_item_data_form_view_save(this);"> <i class="far fa-save"></i> ยืนยันการบันทึก</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <!-- Show = Input -->
-            <div class="form-group" id="Modal_add_input">
-                <label for="Modal_add_item_input">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
-                <input type="text" class="form-control form-control-sm" id="Modal_add_item_input" placeholder="กรุณาใส่ข้อมูลที่ต้องการ">
-            </div>
-            <!-- Show = Select Dep -->
-            <div class="form-group" id="Modal_add_select_dep">
-                <label for="Modal_add_item_select_dep">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
-                <select class="custom-select custom-select-sm" id="Modal_add_item_select_dep">
-                @foreach ($Department as $row)
-                    <option value="{{ $row->department_titel }}">{{ $row->department_titel }} - {{ $row->department_main }}</option>
-                @endforeach
-                </select>
-            </div>
-            <!-- Show = Select Hotel -->
-            <div class="form-group" id="Modal_add_select_hotel">
-                <label for="Modal_add_item_select_hotel">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
-                <select class="custom-select custom-select-sm" id="Modal_add_item_select_hotel">
-                @foreach ($Hotel as $row)
-                    <option value="{{ $row->hotel_titel }}">{{ $row->hotel_titel }}</option>
-                @endforeach
-                </select>
-            </div>
-            <!-- Show = Select Windows -->
-            <div class="form-group" id="Modal_add_select_windows">
-                <label for="Modal_add_item_select_windows">ข้อมูลของ <span class="Modal_add_item_name"></span></label>
-                <select class="custom-select custom-select-sm" id="Modal_add_item_select_windows">
-                @foreach ($Window as $row)
-                    <option value="{{ $row->window_titel }}">{{ $row->window_titel }}</option>
-                @endforeach
-                </select>
-            </div>
-            <!-- Show = radio internet -->
-            <div class="form-group" id="Modal_add_radio_internet">
-                <label for="Modal_add_item_select_windows">ข้อมูลเก่าของ <span class="Modal_add_item_name"></span></label>
-                <br>
-                <div align="center">
-                <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="internet_add_1" name="internet_add" class="custom-control-input" value="Enable">
-                <label class="custom-control-label" for="internet_add_1">เปิด</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="internet_add_2" name="internet_add" class="custom-control-input" value="Disable">
-                <label class="custom-control-label" for="internet_add_2">ปิด</label>
-                </div>
-                </div>
-            </div>
-            <!-- Show = radio Windows license -->
-            <div class="form-group" id="Modal_add_radio_windows_license">
-                <label for="Modal_add_radio_windows_license">ข้อมูลเก่าของ <span class="Modal_add_item_name"></span></label>
-                <br>
-                <div align="center">
-                <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="windows_license_add_1" name="windows_license_add" class="custom-control-input" value="Active">
-                <label class="custom-control-label" for="windows_license_add_1">Windows แท้</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="windows_license_add_2" name="windows_license_add" class="custom-control-input" value="Not Active">
-                <label class="custom-control-label" for="windows_license_add_2">Windows ไม่แท้</label>
-                </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer" style="display:inline;">
-            <div class="row">
-                <div class="col">
-                    <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ยกเลิก</button>
-                </div>
-                <div class="col">
-                    <button type="button" class="btn btn-sm btn-block btn-success btn-loading" id="Add_item_data_form_view_save" onclick="Add_item_data_form_view_save(this);"> <i class="far fa-save"></i> ยืนยันการบันทึก</button>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
     </div>
     <!-- Modal Edit -->
     <div class="modal fade" id="Modal_edit_item" tabindex="-1" role="dialog" aria-labelledby="Modal_edit_itemLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content card-primary card-outline">
-        <div class="modal-header">
-            <h5 class="modal-title" id="Modal_edit_itemLabel">เปลี่ยนข้อมูล <span class="Modal_edit_item_name"></span></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <!-- Show = Input -->
-            <div class="form-group" id="Modal_edit_input">
-                <label for="Modal_edit_item_input">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
-                <input type="text" class="form-control form-control-sm" id="Modal_edit_item_input" placeholder="กรุณาใส่ข้อมูลที่ต้องการ">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content card-primary card-outline">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Modal_edit_itemLabel">เปลี่ยนข้อมูล <span class="Modal_edit_item_name"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Show = Input -->
+                    <div class="form-group" id="Modal_edit_input">
+                        <label for="Modal_edit_item_input">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
+                        <input type="text" class="form-control form-control-sm" id="Modal_edit_item_input" placeholder="กรุณาใส่ข้อมูลที่ต้องการ">
+                    </div>
+                    <!-- Show = Select Dep -->
+                    <div class="form-group" id="Modal_edit_select_dep">
+                        <label for="Modal_edit_item_select_dep">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
+                        <select class="custom-select custom-select-sm" id="Modal_edit_item_select_dep">
+                        @foreach ($Department as $row)
+                            <option value="{{ $row->department_titel }}">{{ $row->department_titel }} - {{ $row->department_main }}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <!-- Show = Select Hotel -->
+                    <div class="form-group" id="Modal_edit_select_hotel">
+                        <label for="Modal_edit_item_select_hotel">แก้ไขข้อมูล <span class="Modal_add_item_name"></span></label>
+                        <select class="custom-select custom-select-sm" id="Modal_edit_item_select_hotel">
+                        @foreach ($Hotel as $row)
+                            <option value="{{ $row->hotel_titel }}">{{ $row->hotel_titel }}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <!-- Show = Select Windows -->
+                    <div class="form-group" id="Modal_edit_select_windows">
+                        <label for="Modal_edit_item_select_windows">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
+                        <select class="custom-select custom-select-sm" id="Modal_edit_item_select_windows">
+                        @foreach ($Window as $row)
+                            <option value="{{ $row->window_titel }}">{{ $row->window_titel }}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <!-- Show = radio internet -->
+                    <div class="form-group" id="Modal_edit_radio_internet">
+                        <label for="Modal_edit_item_select_windows">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
+                        <br>
+                        <div align="center">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="internet_edit_1" name="internet_edit" class="custom-control-input" value="Enable">
+                                <label class="custom-control-label" for="internet_edit_1">เปิด</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="internet_edit_2" name="internet_edit" class="custom-control-input" value="Disable">
+                                <label class="custom-control-label" for="internet_edit_2">ปิด</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Show = radio Windows license -->
+                    <div class="form-group" id="Modal_edit_radio_windows_license">
+                        <label for="Modal_edit_radio_windows_license">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
+                        <br>
+                        <div align="center">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="windows_license_edit_1" name="windows_license_edit" class="custom-control-input" value="Active">
+                                <label class="custom-control-label" for="windows_license_edit_1">Windows แท้</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="windows_license_edit_2" name="windows_license_edit" class="custom-control-input" value="Not Active">
+                                <label class="custom-control-label" for="windows_license_edit_2">Windows ไม่แท้</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Remark -->
+                    <label for="Modal_edit_item_remark">หมายเหตุ</label>
+                    <input type="text" class="form-control form-control-sm" id="Modal_edit_item_remark" placeholder="หมายเหตุ">
+                </div>
+                <div class="modal-footer" style="display:inline;">
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ยกเลิก</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-sm btn-block btn-success btn-loading" id="Edit_item_data_form_view_save" onclick="Edit_item_data_form_view_save(this);"><i class="far fa-save"></i> ยืนยันการแก้ไข</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Show = Select Dep -->
-            <div class="form-group" id="Modal_edit_select_dep">
-                <label for="Modal_edit_item_select_dep">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
-                <select class="custom-select custom-select-sm" id="Modal_edit_item_select_dep">
-                @foreach ($Department as $row)
-                    <option value="{{ $row->department_titel }}">{{ $row->department_titel }} - {{ $row->department_main }}</option>
-                @endforeach
-                </select>
-            </div>
-            <!-- Show = Select Hotel -->
-            <div class="form-group" id="Modal_edit_select_hotel">
-                <label for="Modal_edit_item_select_hotel">แก้ไขข้อมูล <span class="Modal_add_item_name"></span></label>
-                <select class="custom-select custom-select-sm" id="Modal_edit_item_select_hotel">
-                @foreach ($Hotel as $row)
-                    <option value="{{ $row->hotel_titel }}">{{ $row->hotel_titel }}</option>
-                @endforeach
-                </select>
-            </div>
-            <!-- Show = Select Windows -->
-            <div class="form-group" id="Modal_edit_select_windows">
-                <label for="Modal_edit_item_select_windows">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
-                <select class="custom-select custom-select-sm" id="Modal_edit_item_select_windows">
-                @foreach ($Window as $row)
-                    <option value="{{ $row->window_titel }}">{{ $row->window_titel }}</option>
-                @endforeach
-                </select>
-            </div>
-            <!-- Show = radio internet -->
-            <div class="form-group" id="Modal_edit_radio_internet">
-                <label for="Modal_edit_item_select_windows">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
-                <br>
-                <div align="center">
-                <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="internet_edit_1" name="internet_edit" class="custom-control-input" value="Enable">
-                <label class="custom-control-label" for="internet_edit_1">เปิด</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="internet_edit_2" name="internet_edit" class="custom-control-input" value="Disable">
-                <label class="custom-control-label" for="internet_edit_2">ปิด</label>
-                </div>
-                </div>
-            </div>
-            <!-- Show = radio Windows license -->
-            <div class="form-group" id="Modal_edit_radio_windows_license">
-                <label for="Modal_edit_radio_windows_license">แก้ไขข้อมูล <span class="Modal_edit_item_name"></span></label>
-                <br>
-                <div align="center">
-                <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="windows_license_edit_1" name="windows_license_edit" class="custom-control-input" value="Active">
-                <label class="custom-control-label" for="windows_license_edit_1">Windows แท้</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="windows_license_edit_2" name="windows_license_edit" class="custom-control-input" value="Not Active">
-                <label class="custom-control-label" for="windows_license_edit_2">Windows ไม่แท้</label>
-                </div>
-                </div>
-            </div>
-            <!-- Remark -->
-                <label for="Modal_edit_item_remark">หมายเหตุ</label>
-                <input type="text" class="form-control form-control-sm" id="Modal_edit_item_remark" placeholder="หมายเหตุ">
-        </div>
-        <div class="modal-footer" style="display:inline;">
-            <div class="row">
-                <div class="col">
-                    <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ยกเลิก</button>
-                </div>
-                <div class="col">
-                    <button type="button" class="btn btn-sm btn-block btn-success btn-loading" id="Edit_item_data_form_view_save" onclick="Edit_item_data_form_view_save(this);"><i class="far fa-save"></i> ยืนยันการแก้ไข</button>
-                </div>
-            </div>
-        </div>
         </div>
     </div>
+    <!-- Modal Note Status -->
+    <div class="modal fade" id="Modal_note_status" tabindex="-1" role="dialog" aria-labelledby="Modal_note_statusLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Modal_note_statusLabel">สาเหตุ / คอมเม้น / โน็ต</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="note_comment_textarea" rows="3" placeholder="สาเหตุ / คอมเม้น / โน็ต"></textarea>
+                </div>
+                <div class="modal-footer" style="display:inline;">
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ยกเลิก</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-sm btn-block btn-success" id="save_note_status" onclick="Update_status_com(this);"><i class="far fa-save"></i> ยืนยันการแก้ไข</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     </body>
         <!-- All Js -->

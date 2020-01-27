@@ -372,8 +372,14 @@ class Viewitemcontroller extends Controller
     public function save_update_status_com(Request $request)
     {
         $id = Item::where('sticker_number', $request->post('ID_computer'))->value('item_id');
+        if ($request->post('status') == 'Y') {
+            $note_status = "";
+        }else{
+            $note_status = $request->post('note_comment');
+        }
         $Update = Item::find($id);
         $Update->ststus_com = $request->post('status');
+        $Update->note_status = $note_status;
         $Update->save();
         return response()->json(['status' => 'success','error_text' => 'บันทึก เสร็จสิ้น รอ 1วินาที'],200);
     }

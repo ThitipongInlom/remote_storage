@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Response;
 use Carbon\Carbon;
+use App\Model\Item as Item;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,6 @@ class Dashboardcontroller extends Controller
 {
     public function Ajax_Table_Main(Request $request)
     {
-
         $type  = $request->post('type_select_table');
         $hotel = $request->post('hotel_select_table');
         switch ($type) {
@@ -96,5 +96,23 @@ class Dashboardcontroller extends Controller
         ->rawColumns(['ip_main', 'teamviewer', 'anydesk', 'action', 'status'])
         ->make(true);
 
+    }
+
+    public function list_btn_computer_number(Request $request)
+    {
+        $thezign = Item::where('hotel', 'Thezign')->orderBy('sticker_number', 'desc')->value('sticker_number');
+        $tsix5   = Item::where('hotel', 'Tsix5')->orderBy('sticker_number', 'desc')->value('sticker_number');
+        $way     = Item::where('hotel', 'way')->orderBy('sticker_number', 'desc')->value('sticker_number');
+        $z2      = Item::where('hotel', 'Z-Through')->orderBy('sticker_number', 'desc')->value('sticker_number');
+        $garden  = Item::where('hotel', 'Garden Seaview')->orderBy('sticker_number', 'desc')->value('sticker_number');
+
+        return response()->json(['status' => 'success',
+                                 'error_text' => 'โหลดข้อมูล', 
+                                 'thezign' => $thezign,
+                                 'tsix5' => $tsix5,
+                                 'way' => $way,
+                                 'z2' => $z2,
+                                 'garden' => $garden
+                                ],200);
     }
 }

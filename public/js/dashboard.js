@@ -102,6 +102,8 @@ $(document).ready(function () {
             "regex": true
         },
     });
+
+    List_btn_computer_number();
 });
 
 $(document).ajaxComplete(function () {
@@ -113,4 +115,25 @@ $(document).ajaxComplete(function () {
 var load_table_on_select = function load_table_on_select() {
     var table = $('#Table_Main').DataTable();
     table.draw();
+}
+
+var List_btn_computer_number = function List_btn_computer_number() {
+    $.ajax({
+        url: 'api/v1/ajax_list_btn_computer_number',
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            $(".btn_list_thezign").text(res.thezign);
+            $(".btn_list_tsix5").text(res.tsix5);
+            $(".btn_list_way").text(res.way);
+            $(".btn_list_z2").text(res.z2);
+            $(".btn_list_garden").text(res.garden);
+        }
+    })
 }

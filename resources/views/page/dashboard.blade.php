@@ -36,8 +36,29 @@
         <div class="card card-primary card-outline">
             <div class="card-body">
                 <div class="clearfix">
-                    <div class="float-left mb-2">
-                        <h3>แดชบอร์ด</h3>
+                    <div class="float-left mb-3">
+                        <h4>แดชบอร์ด | 
+                            <button type="button" class="btn btn-sm btn-secondary bg-orange" 
+                                    data-toggle="tooltip" data-placement="bottom" title="ข้อมูล COM ล่าสุดที่มีในระบบ">
+                                TheZign <span class="badge badge-light btn_list_thezign"></span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-secondary bg-red"
+                                    data-toggle="tooltip" data-placement="bottom" title="ข้อมูล COM ล่าสุดที่มีในระบบ">
+                                Tsix5 <span class="badge badge-light btn_list_tsix5"></span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-secondary bg-purple"
+                                    data-toggle="tooltip" data-placement="bottom" title="ข้อมูล COM ล่าสุดที่มีในระบบ">
+                                Way <span class="badge badge-light btn_list_way"></span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-secondary bg-cyan"
+                                    data-toggle="tooltip" data-placement="bottom" title="ข้อมูล COM ล่าสุดที่มีในระบบ">
+                                Z2 <span class="badge badge-light btn_list_z2"></span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-secondary bg-yellow"
+                                    data-toggle="tooltip" data-placement="bottom" title="ข้อมูล COM ล่าสุดที่มีในระบบ">
+                                Garden <span class="badge badge-light btn_list_garden"></span>
+                            </button>
+                        </h4>
                     </div>
                     <div class="float-right text-right mb-3">
                         <select class="custom-select custom-select-sm col-4" id="hotel_select_table" onchange="load_table_on_select();">

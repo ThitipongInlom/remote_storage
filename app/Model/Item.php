@@ -41,7 +41,8 @@ class Item extends Model
         'license',
         'username_admin',
         'password_admin',
-        'ststus_com'
+        'ststus_com',
+        'note_status'
     ];
 
     public $timestamps = false;

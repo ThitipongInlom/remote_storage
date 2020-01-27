@@ -264,7 +264,6 @@ var Edit_item_data_form_view = function Edit_item_data_form_view(e) {
             }
         break;
     }
-    console.log(e);
     // ถ้ามีการ Save ข้อมูล 
     $("#Edit_item_data_form_view_save").attr('datashow', $(e).attr('datashow'));
     $("#Edit_item_data_form_view_save").attr('newname', $(e).attr('newname'));
@@ -334,6 +333,7 @@ var Update_status_com = function Update_status_com(e) {
     var Data = new FormData();
     Data.append('status', $(e).attr('update'));
     Data.append('ID_computer', $("#id_computer").val());
+    Data.append('note_comment', $("#note_comment_textarea").val());
     $.ajax({
         url: '../save_update_status_com',
         type: 'POST',
@@ -349,11 +349,20 @@ var Update_status_com = function Update_status_com(e) {
             var res = jQuery.parseJSON(callback);
             if (res.status == 'success') {
                 Toastr["success"](res.error_text);
+                $("#Modal_note_status").modal('hide');
                 setTimeout(function () {
                     location.reload();
                 }, 1000);
             }
         }
+    });
+}
+
+var Open_modal_note_status = function Open_modal_note_status(e) {
+    $("#Modal_note_status").modal('show');
+    $("#save_note_status").attr('update', $(e).attr('update'));
+    $('#Modal_note_status').on('hidden.bs.modal', function (e) {
+        $("#note_comment_textarea").val('');
     });
 }
 
