@@ -6,10 +6,8 @@ window.Vue = require('vue');
 require('@fortawesome/fontawesome-free/js/all.js');
 // Adminlte 3
 require('admin-lte/dist/js/adminlte');
-// Datepicker
-require('air-datepicker/dist/js/datepicker');
-require('air-datepicker/src/js/i18n/datepicker.en');
-require('air-datepicker/src/js/i18n/datepicker.th');
+// Daterangepicker
+require('daterangepicker/daterangepicker');
 // Ladda 
 window.Ladda = require('ladda/js/ladda');
 // Toastr

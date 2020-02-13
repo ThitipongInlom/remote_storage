@@ -25,7 +25,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.12.0",
-        "admin-lte": "^3.0.1",
+        "admin-lte": "^3.0.2",
         "air-datepicker": "^2.2.3",
         "datatables.net-bs4": "^1.10.19",
         "datatables.net-buttons-bs4": "^1.5.6",
@@ -35,6 +35,7 @@
         "datatables.net-responsive-bs4": "^2.2.3",
         "datatables.net-rowgroup-bs4": "^1.1.0",
         "datatables.net-scroller-bs4": "^2.0.0",
+        "daterangepicker": "^3.0.5",
         "ladda": "^2.0.1",
         "package.json": "^2.0.1",
         "simplebar": "^4.0.0",

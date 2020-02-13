@@ -91,6 +91,21 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'apimysql' => [
+            'driver' => 'mysql',
+            'host' => '172.16.1.14',
+            'port' => '3306',
+            'database' => 'air_db',
+            'username' => 'root',
+            'password' => 'itminadthezign',
+            'unix_socket' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+        ],
+
     ],
 
     /*
