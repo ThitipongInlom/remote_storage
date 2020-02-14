@@ -36,24 +36,32 @@
         <div class="card card-primary card-outline">
             <div class="card-body">
                 <div class="clearfix">
+                    <div class="float-left text-right mb-3">
+                        
+                    </div>
                     <div class="float-right text-right mb-3">
+                        <select class="custom-select custom-select-sm col-4" id="select_type" onchange="load_table_on_select();">
+                            <option value="wifi_all">ข้อมูล Wifi ทั้งหมด</option>
+                            <option value="wifi_wait">ข้อมูล Wifi รอสร้าง</option>
+                            <option value="wifi_complete">ข้อมูล Wifi สร้างแล้ว</option>
+                        </select>
                         <button class="btn btn-sm btn-success" onclick="Open_add_data_modal();" data-toggle="tooltip" data-placement="bottom" title="เพิ่มข้อมูล WIFI"><i class="fas fa-plus"></i> เพิ่มข้อมูล</button>
                     </div>
                 </div>
-            <div class="table-responsive">
-            <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main" width="100%">
-                <thead>
-                    <tr class="bg-primary">
-                        <th>Group</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Date Start</th>
-                        <th>Date End</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-            </table>
-            </div>
+                <div class="table-responsive">
+                    <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main" width="100%">
+                        <thead>
+                            <tr class="bg-primary">
+                                <th>Group</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Date Start</th>
+                                <th>Date End</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

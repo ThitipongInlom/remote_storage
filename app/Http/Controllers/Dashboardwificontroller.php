@@ -13,7 +13,13 @@ class Dashboardwificontroller extends Controller
 {
     public function Ajax_Table_Main(Request $request)
     {
-        $data = wifi::get();
+        if ($request->post('select_type') == 'wifi_wait') {
+            $data = wifi::where('wifi_status', 'Wait')->get();
+        }else if ($request->post('select_type') == 'wifi_complete') {
+            $data = wifi::where('wifi_status', 'Complete')->get();
+        }else {
+            $data = wifi::get();
+        }
 
         return Datatables::of($data)
         ->editColumn('wifi_date_start', function($data) {

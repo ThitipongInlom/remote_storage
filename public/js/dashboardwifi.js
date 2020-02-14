@@ -23,6 +23,9 @@ $(document).ready(function () {
             "type": 'POST',
             "headers": {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            "data": function (d) {
+                d.select_type = $("#select_type").val();
             }
         },
         "columns": [{
@@ -51,7 +54,7 @@ $(document).ready(function () {
             },
             {
                 "className": 'text-center',
-                "targets": [5]
+                "targets": [3, 4, 5]
             },
             {
                 "className": 'text-right',
@@ -79,10 +82,16 @@ $(document).ready(function () {
     });
 });
 
+var load_table_on_select = function load_table_on_select() {
+    var table = $('#Table_Main').DataTable();
+    table.draw();
+}
+
 var Open_add_data_modal = function Open_add_data_modal () {
     $("#Add_data_modal").modal('show');
 
     $('#Add_data_modal').on('hidden.bs.modal', function (e) {
+        $("#datepicker_data_wifi").removeClass('is-valid').removeClass('is-invalid');
         $("#group_name").val('').removeClass('is-valid').removeClass('is-invalid');
         $("#username").val('').removeClass('is-valid').removeClass('is-invalid');
         $("#password").val('').removeClass('is-valid').removeClass('is-invalid');
