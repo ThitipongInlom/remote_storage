@@ -22,6 +22,7 @@ class wifi extends Model
         'wifi_status',
         'wifi_note',
         'wifi_line_alert_coming',
+        'wifi_line_alert_generate',
     ];
 
      /**

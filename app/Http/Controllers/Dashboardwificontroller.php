@@ -48,6 +48,7 @@ class Dashboardwificontroller extends Controller
         $wifi->wifi_date_end = $request->datepicker_end;
         $wifi->wifi_status = 'Wait';
         $wifi->wifi_line_alert_coming = '1';
+        $wifi->wifi_line_alert_generate = '1';
         $wifi->save();
 
         return response()->json(['tag' => 'success',
@@ -71,7 +72,7 @@ class Dashboardwificontroller extends Controller
                 if ($row->wifi_line_alert_coming == '1') {
                     // ตั้งค่า Line
                     $message  = "แจ้งเตือน ก่อนสร้าง 1 วัน \n";
-                    $message .= "สร้างวันที่: ".date('d/m/Y h:i:s', strtotime(now()))." \n";
+                    $message .= "แจ้งเตือน: ".date('d/m/Y h:i:s', strtotime(now()))." \n";
                     $message .= "ชื่อกรุ๊ป: $row->wifi_group \n";
                     $message .= "Username: $row->wifi_username \n";
                     $message .= "Password: $row->wifi_password \n";
@@ -90,7 +91,7 @@ class Dashboardwificontroller extends Controller
         // แจ้ง Line และสร้าง Wifi
         if (isset($user_generage)) {
             foreach ($user_generage as $key => $row) {
-                if ($row->wifi_line_alert_coming == '1') {
+                if ($row->wifi_line_alert_generate == '1') {
                     // สร้่าง Wifi
                     $this->Generate_wifi($row->wifi_username,$row->wifi_password,$row->wifi_date_start,$row->wifi_date_end);
                     // ตั้งค่า Line
@@ -107,7 +108,7 @@ class Dashboardwificontroller extends Controller
                     $wifi = wifi::find($row->wifi_id);
                     $wifi->wifi_status = 'Complete';
                     $wifi->wifi_note = $message;
-                    $wifi->wifi_line_alert_coming = '0';
+                    $wifi->wifi_line_alert_generate = '0';
                     $wifi->save();
                 }
             }
