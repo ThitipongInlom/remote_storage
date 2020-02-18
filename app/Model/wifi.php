@@ -15,6 +15,7 @@ class wifi extends Model
      */
     protected $fillable = [
         'wifi_group', 
+        'wifi_hotel',
         'wifi_username',
         'wifi_password',
         'wifi_date_start',

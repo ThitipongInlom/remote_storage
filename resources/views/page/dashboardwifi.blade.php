@@ -37,10 +37,10 @@
             <div class="card-body">
                 <div class="clearfix">
                     <div class="float-left text-right mb-3">
-                        
+                        <button class="btn btn-sm btn-success" onclick="Btn_generate_wifi_group()"><i class="fas fa-paper-plane"></i> ทดลอง ยิง API</button>
                     </div>
                     <div class="float-right text-right mb-3">
-                        <select class="custom-select custom-select-sm col-4" id="select_type" onchange="load_table_on_select();">
+                        <select class="custom-select custom-select-sm col-7" id="select_type" onchange="load_table_on_select();">
                             <option value="wifi_all">ข้อมูล Wifi ทั้งหมด</option>
                             <option value="wifi_wait">ข้อมูล Wifi รอสร้าง</option>
                             <option value="wifi_complete">ข้อมูล Wifi สร้างแล้ว</option>
@@ -74,7 +74,7 @@
     <div class="modal fade" id="Add_data_modal" tabindex="-1" role="dialog" aria-labelledby="Add_data_modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-primary mb-2">
+                <div class="modal-header bg-primary mb-2 pb-2">
                     <h4 class="modal-title">เพิ่ม รายการ สร้าง WIFI</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -106,6 +106,20 @@
                             <div class="form-group">
                                 <label for="password">Password :</label>
                                 <input type="text" class="form-control form-control-sm" id="password" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="select_hotel">Hotel :</label>
+                                <select class="custom-select custom-select-sm" id="select_hotel" onchange="load_table_on_select();">
+                                    <option value="thezign">TheZign</option>
+                                    <option value="tsix5">Tsix5</option>
+                                    <option value="way">Way</option>
+                                    <option value="z2">Z-Through</option>
+                                    <option value="garden_seaview">Garden Seaview</option>
+                                </select>
                             </div>
                         </div>
                     </div>

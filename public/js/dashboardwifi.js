@@ -103,14 +103,16 @@ var Save_add_data_modal = function Save_add_data_modal () {
     var Array_id = ['group_name',
                     'datepicker_data_wifi',
                     'username',
-                    'password'
+                    'password',
+                    'select_hotel'
         ];
     const data = {
         group_name: $("#group_name").val(),
         datepicker_start: $("#datepicker_data_wifi").data('daterangepicker').startDate.format('YYYY-MM-DD'),
         datepicker_end: $("#datepicker_data_wifi").data('daterangepicker').endDate.format('YYYY-MM-DD'),
         username: $("#username").val(),
-        password: $("#password").val()
+        password: $("#password").val(),
+        select_hotel: $("#select_hotel").val()
     }
     var Check_rows = Check_null_input(Array_id);
     if (Check_rows == true) {
@@ -133,6 +135,14 @@ var Save_add_data_modal = function Save_add_data_modal () {
     }else {
 
     }
+}
+
+var Btn_generate_wifi_group = function Btn_generate_wifi_group() {
+    axios({
+        method: 'get',
+        url: 'api/v1/Generate_wifi_group',
+    });
+    load_table_on_select();
 }
 
 var Check_null_input = function Check_null_input(Array_id) {

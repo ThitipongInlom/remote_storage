@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Config;
 use App\Model\wifi as wifi;
+use App\Model\wifidb as wifidb;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
@@ -41,13 +42,14 @@ class Dashboardwificontroller extends Controller
     {
         // Insert ข้อมูลลง DB
         $wifi = new wifi;
-        $wifi->wifi_group = $request->group_name;
-        $wifi->wifi_username = $request->username;
-        $wifi->wifi_password = $request->password;
-        $wifi->wifi_date_start = $request->datepicker_start;
-        $wifi->wifi_date_end = $request->datepicker_end;
-        $wifi->wifi_status = 'Wait';
-        $wifi->wifi_line_alert_coming = '1';
+        $wifi->wifi_group               = $request->group_name;
+        $wifi->wifi_hotel               = $request->select_hotel;
+        $wifi->wifi_username            = $request->username;
+        $wifi->wifi_password            = $request->password;
+        $wifi->wifi_date_start          = $request->datepicker_start;
+        $wifi->wifi_date_end            = $request->datepicker_end;
+        $wifi->wifi_status              = 'Wait';
+        $wifi->wifi_line_alert_coming   = '1';
         $wifi->wifi_line_alert_generate = '1';
         $wifi->save();
 
@@ -59,7 +61,7 @@ class Dashboardwificontroller extends Controller
     {
         $day_generate = date('Y-m-d');
         $day_coming = date('Y-m-d', strtotime("+1 day", strtotime(now())));
-        $wifi_wait = wifi::where('wifi_status', 'wait')->get();
+        $wifi_wait = wifi::where('wifi_status', 'Wait')->get();
         $user_generage = $wifi_wait->where('wifi_date_start', $day_generate);
         $user_coming = $wifi_wait->where('wifi_date_start', $day_coming);
 
@@ -93,7 +95,7 @@ class Dashboardwificontroller extends Controller
             foreach ($user_generage as $key => $row) {
                 if ($row->wifi_line_alert_generate == '1') {
                     // สร้่าง Wifi
-                    $this->Generate_wifi($row->wifi_username,$row->wifi_password,$row->wifi_date_start,$row->wifi_date_end);
+                    $this->Generate_wifi($row->wifi_username,$row->wifi_password,$row->wifi_date_start,$row->wifi_date_end,$row->wifi_hotel);
                     // ตั้งค่า Line
                     $message  = "แจ้งเตือน หลังจากสร้าง Wifi \n";
                     $message .= "สร้างวันที่: ".date('d/m/Y h:i:s', strtotime(now()))." \n";
@@ -115,12 +117,13 @@ class Dashboardwificontroller extends Controller
         }
     }
 
-    public function Generate_wifi($user,$pass,$date_start,$date_end)
+    public function Generate_wifi($user,$pass,$date_start,$date_end,$hotel)
     {
         // เช็คว่ามี Username ใน Airlink หรือ ไม่  
         // ถ้ามี username ในระบบ ค่าเท่ากับ 1
         // ถ้าไม่มี username ในระบบ ค่าเท่ากับ 0
-        $radusergroup = DB::connection('apimysql')->table("radusergroup")->where('username', $user)->count();
+        $this->Set_DB_Airlink($hotel);
+        $voucher_count = DB::connection('apimysql')->table("voucher")->where('username', $user)->count();
         // ดึงข้อมูลจาก Group wifi
         $Valid = date("Y-m-d",strtotime($date_end))."T23:59:59";
         $Expired = strftime("%B %d %Y",strtotime($date_end))." 23:59:59";
@@ -136,7 +139,7 @@ class Dashboardwificontroller extends Controller
             $Billplan = $row->name;
         }
         // ถ้ามี username ไม่ต้องสร้าง wifi ใหม่
-        if ($radusergroup > 0) {
+        if ($voucher_count > 0) {
             // ลบข้อมูลจาก username จาก Table radcheck
             DB::connection('apimysql')->table("radcheck")->where('username' , $user)->delete();
             // เพิ่มข้อมูล username จาก radcheck
@@ -176,6 +179,20 @@ class Dashboardwificontroller extends Controller
                  'encryption' => 'clear',
                  'money' => '0'
                 ]]);
+        }
+        return;
+    }
+
+    public function Set_DB_Airlink($hotel)
+    {
+        $data = wifidb::where('wifi_db_hotel', $hotel)->get();
+        foreach ($data as $key => $row) {
+            Config::set("database.connections.apimysql.driver" , "$row->wifi_db_driver");
+            Config::set("database.connections.apimysql.host" , "$row->wifi_db_host");
+            Config::set("database.connections.apimysql.port" , "$row->wifi_db_port");
+            Config::set("database.connections.apimysql.database" , "$row->wifi_db_database");
+            Config::set("database.connections.apimysql.username" , "$row->wifi_db_username");
+            Config::set("database.connections.apimysql.password" , "$row->wifi_db_password");
         }
         return;
     }
