@@ -115,10 +115,10 @@
                                 <label for="select_hotel">Hotel :</label>
                                 <select class="custom-select custom-select-sm" id="select_hotel" onchange="load_table_on_select();">
                                     <option value="thezign">TheZign</option>
-                                    <option value="tsix5">Tsix5</option>
-                                    <option value="way">Way</option>
+                                    <option value="tsix5" disabled>Tsix5</option>
+                                    <option value="way" disabled>Way</option>
                                     <option value="z2">Z-Through</option>
-                                    <option value="garden_seaview">Garden Seaview</option>
+                                    <option value="garden_seaview" disabled>Garden Seaview</option>
                                 </select>
                             </div>
                         </div>
@@ -127,10 +127,10 @@
                 <div class="modal-footer" style="display:inline">
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal">ยกเลิก</button>
+                            <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ยกเลิก</button>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-sm btn-block btn-success" onclick="Save_add_data_modal();">ยืนยันการสร้าง WIFI</button>
+                            <button type="button" class="btn btn-sm btn-block btn-success" onclick="Save_add_data_modal();"><i class="fas fa-save"></i> ยืนยันการสร้าง WIFI</button>
                         </div>
                     </div>
                 </div>

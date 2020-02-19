@@ -141,8 +141,10 @@ var Btn_generate_wifi_group = function Btn_generate_wifi_group() {
     axios({
         method: 'get',
         url: 'api/v1/Generate_wifi_group',
+    })
+    .then(function (response) {
+        load_table_on_select();
     });
-    load_table_on_select();
 }
 
 var Check_null_input = function Check_null_input(Array_id) {

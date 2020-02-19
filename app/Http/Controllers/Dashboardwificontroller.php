@@ -95,7 +95,7 @@ class Dashboardwificontroller extends Controller
             foreach ($user_generage as $key => $row) {
                 if ($row->wifi_line_alert_generate == '1') {
                     // สร้่าง Wifi
-                    $this->Generate_wifi($row->wifi_username,$row->wifi_password,$row->wifi_date_start,$row->wifi_date_end,$row->wifi_hotel);
+                    $this->Generate_wifi($row->wifi_username,$row->wifi_password,$row->wifi_date_start,$row->wifi_date_end,$row->wifi_hotel,$token);
                     // ตั้งค่า Line
                     $message  = "แจ้งเตือน หลังจากสร้าง Wifi \n";
                     $message .= "สร้างวันที่: ".date('d/m/Y h:i:s', strtotime(now()))." \n";
@@ -117,12 +117,53 @@ class Dashboardwificontroller extends Controller
         }
     }
 
-    public function Generate_wifi($user,$pass,$date_start,$date_end,$hotel)
+    public function Generate_wifi($user,$pass,$date_start,$date_end,$hotel,$token)
     {
         // เช็คว่ามี Username ใน Airlink หรือ ไม่  
         // ถ้ามี username ในระบบ ค่าเท่ากับ 1
         // ถ้าไม่มี username ในระบบ ค่าเท่ากับ 0
-        $this->Set_DB_Airlink($hotel);
+        $wifi_db_type = $this->Set_DB_Airlink($hotel,$token);
+        if ($wifi_db_type == 'airlink') {
+            // ถ้าเป็นประเภท airlink
+            $this->Generate_wifi_airlink($user,$pass,$date_start,$date_end,$hotel);
+        }else if ($wifi_db_type == 'neogate') {
+            // ถ้าเป็นประเภท neogate
+            $this->Generate_wifi_neogate($user,$pass,$date_start,$date_end,$hotel);
+        }else{
+            // ถ้าไม่มีประเภท ไม่มีการสร้าง wifi
+        }
+        return;
+    }
+
+    public function Set_DB_Airlink($hotel,$token)
+    {
+        // ดึงข้อมูลของโรงแรมนั้นๆ จากตัวแปร $hotel
+        $data = wifidb::where('wifi_db_hotel', $hotel)->get();
+        // ตั้งค่า API DB เป็นของแต่ล่ะโรงแรม
+        foreach ($data as $key => $row) {
+            Config::set("database.connections.apimysql.driver" , "$row->wifi_db_driver");
+            Config::set("database.connections.apimysql.host" , "$row->wifi_db_host");
+            Config::set("database.connections.apimysql.port" , "$row->wifi_db_port");
+            Config::set("database.connections.apimysql.database" , "$row->wifi_db_database");
+            Config::set("database.connections.apimysql.username" , "$row->wifi_db_username");
+            Config::set("database.connections.apimysql.password" , "$row->wifi_db_password");
+            $wifi_db_type = $row->wifi_db_type;
+        }
+        // เช็ค การเข้าถึง DB ของแต่ล่ะโรงแรม
+        try {
+            DB::connection('apimysql')->getPdo();
+            return $wifi_db_type;
+        } catch (\Exception $e) {
+            // ตั้งค่า Line
+            $message  = "แจ้งเตือน หลังจากสร้าง Wifi \n";
+            $message .= "ไม่สามารถติดต่อDBของ $hotel ได้ \n";
+            // ส่ง Line
+            $this->Send_Line_Alert($token, $message);
+        }
+    }
+
+    public function Generate_wifi_airlink($user,$pass,$date_start,$date_end,$hotel)
+    {
         $voucher_count = DB::connection('apimysql')->table("voucher")->where('username', $user)->count();
         // ดึงข้อมูลจาก Group wifi
         $Valid = date("Y-m-d",strtotime($date_end))."T23:59:59";
@@ -183,16 +224,65 @@ class Dashboardwificontroller extends Controller
         return;
     }
 
-    public function Set_DB_Airlink($hotel)
+    public function Generate_wifi_neogate($user,$pass,$date_start,$date_end,$hotel)
     {
-        $data = wifidb::where('wifi_db_hotel', $hotel)->get();
-        foreach ($data as $key => $row) {
-            Config::set("database.connections.apimysql.driver" , "$row->wifi_db_driver");
-            Config::set("database.connections.apimysql.host" , "$row->wifi_db_host");
-            Config::set("database.connections.apimysql.port" , "$row->wifi_db_port");
-            Config::set("database.connections.apimysql.database" , "$row->wifi_db_database");
-            Config::set("database.connections.apimysql.username" , "$row->wifi_db_username");
-            Config::set("database.connections.apimysql.password" , "$row->wifi_db_password");
+        $voucher_count = DB::connection('apimysql')->table("radacctprofile")->where('acc_user', $user)->count();
+        // ดึงข้อมูลจาก Group wifi
+        $Valid = date("Y-m-d",strtotime($date_end))." 23:59:59";
+        $Expired = strftime("%B %d %Y",strtotime($date_end))." 23:59:59";
+        $Data_Billingplan = DB::connection('apimysql')->table("radgroupprofile")->where('group_name', 'Meeting')->get();
+        foreach ($Data_Billingplan as $key => $row) {
+            $Group = $row->group_name;
+            $Ggroupname = $row->group_name;
+            $Up = $row->group_upload;
+            $Down = $row->group_download;
+            $Re_url = $row->group_redirect;
+            $Idle = $row->group_idletimeout;
+            $Billplan = $row->group_name;
+        }
+        // ถ้ามี username ไม่ต้องสร้าง wifi ใหม่
+        if ($voucher_count > 0) {
+            // ลบข้อมูลจาก username จาก Table radcheck
+            DB::connection('apimysql')->table("radcheck")->where('username' , $user)->delete();
+            // เพิ่มข้อมูล username จาก radcheck
+            DB::connection('apimysql')->table("radcheck")->insert([
+                ['username' => $user, 'attribute' => 'Password', 'op' => ':=', 'value' => $pass],
+                ['username' => $user, 'attribute' => 'Expiration', 'op' => ':=', 'value' => $Expired],
+                ['username' => $user, 'attribute' => 'Auth-Type', 'op' => ':=', 'value' => 'Local']]);
+            // เปลี่ยนวันที่ใหม่
+            DB::connection('apimysql')->table('radacctprofile')->where('acc_user', $user)
+                ->update(['acc_expire' => $Valid]);
+        }else {
+            // ลบข้อมูลจาก username จาก Table radcheck
+            DB::connection('apimysql')->table("radcheck")->where('username' , $user)->delete();
+            // เพิ่มข้อมูล username จาก radcheck
+            DB::connection('apimysql')->table("radcheck")->insert([
+                ['username' => $user, 'attribute' => 'Password', 'op' => ':=', 'value' => $pass],
+                ['username' => $user, 'attribute' => 'Expiration', 'op' => ':=', 'value' => $Expired],
+                ['username' => $user, 'attribute' => 'Auth-Type', 'op' => ':=', 'value' => 'Local']]);
+            // เพิ่มข้อมูล username จาก radreply
+            DB::connection('apimysql')->table("radreply")->insert([
+                ['username' => $user, 'attribute' => 'WISPr-Bandwidth-Max-Down', 'op' => ':=', 'value' => $Down],
+                ['username' => $user, 'attribute' => 'WISPr-Bandwidth-Max-Up', 'op' => ':=', 'value' => $Up],
+                ['username' => $user, 'attribute' => 'WISPr-Redirection-URL', 'op' => ':=', 'value' => $Re_url]]);
+            // เพิ่มข้อมูล username จาก radusergroup
+            DB::connection('apimysql')->table("radusergroup")->insert([
+                ['username' => $user, 'groupname' => $Group, 'priority' => '1']]);
+            // เพิ่มข้อมูล username จาก voucher
+            DB::connection('apimysql')->table("radacctprofile")->insert([ 
+                ['acc_user'    => $user,
+                 'acc_pass'    => $pass,
+                 'acc_first'   => 'Group',
+                 'acc_last'    => $user,
+                 'acc_type'    => 'ADD',
+                 'acc_group'   => $Group,
+                 'acc_expire'  => $Valid,
+                 'acc_idle'    => $Idle,
+                 'acc_price'   => '0',
+                 'acc_addby'   => 'Auto Wifi comment',
+                 'acc_adddate' => now(),
+                 'acc_status'  => '1'
+                ]]);
         }
         return;
     }

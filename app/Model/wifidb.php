@@ -14,6 +14,7 @@ class wifidb extends Model
      * รายชื่อ ตาราง ใน ดาต้าเบส
      */
     protected $fillable = [
+        'wifi_db_type',
         'wifi_db_hotel', 
         'wifi_db_driver',
         'wifi_db_host',
