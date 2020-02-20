@@ -102,8 +102,8 @@
                 </li>
             </ul>
         </li>
-        <li class="nav-item has-treeview {{ Request::is("dashboardwifi") ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ Request::is("dashboardwifi") ? 'active' : '' }}">
+        <li class="nav-item has-treeview {{ Request::is("dashboardwifi","settingconnectdb") ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::is("dashboardwifi","settingconnectdb") ? 'active' : '' }}">
                 <i class="fas fa-wifi"></i>
                 <p>
                     ระบบ Wifi
@@ -115,6 +115,12 @@
                     <a href="{{ url('dashboardwifi') }}" class="nav-link {{ Request::is("dashboardwifi") ? 'active' : '' }}">
                         <i class="fas fa-home"></i>
                         <p>หน้าหลัก</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('settingconnectdb') }}" class="nav-link {{ Request::is("settingconnectdb") ? 'active' : '' }}">
+                        <i class="fas fa-sliders-h"></i>
+                        <p>ตั้งค่า การเชื่อมต่อ DB</p>
                     </a>
                 </li>
             </ul>

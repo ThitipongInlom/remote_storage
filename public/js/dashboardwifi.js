@@ -9,10 +9,10 @@ $(document).ready(function () {
             "<'row'<'col-sm-1'i><'col-sm-7'><'col-sm-4'p>>",
         "processing": true,
         "serverSide": true,
-        "bPaginate": true,
+        "bPaginate" : true,
         "responsive": true,
         "order": [
-            [1, 'asc'],
+            [6, 'desc'],
         ],
         "aLengthMenu": [
             [10, 50, 100, -1],
@@ -31,6 +31,9 @@ $(document).ready(function () {
         "columns": [{
             "data": 'wifi_group',
             "name": 'wifi_group'
+        },{
+            "data": 'wifi_hotel',
+            "name": 'wifi_hotel'
         },{
             "data": 'wifi_username',
             "name": 'wifi_username'
@@ -54,7 +57,7 @@ $(document).ready(function () {
             },
             {
                 "className": 'text-center',
-                "targets": [3, 4, 5]
+                "targets": [1, 4, 5, 6]
             },
             {
                 "className": 'text-right',
@@ -143,6 +146,9 @@ var Btn_generate_wifi_group = function Btn_generate_wifi_group() {
         url: 'api/v1/Generate_wifi_group',
     })
     .then(function (response) {
+        load_table_on_select();
+    })
+    .catch(function (error) {
         load_table_on_select();
     });
 }

@@ -8,7 +8,7 @@
         <!-- All Css -->
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
     </head>
-    <body class="hold-transition sidebar-mini sidebar-collapse">
+    <body class="hold-transition sidebar-mini sidebar-open">
     @include('../layout.head')
     <!-- ส่วนหัวข้อมูล -->
     <div class="content-wrapper">
@@ -53,6 +53,7 @@
                         <thead>
                             <tr class="bg-primary">
                                 <th>Group</th>
+                                <th>Hotel</th>
                                 <th>Username</th>
                                 <th>Password</th>
                                 <th>Date Start</th>
@@ -115,8 +116,8 @@
                                 <label for="select_hotel">Hotel :</label>
                                 <select class="custom-select custom-select-sm" id="select_hotel" onchange="load_table_on_select();">
                                     <option value="thezign">TheZign</option>
-                                    <option value="tsix5" disabled>Tsix5</option>
-                                    <option value="way" disabled>Way</option>
+                                    <option value="tsix5">Tsix5</option>
+                                    <option value="way">Way</option>
                                     <option value="z2">Z-Through</option>
                                     <option value="garden_seaview" disabled>Garden Seaview</option>
                                 </select>

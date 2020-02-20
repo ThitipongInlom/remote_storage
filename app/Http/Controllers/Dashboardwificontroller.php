@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Config;
+use stdClass;
 use App\Model\wifi as wifi;
 use App\Model\wifidb as wifidb;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +25,17 @@ class Dashboardwificontroller extends Controller
         }
 
         return Datatables::of($data)
+        ->setRowClass(function ($data) {
+            if ($data->wifi_status == 'Complete') {
+                $str_class = "bg-success";
+            }else {
+                $str_class = "bg-secondary";
+            }
+            return $str_class;
+        })
+        ->editColumn('wifi_hotel', function($data) {
+            return Str::ucfirst($data->wifi_hotel);
+        })
         ->editColumn('wifi_date_start', function($data) {
             return date('d/m/Y', strtotime($data->wifi_date_start));
         })
@@ -73,13 +86,8 @@ class Dashboardwificontroller extends Controller
             foreach ($user_coming as $key => $row) {
                 if ($row->wifi_line_alert_coming == '1') {
                     // ตั้งค่า Line
-                    $message  = "แจ้งเตือน ก่อนสร้าง 1 วัน \n";
-                    $message .= "แจ้งเตือน: ".date('d/m/Y h:i:s', strtotime(now()))." \n";
-                    $message .= "ชื่อกรุ๊ป: $row->wifi_group \n";
-                    $message .= "Username: $row->wifi_username \n";
-                    $message .= "Password: $row->wifi_password \n";
-                    $message .= "จากวันที่: ".date('d/m/Y', strtotime($row->wifi_date_start))." - ".date('d/m/Y', strtotime($row->wifi_date_end))." \n";
-                    $message .= "สถานะ: รอสร้าง \n";
+                    $set_code = '0';
+                    $message  = $this->Set_message_line($row->wifi_group,$row->wifi_username,$row->wifi_password,$row->wifi_date_start,$row->wifi_date_end,$row->wifi_hotel,$set_code);
                     // ส่ง Line
                     $this->Send_Line_Alert($token, $message);
                     // อัพเดตข้อมูลว่าส่ง Line เตือน แล้ว
@@ -95,29 +103,21 @@ class Dashboardwificontroller extends Controller
             foreach ($user_generage as $key => $row) {
                 if ($row->wifi_line_alert_generate == '1') {
                     // สร้่าง Wifi
-                    $this->Generate_wifi($row->wifi_username,$row->wifi_password,$row->wifi_date_start,$row->wifi_date_end,$row->wifi_hotel,$token);
-                    // ตั้งค่า Line
-                    $message  = "แจ้งเตือน หลังจากสร้าง Wifi \n";
-                    $message .= "สร้างวันที่: ".date('d/m/Y h:i:s', strtotime(now()))." \n";
-                    $message .= "ชื่อกรุ๊ป: $row->wifi_group \n";
-                    $message .= "Username: $row->wifi_username \n";
-                    $message .= "Password: $row->wifi_password \n";
-                    $message .= "วันที่: ".date('d/m/Y', strtotime($row->wifi_date_start))." - ".date('d/m/Y', strtotime($row->wifi_date_end))." \n";
-                    $message .= "สถานะ: สร้างแล้ว \n";  
-                    // ส่ง Line
-                    $this->Send_Line_Alert($token, $message);
+                    $complete = $this->Generate_wifi($row->wifi_group,$row->wifi_username,$row->wifi_password,$row->wifi_date_start,$row->wifi_date_end,$row->wifi_hotel,$token);
                     // อัพเดตข้อมูลว่าส่ง Line เตือน แล้ว
-                    $wifi = wifi::find($row->wifi_id);
-                    $wifi->wifi_status = 'Complete';
-                    $wifi->wifi_note = $message;
-                    $wifi->wifi_line_alert_generate = '0';
-                    $wifi->save();
+                    if ($complete->status == 'Complete') {
+                        $wifi = wifi::find($row->wifi_id);
+                        $wifi->wifi_status = 'Complete';
+                        $wifi->wifi_note = $complete->message;
+                        $wifi->wifi_line_alert_generate = '0';
+                        $wifi->save();
+                    }
                 }
             }
         }
     }
 
-    public function Generate_wifi($user,$pass,$date_start,$date_end,$hotel,$token)
+    public function Generate_wifi($wifi_group,$user,$pass,$date_start,$date_end,$hotel,$token)
     {
         // เช็คว่ามี Username ใน Airlink หรือ ไม่  
         // ถ้ามี username ในระบบ ค่าเท่ากับ 1
@@ -126,13 +126,35 @@ class Dashboardwificontroller extends Controller
         if ($wifi_db_type == 'airlink') {
             // ถ้าเป็นประเภท airlink
             $this->Generate_wifi_airlink($user,$pass,$date_start,$date_end,$hotel);
+            $set_code = '1';
+            $message = $this->Set_message_line($wifi_group,$user,$pass,$date_start,$date_end,$hotel,$set_code);
+            $this->Send_Line_Alert($token, $message);
+            $complete_data = new stdClass;
+            $complete_data->status = "Complete";
+            $complete_data->message = $message;
+            $complete = $complete_data;
         }else if ($wifi_db_type == 'neogate') {
             // ถ้าเป็นประเภท neogate
             $this->Generate_wifi_neogate($user,$pass,$date_start,$date_end,$hotel);
+            $set_code = '1';
+            $message = $this->Set_message_line($wifi_group,$user,$pass,$date_start,$date_end,$hotel,$set_code);
+            $this->Send_Line_Alert($token, $message);
+            $complete_data = new stdClass;
+            $complete_data->status = "Complete";
+            $complete_data->message = $message;
+            $complete = $complete_data;
         }else{
             // ถ้าไม่มีประเภท ไม่มีการสร้าง wifi
+            $set_code = '2';
+            $message = $this->Set_message_line($wifi_group,$user,$pass,$date_start,$date_end,$hotel,$set_code);
+            $this->Send_Line_Alert($token, $message);
+            $complete_data = new stdClass;
+            $complete_data->status = "error";
+            $complete_data->message = $message;
+            $complete = $complete_data;
         }
-        return;
+        DB::disconnect('apimysql');
+        return $complete;
     }
 
     public function Set_DB_Airlink($hotel,$token)
@@ -154,11 +176,7 @@ class Dashboardwificontroller extends Controller
             DB::connection('apimysql')->getPdo();
             return $wifi_db_type;
         } catch (\Exception $e) {
-            // ตั้งค่า Line
-            $message  = "แจ้งเตือน หลังจากสร้าง Wifi \n";
-            $message .= "ไม่สามารถติดต่อDBของ $hotel ได้ \n";
-            // ส่ง Line
-            $this->Send_Line_Alert($token, $message);
+            return 'error';
         }
     }
 
@@ -199,12 +217,16 @@ class Dashboardwificontroller extends Controller
                 ['username' => $user, 'attribute' => 'Password', 'op' => ':=', 'value' => $pass],
                 ['username' => $user, 'attribute' => 'Expiration', 'op' => ':=', 'value' => $Expired],
                 ['username' => $user, 'attribute' => 'Auth-Type', 'op' => ':=', 'value' => 'Local']]);
+            // ลบข้อมูลจาก username จาก Table radreply
+            DB::connection('apimysql')->table("radreply")->where('username' , $user)->delete();
             // เพิ่มข้อมูล username จาก radreply
             DB::connection('apimysql')->table("radreply")->insert([
                 ['username' => $user, 'attribute' => 'WISPr-Bandwidth-Max-Down', 'op' => ':=', 'value' => $Down],
                 ['username' => $user, 'attribute' => 'WISPr-Bandwidth-Max-Up', 'op' => ':=', 'value' => $Up],
                 ['username' => $user, 'attribute' => 'WISPr-Redirection-URL', 'op' => ':=', 'value' => $Re_url]]);
-            // เพิ่มข้อมูล username จาก radusergroup
+            // ลบข้อมูลจาก username จาก Table radusergroup
+            DB::connection('apimysql')->table("radusergroup")->where('username' , $user)->delete();
+                // เพิ่มข้อมูล username จาก radusergroup
             DB::connection('apimysql')->table("radusergroup")->insert([
                 ['username' => $user, 'groupname' => $Group, 'priority' => '1']]);
             // เพิ่มข้อมูล username จาก voucher
@@ -260,12 +282,16 @@ class Dashboardwificontroller extends Controller
                 ['username' => $user, 'attribute' => 'Password', 'op' => ':=', 'value' => $pass],
                 ['username' => $user, 'attribute' => 'Expiration', 'op' => ':=', 'value' => $Expired],
                 ['username' => $user, 'attribute' => 'Auth-Type', 'op' => ':=', 'value' => 'Local']]);
+            // ลบข้อมูลจาก username จาก Table radreply
+            DB::connection('apimysql')->table("radreply")->where('username' , $user)->delete();
             // เพิ่มข้อมูล username จาก radreply
             DB::connection('apimysql')->table("radreply")->insert([
                 ['username' => $user, 'attribute' => 'WISPr-Bandwidth-Max-Down', 'op' => ':=', 'value' => $Down],
                 ['username' => $user, 'attribute' => 'WISPr-Bandwidth-Max-Up', 'op' => ':=', 'value' => $Up],
                 ['username' => $user, 'attribute' => 'WISPr-Redirection-URL', 'op' => ':=', 'value' => $Re_url]]);
-            // เพิ่มข้อมูล username จาก radusergroup
+            // ลบข้อมูลจาก username จาก Table radusergroup
+            DB::connection('apimysql')->table("radusergroup")->where('username' , $user)->delete();
+                // เพิ่มข้อมูล username จาก radusergroup
             DB::connection('apimysql')->table("radusergroup")->insert([
                 ['username' => $user, 'groupname' => $Group, 'priority' => '1']]);
             // เพิ่มข้อมูล username จาก voucher
@@ -313,6 +339,38 @@ class Dashboardwificontroller extends Controller
         $user_data['pic_upload']    = '';
         $profile = serialize($user_data);
         return $profile;
+    }
+
+    public function Set_message_line($wifi_group,$user,$pass,$date_start,$date_end,$hotel,$set_code)
+    {
+        // $set_code ถ้ามีค่าเท่ากับ 0 จะเป็นการเซ็ตค่า เพื่อให้แจ้งเตือน ก่อนล่วงหน้า 1 วันก่อนการสร้างจริง
+        // $set_code ถ้ามีค่าเท่ากับ 1 จะเป็นการเซ็ตค่า เพื่อให้แจ้งเตือน ว่าได้สร้าง wifi เรียบร้อยแล้ว
+        // $set_code ถ้ามีค่าเท่ากับ 2 จะเป็นการเซ็ตค่า เพื่อให้แจ้งเตือน ว่า ไม่สามารถติดต่อ ฐานข้อมูลของแต่ล่ะโรงแรมได้
+        if ($set_code == '0') {
+            // ตั้งค่า Line
+            $message  = "แจ้งเตือน ก่อนสร้าง 1 วัน \n";
+            $message .= "แจ้งเตือน: ".date('d/m/Y h:i:s', strtotime(now()))." \n";
+            $message .= "ชื่อกรุ๊ป: $wifi_group \n";
+            $message .= "Username: $user \n";
+            $message .= "Password: $pass \n";
+            $message .= "จากวันที่: ".date('d/m/Y', strtotime($date_start))." - ".date('d/m/Y', strtotime($date_end))." \n";
+            $message .= "สถานะ: รอสร้าง \n";
+        }else if ($set_code == '1') {
+            // ตั้งค่า Line
+            $message  = "แจ้งเตือน หลังจากสร้าง Wifi \n";
+            $message .= "สร้างวันที่: ".date('d/m/Y h:i:s', strtotime(now()))." \n";
+            $message .= "ชื่อกรุ๊ป: $wifi_group \n";
+            $message .= "Username: $user \n";
+            $message .= "Password: $pass \n";
+            $message .= "วันที่: ".date('d/m/Y', strtotime($date_start))." - ".date('d/m/Y', strtotime($date_end))." \n";
+            $message .= "สถานะ: สร้างแล้ว \n";              
+        }else if ($set_code == '2') {
+            // ตั้งค่า Line
+            $message  = "แจ้งเตือน หลังจากสร้าง Wifi \n";
+            $message .= "ไม่สามารถติดต่อDBของ $hotel ได้ \n";
+        }
+
+        return $message;
     }
 
     public function Send_Line_Alert($token, $message)

@@ -8,7 +8,7 @@
         <!-- All Css -->
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
     </head>
-    <body class="hold-transition sidebar-mini sidebar-collapse">
+    <body class="hold-transition sidebar-mini sidebar-open">
     @include('../layout.head')
     <!-- ส่วนหัวข้อมูล -->
     <div class="content-wrapper">

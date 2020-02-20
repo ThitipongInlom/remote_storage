@@ -10,6 +10,7 @@ Route::get('/logout', function () { Auth::logout(); return redirect('/'); })->na
 // Dashboard Page
 Route::get('/dashboard', function () { return view('page/dashboard'); })->middleware('auth')->name('dashboard');
 Route::get('/dashboardwifi', function () { return view('page/dashboardwifi'); })->middleware('auth');
+Route::get('/settingconnectdb', function () { return view('page/settingconnectdb'); })->middleware('auth');
 // Add Item
 Route::get('/additem', 'Additemcontroller@Add_item')->middleware('auth')->name('add');
 Route::post('/additem_save', 'Additemcontroller@Additem_save')->name('additem_save');
