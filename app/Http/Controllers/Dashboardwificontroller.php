@@ -79,7 +79,8 @@ class Dashboardwificontroller extends Controller
         $user_coming = $wifi_wait->where('wifi_date_start', $day_coming);
 
         // Token TEST // R4jIdOn7GWxWohFgJlMP4fzsirKKu5Y3XMMYn69E4kK
-        $token = "R4jIdOn7GWxWohFgJlMP4fzsirKKu5Y3XMMYn69E4kK";
+        // Token IT   // ZmxSXIpJBIafLiH1aPnVHF0vgWa0fo7OrgbdSHhKanO
+        $token = "ZmxSXIpJBIafLiH1aPnVHF0vgWa0fo7OrgbdSHhKanO";
 
         // แจ้ง Line ก่อน 1 วัน
         if (isset($user_coming)) {

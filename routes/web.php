@@ -29,11 +29,11 @@ Route::post('/save_delete_item', 'Addselectitemcontroller@save_delete_item')->na
 Route::post('/save_update_status_com', 'Viewitemcontroller@save_update_status_com')->name('save_update_status_com');
 
 // API Make
-Route::group(['prefix' => 'api/v1','middleware' => 'auth'], function () {
+Route::group(['prefix' => 'api/v1'], function () {
     Route::get('/Generate_wifi_group', 'Dashboardwificontroller@Generate_wifi_group');
-    Route::post('/ajax_table_main', 'Dashboardcontroller@Ajax_Table_Main');
-    Route::post('/ajax_table_main_wifi', 'Dashboardwificontroller@Ajax_Table_Main');
-    Route::post('/ajax_load_item_view_history/{sticker_number}', 'Viewitemcontroller@Load_item_view_history');
-    Route::post('/ajax_list_btn_computer_number', 'Dashboardcontroller@list_btn_computer_number');
-    Route::post('/Save_add_data_modal', 'Dashboardwificontroller@Save_add_data_modal');
+    Route::post('/ajax_table_main', 'Dashboardcontroller@Ajax_Table_Main')->middleware('auth');
+    Route::post('/ajax_table_main_wifi', 'Dashboardwificontroller@Ajax_Table_Main')->middleware('auth');
+    Route::post('/ajax_load_item_view_history/{sticker_number}', 'Viewitemcontroller@Load_item_view_history')->middleware('auth');
+    Route::post('/ajax_list_btn_computer_number', 'Dashboardcontroller@list_btn_computer_number')->middleware('auth');
+    Route::post('/Save_add_data_modal', 'Dashboardwificontroller@Save_add_data_modal')->middleware('auth');
 });
