@@ -119,7 +119,7 @@
                                     <option value="tsix5">Tsix5</option>
                                     <option value="way">Way</option>
                                     <option value="z2">Z-Through</option>
-                                    <option value="garden_seaview" disabled>Garden Seaview</option>
+                                    <option value="garden_seaview">Garden Seaview</option>
                                 </select>
                             </div>
                         </div>

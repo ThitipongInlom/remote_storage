@@ -367,8 +367,8 @@ class Dashboardwificontroller extends Controller
             $message .= "สถานะ: สร้างแล้ว \n";              
         }else if ($set_code == '2') {
             // ตั้งค่า Line
-            $message  = "แจ้งเตือน หลังจากสร้าง Wifi \n";
-            $message .= "ไม่สามารถติดต่อDBของ $hotel ได้ \n";
+            $message  = "แจ้งเตือน การเชื่อมต่อ \n";
+            $message .= "Could not connect database $hotel \n";
         }
 
         return $message;
