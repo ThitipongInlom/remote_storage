@@ -8,7 +8,7 @@ Route::post('/register_save', 'Registercontroller@register_save')->name('registe
 // Logout
 Route::get('/logout', function () { Auth::logout(); return redirect('/'); })->name('logout');
 // Dashboard Page
-Route::get('/dashboard', function () { return view('page/dashboard'); })->middleware('auth')->name('dashboard');
+Route::get('/dashboard', 'Dashboardcomcontroller@View_Dashboardcom')->middleware('auth')->name('dashboard');
 Route::get('/dashboardwifi', function () { return view('page/dashboardwifi'); })->middleware('auth');
 Route::get('/settingconnectdb', function () { return view('page/settingconnectdb'); })->middleware('auth');
 // Add Item
