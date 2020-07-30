@@ -24,4 +24,35 @@ var Save_Add_item = function Save_Add_item() {
         'hdd_add',
         'ssd_add'
     ];
+    var Data = new FormData();
+    $(Array_id).each(function (index, value) {
+        Data.append(value, $("#" + value).val());
+    });
+    Data.append("internet_add", $('input:radio[name="internet_add"]:checked').val());
+    Data.append("windows_license_add", $('input:radio[name="windows_license_add"]:checked').val());
+    if ($("#sticker_number_add").val() == '') {
+        console.log('ใส่ข้อมูล COM')
+    }else {
+       $.ajax({
+           url: 'api/v1/Add_ItemCom',
+           type: 'POST',
+           headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+           },
+           dataType: 'json',
+           cache: false,
+           contentType: false,
+           processData: false,
+           data: Data,
+           success: function (result) {
+               if (result.ststus == 200) {
+                   $('#modal_add_computer').modal('hide');
+                   console.log(result.msg)
+               }else {
+                   console.log(result.msg)
+               }
+           }
+       });
+    }
+
 }

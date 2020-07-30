@@ -36,4 +36,7 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::post('/ajax_load_item_view_history/{sticker_number}', 'Viewitemcontroller@Load_item_view_history')->middleware('auth');
     Route::post('/ajax_list_btn_computer_number', 'Dashboardcontroller@list_btn_computer_number')->middleware('auth');
     Route::post('/Save_add_data_modal', 'Dashboardwificontroller@Save_add_data_modal')->middleware('auth');
+
+    Route::post('/Add_ItemCom', 'Dashboardcomcontroller@Add_ItemCom')->middleware('auth');
+    Route::post('/Get_ComId', 'Dashboardcomcontroller@Get_ComId')->middleware('auth');
 });

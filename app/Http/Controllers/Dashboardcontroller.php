@@ -65,8 +65,7 @@ class Dashboardcontroller extends Controller
             return $result;
         })
         ->addColumn('action', function ($users) {
-            $url = url("view/$users->sticker_number");
-            $result  = "<a class='btn btn-sm btn-primary' href='$url' role='button' data-toggle='tooltip' data-placement='bottom' title='ดูข้อมูลคอมพิวเตอร์ $users->sticker_number'><i class='fas fa-search'></i>View</a>";
+            $result  = "<button type='button' com_id='$users->item_id' class='btn btn-sm btn-primary' onclick='Open_edit_computer(this)'><i class='fas fa-search'></i> View</button>";
             return $result;
         })
         ->addColumn('status', function ($users) {

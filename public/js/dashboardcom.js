@@ -98,7 +98,7 @@ $(document).ready(function () {
                 "previous": "ย้อนกลับ"
             },
         },
-        search: {
+        "search": {
             "regex": true
         },
     });
@@ -140,4 +140,24 @@ var List_btn_computer_number = function List_btn_computer_number() {
 
 var Open_add_computer = function Open_add_computer() {
     $('#modal_add_computer').modal('show');
+}
+
+var Open_edit_computer = function Open_edit_computer(e) {
+    var Data = new FormData();
+    Data.append("com_id", $(e).attr('com_id'));
+    $.ajax({
+        url: 'api/v1/Get_ComId',
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: Data,
+        success: function (result) {
+            $('#modal_edit_computer').modal('show');
+        }
+    });
 }

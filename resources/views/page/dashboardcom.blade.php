@@ -102,7 +102,7 @@
         </div>
     </div>
 
-<!-- Modal -->
+<!-- Modal Add -->
 <div class="modal fade" id="modal_add_computer" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_add_computerLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
@@ -244,7 +244,7 @@
                                                                         <label class="custom-control-label" for="windows_license_1">แท้</label>
                                                                     </div>
                                                                     <div class="custom-control custom-radio custom-control-inline">
-                                                                        <input type="radio" id="windows_license_add_2" name="windows_license_add" class="custom-control-input" value="Not Active">
+                                                                        <input type="radio" id="windows_license_add_2" name="windows_license_add" class="custom-control-input" value="Not Active" checked>
                                                                         <label class="custom-control-label" for="windows_license_2">ไม่แท้</label>
                                                                     </div>
                                                                 </div>                                                          
@@ -380,6 +380,293 @@
                         <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal">ยกเลิก</button>                    
                     </div>
                     <div class="col-6">
+                        <button type="button" class="btn btn-sm btn-block btn-success" onclick="Save_Add_item()">ยืนยัน</button> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Edit -->
+<div class="modal fade" id="modal_edit_computer" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_edit_computerLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title" id="modal_edit_computerLabel"><i class="fas fa-edit"></i> แก้ไขข้อมูล เครื่องคอมพิวเตอร์</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-primary card-outline card-outline-tabs">
+                    <div class="card-header p-0 border-bottom-0">
+                        <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="custom-tabs-edit-com-tab" data-toggle="pill" href="#custom-tabs-edit-com" role="tab" aria-controls="custom-tabs-edit-com" aria-selected="true">ข้อมูลเครื่องคอมพิวเตอร์</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="custom-tabs-three-tabContent">
+                            <div class="tab-pane fade active show" id="custom-tabs-edit-com" role="tabpanel" aria-labelledby="custom-tabs-edit-com-tab">
+                                <div class="row">
+                                    <div class="col-5 col-sm-3">
+                                        <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" id="edit-com-guest-tab" data-toggle="pill" href="#edit-com-guest" role="tab" aria-controls="edit-com-guest" aria-selected="true"><i class="fas fa-id-card-alt"></i> Guest</a>
+                                            <a class="nav-link" id="edit-com-system-tab" data-toggle="pill" href="#edit-com-system" role="tab" aria-controls="edit-com-system" aria-selected="false"><i class="fas fa-server"></i>  System</a>
+                                            <a class="nav-link" id="edit-com-software-tab" data-toggle="pill" href="#edit-com-software" role="tab" aria-controls="edit-com-software" aria-selected="false"><i class="fas fa-server"></i> Software</a>
+                                            <a class="nav-link" id="edit-com-hardware-tab" data-toggle="pill" href="#edit-com-hardware" role="tab" aria-controls="edit-com-hardware" aria-selected="false"><i class="fas fa-server"></i> Hardware</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-sm-9">
+                                        <div class="tab-content" id="vert-tabs-tabContent">
+                                            <div class="tab-pane text-left fade active show" id="edit-com-guest" role="tabpanel" aria-labelledby="edit-com-guest-tab">
+                                                <table class="table table-sm">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="50%">
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">Guest Name <img src="{{ url('img/icon/user_name.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="guest_name_edit" placeholder="Guest Name">
+                                                                </div>
+                                                            </td>
+                                                            <td width="50%">
+                                                                <div class="form-group">
+                                                                    <label for="guest_dep">Guest Dep <img src="{{ url('img/icon/dep.png') }}" style="width: 18px;"></label>
+                                                                    <select class="custom-select custom-select-sm" id="guest_dep_edit">
+                                                                    @foreach ($Department as $row)
+                                                                        <option value="{{ $row->department_titel }}">{{ $row->department_titel }} - {{ $row->department_main }}</option>
+                                                                    @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </td>                                                       
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="guest_phone">Guest Phone <img src="{{ url('img/icon/phone.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="guest_phone_edit" placeholder="Guest Phone">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="guest_hotel">Guest Hotel <img src="{{ url('img/icon/hotel.png') }}" style="width: 18px;"></label>
+                                                                    <select class="custom-select custom-select-sm" id="guest_hotel_edit">                                    
+                                                                    @foreach ($Hotel as $row)
+                                                                        <option value="{{ $row->hotel_titel }}">{{ $row->hotel_titel }}</option>
+                                                                    @endforeach
+                                                                    </select>
+                                                                </div>                                
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="edit-com-system" role="tabpanel" aria-labelledby="edit-com-system-tab">
+                                                <table class="table table-sm">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="50%">
+                                                                <div class="form-group">
+                                                                    <label for="sticker_number">Sticker Number</label>
+                                                                    <input type="text" class="form-control form-control-sm" id="sticker_number_edit" placeholder="Sticker Number">
+                                                                </div>
+                                                            </td>
+                                                            <td width="50%">
+                                                                <div class="form-group">
+                                                                    <label for="computer_name">Computer Name</label>
+                                                                    <input type="text" class="form-control form-control-sm" id="computer_name_edit" placeholder="Computer Name">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="ip_main">IP Main <img src="{{ url('img/icon/ip.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="ip_main_edit" placeholder="IP Main">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="ip_sub">IP Sub <img src="{{ url('img/icon/ip.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="ip_sub_edit" placeholder="IP Sub">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="windows">Windows <img src="{{ url('img/icon/windows.png') }}" style="width: 18px;"></label>
+                                                                    <select class="custom-select custom-select-sm" id="windows_edit">
+                                                                    @foreach ($Window as $row)
+                                                                        <option value="{{ $row->window_titel }}">{{ $row->window_titel }}</option>
+                                                                    @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="internet">Internet <img src="{{ url('img/icon/internet.png') }}" style="width: 18px;"></label>
+                                                                    <br>
+                                                                    <div align="center">
+                                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                                            <input type="radio" id="internet_edit_1" name="internet_edit" class="custom-control-input" value="Enable" checked>
+                                                                            <label class="custom-control-label" for="internet_1">เปิด</label>
+                                                                        </div>
+                                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                                            <input type="radio" id="internet_edit_2" name="internet_edit" class="custom-control-input" value="Disable">
+                                                                            <label class="custom-control-label" for="internet_2">ปิด</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label for="windows_license">Windows license <img src="{{ url('img/icon/license.png') }}" style="width: 18px;"></label>
+                                                                <br>
+                                                                <div align="center">
+                                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                                        <input type="radio" id="windows_license_edit_1" name="windows_license_edit" class="custom-control-input" value="Active">
+                                                                        <label class="custom-control-label" for="windows_license_1">แท้</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                                        <input type="radio" id="windows_license_edit_2" name="windows_license_edit" class="custom-control-input" value="Not Active" checked>
+                                                                        <label class="custom-control-label" for="windows_license_2">ไม่แท้</label>
+                                                                    </div>
+                                                                </div>                                                          
+                                                            </td>
+                                                            <td>
+                                                            
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="edit-com-software" role="tabpanel" aria-labelledby="edit-com-software-tab">
+                                                <table class="table table-sm">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="50%">
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">Teamviewer <img src="{{ url('img/teamviewer.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="teamviwer_edit" placeholder="Teamviwer">
+                                                                </div>
+                                                            </td>
+                                                            <td width="50%">
+                                                                <div class="form-group">
+                                                                    <label for="guest_dep">Anydesk <img src="{{ url('img/anydesk.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="anydesk_edit" placeholder="Anydesk">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="50%">
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">Username Admin <img src="{{ url('img/icon/computer_name.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="username_admin_edit" placeholder="Username_Admin">
+                                                                </div>
+                                                            </td>
+                                                            <td width="50%">
+                                                                <div class="form-group">
+                                                                    <label for="guest_dep">Password Admin <img src="{{ url('img/icon/computer_name.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="password_admin_edit" placeholder="Password_Admin">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody> 
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="edit-com-hardware" role="tabpanel" aria-labelledby="edit-com-hardware-tab">
+                                                <table class="table table-sm">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="50%">
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">CPU <img src="{{ url('img/icon/cpu.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="cpu_edit" placeholder="CPU">
+                                                                </div>
+                                                            </td>
+                                                            <td width="50%">
+                                                                <div class="form-group">
+                                                                    <label for="guest_dep">RAM <img src="{{ url('img/icon/ram.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="ram_edit" placeholder="RAM">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">Case <img src="{{ url('img/icon/case.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="case_edit" placeholder="Case">
+                                                                </div>                             
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">Monitor <img src="{{ url('img/icon/monitor.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="monitor_edit" placeholder="Monitor">
+                                                                </div>            
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">Mouse <img src="{{ url('img/icon/mouse.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="mouse_edit" placeholder="Mouse">
+                                                                </div>                             
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">Keyboard <img src="{{ url('img/icon/keyboard.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="keyboard_edit" placeholder="Keyboard">
+                                                                </div>            
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">Mainboard <img src="{{ url('img/icon/mainboard.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="mainboard_edit" placeholder="Mainboard">
+                                                                </div>                             
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">Power Supply <img src="{{ url('img/icon/powersupply.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="powersupply_edit" placeholder="Power Supply">
+                                                                </div>            
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">HDD <img src="{{ url('img/icon/hdd.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="hdd_edit" placeholder="HDD">
+                                                                </div>                             
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <label for="guest_name">SSD <img src="{{ url('img/icon/ssd.png') }}" style="width: 18px;"></label>
+                                                                    <input type="text" class="form-control form-control-sm" id="ssd_edit" placeholder="SSD">
+                                                                </div>            
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-inline">
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal">ยกเลิก</button>                    
+                    </div>
+                    <div class="col-6">
                         <button type="button" class="btn btn-sm btn-block btn-success">ยืนยัน</button> 
                     </div>
                 </div>
@@ -387,6 +674,8 @@
         </div>
     </div>
 </div>
+
+
     <!-- END -->
     @include('../layout.footer')
     </body>
