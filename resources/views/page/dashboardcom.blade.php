@@ -97,6 +97,9 @@
                     </table>
                     </div>
                     </div>
+                    <div class="overlay">
+                        <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -391,10 +394,10 @@
 
 <!-- Modal Edit -->
 <div class="modal fade" id="modal_edit_computer" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_edit_computerLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" id="edit_modal_setting">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h5 class="modal-title" id="modal_edit_computerLabel"><i class="fas fa-edit"></i> แก้ไขข้อมูล เครื่องคอมพิวเตอร์</h5>
+                <h5 class="modal-title" id="modal_edit_computerLabel"><i class="fas fa-edit"></i> แก้ไขข้อมูล คอมพิวเตอร์</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -402,7 +405,10 @@
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="custom-tabs-edit-com-tab" data-toggle="pill" href="#custom-tabs-edit-com" role="tab" aria-controls="custom-tabs-edit-com" aria-selected="true">ข้อมูลเครื่องคอมพิวเตอร์</a>
+                                <a class="nav-link active pill_edit" id="custom-tabs-edit-com-tab" data-toggle="pill" href="#custom-tabs-edit-com" role="tab" aria-controls="custom-tabs-edit-com" aria-selected="true">ข้อมูลคอมพิวเตอร์</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pill_edit" id="custom-tabs-edit-com-history-tab" data-toggle="pill" href="#custom-tabs-edit-com-history" role="tab" aria-controls="custom-tabs-edit-com-history" aria-selected="true">ประวัติคอมพิวเตอร์</a>
                             </li>
                         </ul>
                     </div>
@@ -469,7 +475,7 @@
                                                             <td width="50%">
                                                                 <div class="form-group">
                                                                     <label for="sticker_number">Sticker Number</label>
-                                                                    <input type="text" class="form-control form-control-sm" id="sticker_number_edit" placeholder="Sticker Number">
+                                                                    <input type="text" class="form-control form-control-sm" id="sticker_number_edit" placeholder="Sticker Number" disabled>
                                                                 </div>
                                                             </td>
                                                             <td width="50%">
@@ -510,7 +516,7 @@
                                                                     <br>
                                                                     <div align="center">
                                                                         <div class="custom-control custom-radio custom-control-inline">
-                                                                            <input type="radio" id="internet_edit_1" name="internet_edit" class="custom-control-input" value="Enable" checked>
+                                                                            <input type="radio" id="internet_edit_1" name="internet_edit" class="custom-control-input" value="Enable">
                                                                             <label class="custom-control-label" for="internet_1">เปิด</label>
                                                                         </div>
                                                                         <div class="custom-control custom-radio custom-control-inline">
@@ -531,7 +537,7 @@
                                                                         <label class="custom-control-label" for="windows_license_1">แท้</label>
                                                                     </div>
                                                                     <div class="custom-control custom-radio custom-control-inline">
-                                                                        <input type="radio" id="windows_license_edit_2" name="windows_license_edit" class="custom-control-input" value="Not Active" checked>
+                                                                        <input type="radio" id="windows_license_edit_2" name="windows_license_edit" class="custom-control-input" value="Not Active">
                                                                         <label class="custom-control-label" for="windows_license_2">ไม่แท้</label>
                                                                     </div>
                                                                 </div>                                                          
@@ -657,6 +663,43 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade" id="custom-tabs-edit-com-history" role="tabpanel" aria-labelledby="custom-tabs-edit-com-tab-history">
+                                <div class="card card-primary">
+                                    <div class="card-header pb-0">
+                                        <h3 class="card-title"><i class="fas fa-list"></i> ข้อมูลประวัติย้อนหลัง</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                        <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_historys_com" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sticker</th>
+                                                    <th>วันที่</th>
+                                                    <th>ประเภท</th>
+                                                    <th>ข้อมูลเก่า</th>
+                                                    <th>ข้อมูลใหม่</th>
+                                                    <th>หมายเหตุ</th>
+                                                    <th>สถานะ</th>
+                                                    <th>ผู้ทำการ</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Sticker</th>
+                                                    <th>วันที่</th>
+                                                    <th>ประเภท</th>
+                                                    <th>ข้อมูลเก่า</th>
+                                                    <th>ข้อมูลใหม่</th>
+                                                    <th>หมายเหตุ</th>
+                                                    <th>สถานะ</th>
+                                                    <th>ผู้ทำการ</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -664,10 +707,10 @@
             <div class="modal-footer d-inline">
                 <div class="row">
                     <div class="col-6">
-                        <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal">ยกเลิก</button>                    
+                        <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ยกเลิก</button>                    
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btn btn-sm btn-block btn-success">ยืนยัน</button> 
+                        <button type="button" class="btn btn-sm btn-block btn-success"><i class="fas fa-save"></i> ยืนยัน</button> 
                     </div>
                 </div>
             </div>
