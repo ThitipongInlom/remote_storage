@@ -54,5 +54,54 @@ var Save_Add_item = function Save_Add_item() {
            }
        });
     }
+}
 
+var Save_edit_item = function Save_edit_item () {
+    var Array_id = [
+        'guest_name_edit',
+        'guest_dep_edit',
+        'guest_phone_edit',
+        'guest_hotel_edit',
+        'sticker_number_edit',
+        'computer_name_edit',
+        'ip_main_edit',
+        'ip_sub_edit',
+        'windows_edit',
+        'teamviwer_edit',
+        'anydesk_edit',
+        'username_admin_edit',
+        'password_admin_edit',
+        'cpu_edit',
+        'ram_edit',
+        'case_edit',
+        'monitor_edit',
+        'mouse_edit',
+        'keyboard_edit',
+        'mainboard_edit',
+        'powersupply_edit',
+        'hdd_edit',
+        'ssd_edit'
+    ];
+    var Data = new FormData();
+    $(Array_id).each(function (index, value) {
+        Data.append(value, $("#" + value).val());
+    });
+    Data.append("internet_edit", $('input:radio[name="internet_edit"]:checked').val());
+    Data.append("windows_license_edit", $('input:radio[name="windows_license_edit"]:checked').val());
+    $.ajax({
+        url: 'api/v1/Update_ItemCom',
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: Data,
+        success: function (result) {
+            $('#modal_edit_computer').modal('hide');
+            $('#Table_Main').DataTable().draw();
+        }
+    });
 }

@@ -8,7 +8,7 @@
         <!-- All Css -->
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
     </head>
-    <body class="hold-transition sidebar-mini sidebar-open">
+    <body class="hold-transition sidebar-mini sidebar-closed sidebar-collapse">
     @include('../layout.head')
     <!-- ส่วนหัวข้อมูล -->
     <div class="content-wrapper">
@@ -78,24 +78,24 @@
                                 <button type="button" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="เพิ่มข้อมูลคอมพิวเตอร์" onclick="Open_add_computer()"><i class="fas fa-plus"></i> เพิ่มข้อมูล</button>
                             </div>
                         </div>
-                    <div class="table-responsive">
-                    <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main" width="100%">
-                        <thead>
-                            <tr class="bg-primary">
-                                <th width="5%">Status</th>
-                                <th width="5%">Sticker</th>
-                                <th width="20%">Name</th>
-                                <th width="5%">Dep</th>
-                                <th width="40%">Computer Name</th>
-                                <th width="10%">IP</th>
-                                <th width="10%">Teamviewer</th>
-                                <th width="10%">Anydesk</th>
-                                <th width="10%">Phone</th>
-                                <th width="10%">Action</th>
-                            </tr>
-                        </thead>
-                    </table>
-                    </div>
+                        <div class="table-responsive">
+                            <table class="table table-sm dt-responsive nowrap row-border table-bordered table-hover dt-responsive display nowrap" cellspacing="0" cellpadding="0" id="Table_Main" width="100%">
+                                <thead>
+                                    <tr class="bg-primary">
+                                        <th width="5%">Status</th>
+                                        <th width="5%">Sticker</th>
+                                        <th width="20%">Name</th>
+                                        <th width="5%">Dep</th>
+                                        <th width="40%">Computer Name</th>
+                                        <th width="10%">IP</th>
+                                        <th width="10%">Teamviewer</th>
+                                        <th width="10%">Anydesk</th>
+                                        <th width="10%">Phone</th>
+                                        <th width="10%">Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                     <div class="overlay">
                         <i class="fas fa-2x fa-sync-alt fa-spin"></i>
@@ -710,7 +710,7 @@
                         <button type="button" class="btn btn-sm btn-block btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> ยกเลิก</button>                    
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btn btn-sm btn-block btn-success"><i class="fas fa-save"></i> ยืนยัน</button> 
+                        <button type="button" class="btn btn-sm btn-block btn-success" onclick="Save_edit_item()"><i class="fas fa-save"></i> ยืนยัน</button> 
                     </div>
                 </div>
             </div>

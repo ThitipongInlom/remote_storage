@@ -45,7 +45,7 @@ class Viewitemcontroller extends Controller
 
     public function Load_item_view_history(Request $request, $sticker_number)
     {
-        $users = ChangeHistory::where('sticker_number', $sticker_number)->get();
+        $users = ChangeHistory::where('sticker_number', $sticker_number)->orderBy('changehistory_id', 'desc')->get();
 
         return Datatables::of($users)
         ->editColumn('remark', function($users) {

@@ -54,9 +54,16 @@
         <li class="nav-item">
             <a href="{{ url('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                 <i class="fas fa-tachometer-alt"></i>
-                <p>แดชบอร์ด รีโมท</p>
+                <p>ข้อมูลคอมพิวเตอร์</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ url('dashboardbattery') }}" class="nav-link {{ Request::is('dashboardbattery') ? 'active' : '' }}">
+                <i class="fas fa-tachometer-alt"></i>
+                <p>ข้อมูลแบตเตอร์รี่</p>
+            </a>
+        </li>
+        <!--
         @if (isset($Item))
             @php 
                 $urlviewitem = $Item[0]->sticker_number; 
@@ -125,6 +132,7 @@
                 </li>
             </ul>
         </li>
+        -->
         <li class="nav-item has-treeview {{ Request::is("addselectitem") ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ Request::is("addselectitem") ? 'active' : '' }}">
                 <i class="fas fa-cogs"></i>

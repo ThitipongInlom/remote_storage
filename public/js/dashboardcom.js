@@ -117,7 +117,7 @@ $(document).ready(function () {
         "bPaginate": true,
         "responsive": true,
         "order": [
-            [1, 'desc']
+            [0, 'desc']
         ],
         "aLengthMenu": [
             [5, 10, 20, -1],
@@ -274,7 +274,7 @@ var Open_edit_computer = function Open_edit_computer(e) {
                 $("input[name=internet_edit][value='" + result.data.internet + "']").prop("checked", true);
             }
             // เช็คถ้าไม่มีข้อมูลให้ติ้ก ไม่แท้
-            if (result.data.license == null) {
+            if (result.data.license == null || result.data.license == '') {
                 $("input[name=windows_license_edit][value='Not Active']").prop("checked", true);
             }else {
                 $("input[name=windows_license_edit][value='" + result.data.license + "']").prop("checked", true);

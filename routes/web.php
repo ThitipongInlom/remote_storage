@@ -9,6 +9,7 @@ Route::post('/register_save', 'Registercontroller@register_save')->name('registe
 Route::get('/logout', function () { Auth::logout(); return redirect('/'); })->name('logout');
 // Dashboard Page
 Route::get('/dashboard', 'Dashboardcomcontroller@View_Dashboardcom')->middleware('auth')->name('dashboard');
+Route::get('/dashboardbattery', 'Dashboardbatterycontroller@View_Dashboardbattery')->middleware('auth')->name('dashboardbattery');
 Route::get('/dashboardwifi', function () { return view('page/dashboardwifi'); })->middleware('auth');
 Route::get('/settingconnectdb', function () { return view('page/settingconnectdb'); })->middleware('auth');
 // Add Item
@@ -39,4 +40,5 @@ Route::group(['prefix' => 'api/v1'], function () {
 
     Route::post('/Add_ItemCom', 'Dashboardcomcontroller@Add_ItemCom')->middleware('auth');
     Route::post('/Get_ComId', 'Dashboardcomcontroller@Get_ComId')->middleware('auth');
+    Route::post('/Update_ItemCom', 'Dashboardcomcontroller@Update_ItemCom')->middleware('auth');
 });
