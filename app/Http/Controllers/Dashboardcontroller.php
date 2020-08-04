@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB as DB;
 
 class Dashboardcontroller extends Controller
 {
+    
     public function Ajax_Table_Main(Request $request)
     {
         $type  = $request->post('type_select_table');
@@ -94,7 +95,6 @@ class Dashboardcontroller extends Controller
         })
         ->rawColumns(['ip_main', 'teamviewer', 'anydesk', 'action', 'status'])
         ->make(true);
-
     }
 
     public function list_btn_computer_number(Request $request)

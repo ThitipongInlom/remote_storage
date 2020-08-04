@@ -5,9 +5,11 @@ window.Vue = require('vue');
 // Fafa icon
 require('@fortawesome/fontawesome-free/js/all.js');
 // Adminlte 3
-require('admin-lte/dist/js/adminlte');
+require('admin-lte/dist/js/adminlte.js');
 // Daterangepicker
-require('daterangepicker/daterangepicker');
+require('daterangepicker/daterangepicker.js');
+// moment
+require('moment/dist/moment.js');
 // Ladda 
 window.Ladda = require('ladda/js/ladda');
 // Toastr

@@ -724,6 +724,5 @@
     </body>
     <!-- All Js -->
     <script type="text/javascript" src="{{ url('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ url('js/add_item_com.js') }}"></script>
     <script type="text/javascript" src="{{ url('js/dashboardcom.js') }}"></script>
 </html>

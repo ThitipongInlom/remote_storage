@@ -33,6 +33,7 @@ Route::post('/save_update_status_com', 'Viewitemcontroller@save_update_status_co
 Route::group(['prefix' => 'api/v1'], function () {
     Route::get('/Generate_wifi_group', 'Dashboardwificontroller@Generate_wifi_group');
     Route::post('/ajax_table_main', 'Dashboardcontroller@Ajax_Table_Main')->middleware('auth');
+    Route::post('/ajax_table_main_battery', 'Dashboardbatterycontroller@Ajax_Table_Main')->middleware('auth');
     Route::post('/ajax_table_main_wifi', 'Dashboardwificontroller@Ajax_Table_Main')->middleware('auth');
     Route::post('/ajax_load_item_view_history/{sticker_number}', 'Viewitemcontroller@Load_item_view_history')->middleware('auth');
     Route::post('/ajax_list_btn_computer_number', 'Dashboardcontroller@list_btn_computer_number')->middleware('auth');
@@ -41,4 +42,8 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::post('/Add_ItemCom', 'Dashboardcomcontroller@Add_ItemCom')->middleware('auth');
     Route::post('/Get_ComId', 'Dashboardcomcontroller@Get_ComId')->middleware('auth');
     Route::post('/Update_ItemCom', 'Dashboardcomcontroller@Update_ItemCom')->middleware('auth');
+    Route::post('/Add_ItemBattery', 'Dashboardbatterycontroller@Add_ItemBattery')->middleware('auth');
+    Route::post('/Get_BatteryId', 'Dashboardbatterycontroller@Get_BatteryId')->middleware('auth');
+    Route::post('/Update_Battery', 'Dashboardbatterycontroller@Update_Battery')->middleware('auth');
+    Route::post('/Save_change_battery', 'Dashboardbatterycontroller@Save_change_battery')->middleware('auth');
 });
